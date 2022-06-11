@@ -38,15 +38,16 @@
 .social-icons a svg {
     height: 26px;
     width: 26px;
+    transition: 1s ease;
 }
 
 .social-icons a svg:hover {
     height: 26px;
     width: 26px;
-    -webkit-filter: brightness(1.5);
-    -moz-filter: brightness(1.5);
-    -ms-filter: brightness(1.5);
-    filter: brightness(1.5);
+    -webkit-filter: brightness(2);
+    -moz-filter: brightness(2);
+    -ms-filter: brightness(2);
+    filter: brightness(2);
 }
 
 
