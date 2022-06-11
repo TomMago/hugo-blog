@@ -67,6 +67,14 @@ body:not(.dark) #sun {
 
 #menu a {
     font-size: 16px;
+    transition: 0.6s ease;
+}
+
+#menu a:hover {
+    -webkit-filter: brightness(2.5);
+    -moz-filter: brightness(2.5);
+    -ms-filter: brightness(2.5);
+    filter: brightness(2.5);
 }
 
 #menu .active {
