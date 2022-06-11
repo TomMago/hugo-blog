@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Site</title>
-    <link>http://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <title>Toms Blog</title>
+    <link>https://tommago.com/</link>
+    <description>Recent content on Toms Blog</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>asdfasdf</title>
-      <link>http://example.org/searchsj/</link>
+      <link>https://tommago.com/searchsj/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/searchsj/</guid>
+      <guid>https://tommago.com/searchsj/</guid>
       <description>pushthis</description>
     </item>
     
     <item>
       <title>Test site</title>
-      <link>http://example.org/test/</link>
+      <link>https://tommago.com/test/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/test/</guid>
+      <guid>https://tommago.com/test/</guid>
       <description>first papermod site</description>
     </item>
     

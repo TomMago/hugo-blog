@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://tommago.com/sitemap.xml
