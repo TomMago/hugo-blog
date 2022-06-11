@@ -25,9 +25,6 @@ languages:
           tag: tags
         menu:
             main:
-                - name: Archive
-                  url: archives
-                  weight: 5
                 - name: Search
                   url: search/
                   weight: 10
@@ -84,8 +81,15 @@ params:
             - This year I'm participating in the Google Summer of code working on a Quantum Autoencoder for the ML4SCI organization
             - In this blog I document my experience
     socialIcons:
+        - name: email
+          url: "mailto:tommagorsch@gmail.com"
         - name: github
           url: "https://github.com/TomMago"
+        - name: googlescholar
+          url: "https://scholar.google.com/citations?hl=de&user=zmmHkrYAAAAJ"
+        #- name cv
+        #  url: "https://github.com/TomMago"
+
         #- name: KoFi
         #  url: "https://ko-fi.com/adityatelange"
         #- name: Discord
