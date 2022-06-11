@@ -31,15 +31,18 @@ languages:
                 - name: Tags
                   url: tags/
                   weight: 10
-                - name: Categories
-                  url: categories/
+                - name: Notes
+                  url: notes.tommago.com
                   weight: 10
+                #- name: Categories
+                #  url: categories/
+                #  weight: 10
 
-#outputs:
-#    home:
-#        - HTML
-#        - RSS
-#        - JSON
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
