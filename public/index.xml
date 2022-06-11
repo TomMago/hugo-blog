@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>affensindschön</title>
+      <link>https://tommago.com/posts/testpost/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/testpost/</guid>
+      <description>first papermod site</description>
+    </item>
+    
+    <item>
       <title>asdfasdf</title>
       <link>https://tommago.com/posts/searchsj/</link>
       <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
