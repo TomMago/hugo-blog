@@ -32,7 +32,7 @@ languages:
                   url: tags/
                   weight: 10
                 - name: Notes
-                  url: notes.tommago.com
+                  url: https://notes.tommago.com
                   weight: 10
                 #- name: Categories
                 #  url: categories/
@@ -88,6 +88,8 @@ params:
           url: "mailto:tommagorsch@gmail.com"
         - name: github
           url: "https://github.com/TomMago"
+        - name: inspirehep
+          url: "https://inspirehep.net/authors/1894387?ui-citation-summary=true"
         - name: googlescholar
           url: "https://scholar.google.com/citations?hl=de&user=zmmHkrYAAAAJ"
         #- name cv
