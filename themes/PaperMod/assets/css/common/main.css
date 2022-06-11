@@ -40,6 +40,17 @@
     width: 26px;
 }
 
+.social-icons a svg:hover {
+    height: 26px;
+    width: 26px;
+    -webkit-filter: brightness(1.5);
+    -moz-filter: brightness(1.5);
+    -ms-filter: brightness(1.5);
+    filter: brightness(1.5);
+}
+
+
+
 code {
     direction: ltr;
 }
