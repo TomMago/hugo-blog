@@ -38,7 +38,7 @@
 .social-icons a svg {
     height: 26px;
     width: 26px;
-    transition: 0.5s ease-in;
+    transition: 0.35s ease-in;
 }
 
 .social-icons a svg:hover {
