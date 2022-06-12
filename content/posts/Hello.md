@@ -1,6 +1,6 @@
 ---
 title: "Hello World! | Hello GSoC!"
-date: 2022-06-13
+date: 2022-06-12
 tags: ["GSoC"]
 author: "Tom Magorsch"
 ShowToc: false

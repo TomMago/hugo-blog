@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>TomMago</title>
-    <link>https://tommago.com/</link>
-    <description>Recent content on TomMago</description>
+    <title>GSoC on TomMago</title>
+    <link>https://tommago.com/tags/gsoc/</link>
+    <description>Recent content in GSoC on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello World! | Hello GSoC!</title>
       <link>https://tommago.com/posts/hello/</link>
@@ -14,7 +14,6 @@
       <guid>https://tommago.com/posts/hello/</guid>
       <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. This blog is supposed to document the experience and share some of my scientific interests.</description>
     </item>
-    
     
   </channel>
 </rss>
