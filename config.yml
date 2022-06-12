@@ -1,5 +1,5 @@
 baseURL: "https://tommago.com/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
-title: "Toms Blog"
+title: "TomMago"
 paginate: 5
 theme: "PaperMod"
 
@@ -46,17 +46,17 @@ outputs:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    description: "Toms blog descirtion"
+    description: "Tom Magorsch - writing about particle physics, machine learning and other interests"
     author: "Tom Magorsch"
     # author: ["Me", "You"] # multiple authors
 
     defaultTheme: auto
     # disableThemeToggle: true
-    ShowShareButtons: true
+    ShowShareButtons: false
     ShowReadingTime: true
     # disableSpecial1stPost: true
     displayFullLangName: true
-    ShowPostNavLinks: true
+    ShowPostNavLinks: false
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
     ShowRssButtonInSectionTermList: true
@@ -80,9 +80,9 @@ params:
     homeInfoParams:
         Title: "Welcome"
         Content: >
-            Welcome to my blog
-            - This year I'm participating in the Google Summer of code working on a Quantum Autoencoder for the ML4SCI organization
-            - In this blog I document my experience
+            My name is Tom Magorsch and I'm a physicist interested particle phyiscs, machine learning and software development.
+            - This year I'm participating in the Google Summer of Code, working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
+            - In this blog I will document my experience.
     socialIcons:
         - name: email
           url: "mailto:tommagorsch@gmail.com"

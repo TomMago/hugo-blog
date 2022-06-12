@@ -1,47 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Toms Blog</title>
+    <title>TomMago</title>
     <link>https://tommago.com/</link>
-    <description>Recent content on Toms Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>affensindschön</title>
-      <link>https://tommago.com/posts/testpost/</link>
-      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tommago.com/posts/testpost/</guid>
-      <description>first papermod site</description>
-    </item>
-    
-    <item>
-      <title>asdfasdf</title>
-      <link>https://tommago.com/posts/searchsj/</link>
-      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tommago.com/posts/searchsj/</guid>
-      <description>pushthis</description>
-    </item>
-    
-    <item>
-      <title>private</title>
-      <link>https://tommago.com/posts/firstprivatepost/</link>
-      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tommago.com/posts/firstprivatepost/</guid>
-      <description>private</description>
-    </item>
-    
-    <item>
-      <title>Test site</title>
-      <link>https://tommago.com/posts/test/</link>
-      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tommago.com/posts/test/</guid>
-      <description>first papermod site</description>
-    </item>
-    
+    <description>Recent content on TomMago</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
     
   </channel>
 </rss>
