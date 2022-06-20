@@ -12,7 +12,7 @@
       <pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tommago.com/posts/hello/</guid>
-      <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. This blog is supposed to document the experience and share some of my scientific interests.</description>
+      <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka,&amp;#32;Nachman &amp;amp; al.,&amp;#32;2021 Kasieczka,&amp;#32; G.,&amp;#32; Nachman,&amp;#32; B.,&amp;#32; Shih,&amp;#32; D.&amp;#32;&amp;amp;&amp;#32;et al. &amp;#32; (2021). &amp;#32;The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics.</description>
     </item>
     
     

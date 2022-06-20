@@ -1,0 +1,96 @@
+[
+  {
+    "DOI": "10.1088/2058-9565/aa8072",
+    "URL": "https://doi.org/10.1088/2058-9565/aa8072",
+    "abstract": "Classical autoencoders are neural networks that can learn efficient low-dimensional representations of data in higher-dimensional space. The task of an autoencoder is, given an input x, to map x to a lower dimensional point y such that x can likely be recovered from y. The structure of the underlying autoencoder network can be chosen to represent the data on a smaller dimension, effectively compressing the input. Inspired by this idea, we introduce the model of a quantum autoencoder to perform similar tasks on quantum data. The quantum autoencoder is trained to compress a particular data set of quantum states, where a classical compression algorithm cannot be employed. The parameters of the quantum autoencoder are trained using classical optimization algorithms. We show an example of a simple programmable circuit that can be trained as an efficient autoencoder. We apply our model in the context of quantum simulation to compress ground states of the Hubbard model and molecular Hamiltonians.",
+    "author": [
+      {
+        "family": "Romero",
+        "given": "Jonathan"
+      },
+      {
+        "family": "Olson",
+        "given": "Jonathan P"
+      },
+      {
+        "family": "Aspuru-Guzik",
+        "given": "Alan"
+      }
+    ],
+    "container-title": "Quantum Science and Technology",
+    "id": "Romero_2017",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          2017,
+          8
+        ]
+      ]
+    },
+    "page": "045001",
+    "publisher": "IOP Publishing",
+    "title": "Quantum autoencoders for efficient compression of quantum data",
+    "type": "article-journal",
+    "volume": "2"
+  },
+  {
+    "DOI": "10.1088/1361-6633/ac36b9",
+    "URL": "http://arxiv.org/abs/2101.08320",
+    "abstract": "A new paradigm for data-driven, model-agnostic new physics searches at colliders is emerging, and aims to leverage recent breakthroughs in anomaly detection and machine learning. In order to develop and benchmark new anomaly detection methods within this framework, it is essential to have standard datasets. To this end, we have created the LHC Olympics 2020, a community challenge accompanied by a set of simulated collider events. Participants in these Olympics have developed their methods using an R&D dataset and then tested them on black boxes: datasets with an unknown anomaly (or not). This paper will review the LHC Olympics 2020 challenge, including an overview of the competition, a description of methods deployed in the competition, lessons learned from the experience, and implications for data analyses with future datasets as well as future colliders.",
+    "author": [
+      {
+        "family": "Kasieczka",
+        "given": "Gregor"
+      },
+      {
+        "family": "Nachman",
+        "given": "Benjamin"
+      },
+      {
+        "family": "Shih",
+        "given": "David"
+      },
+      {
+        "family": "et al.",
+        "given": ""
+      }
+    ],
+    "id": "Kasieczka2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          1
+        ]
+      ]
+    },
+    "keyword": "hep-ph, hep-ex, physics.data-an",
+    "title": "The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.22331/q-2018-08-06-79",
+    "URL": "http://arxiv.org/abs/1801.00862",
+    "abstract": "Noisy Intermediate-Scale Quantum (NISQ) technology will be available in the near future. Quantum computers with 50-100 qubits may be able to perform tasks which surpass the capabilities of today’s classical digital computers, but noise in quantum gates will limit the size of quantum circuits that can be executed reliably. NISQ devices will be useful tools for exploring many-body quantum physics, and may have other useful applications, but the 100-qubit quantum computer will not change the world right away — we should regard it as a significant step toward the more powerful quantum technologies of the future. Quantum technologists should continue to strive for more accurate quantum gates and, eventually, fully fault-tolerant quantum computing.",
+    "author": [
+      {
+        "family": "Preskill",
+        "given": "John"
+      }
+    ],
+    "container-title": "Quantum 2, 79 (2018)",
+    "id": "Preskill2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018,
+          1
+        ]
+      ]
+    },
+    "keyword": "quant-ph, cond-mat.str-el",
+    "title": "Quantum Computing in the NISQ era and beyond",
+    "type": "article-journal"
+  }
+]
