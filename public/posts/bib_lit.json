@@ -52,8 +52,180 @@
         "given": "David"
       },
       {
-        "family": "et al.",
-        "given": ""
+        "family": "Amram",
+        "given": "Oz"
+      },
+      {
+        "family": "Andreassen",
+        "given": "Anders"
+      },
+      {
+        "family": "Benkendorfer",
+        "given": "Kees"
+      },
+      {
+        "family": "Bortolato",
+        "given": "Blaz"
+      },
+      {
+        "family": "Brooijmans",
+        "given": "Gustaaf"
+      },
+      {
+        "family": "Canelli",
+        "given": "Florencia"
+      },
+      {
+        "family": "Collins",
+        "given": "Jack H."
+      },
+      {
+        "family": "Dai",
+        "given": "Biwei"
+      },
+      {
+        "family": "Freitas",
+        "given": "Felipe F. De"
+      },
+      {
+        "family": "Dillon",
+        "given": "Barry M."
+      },
+      {
+        "family": "Dinu",
+        "given": "Ioan-Mihail"
+      },
+      {
+        "family": "Dong",
+        "given": "Zhongtian"
+      },
+      {
+        "family": "Donini",
+        "given": "Julien"
+      },
+      {
+        "family": "Duarte",
+        "given": "Javier"
+      },
+      {
+        "family": "Faroughy",
+        "given": "D. A."
+      },
+      {
+        "family": "Gonski",
+        "given": "Julia"
+      },
+      {
+        "family": "Harris",
+        "given": "Philip"
+      },
+      {
+        "family": "Kahn",
+        "given": "Alan"
+      },
+      {
+        "family": "Kamenik",
+        "given": "Jernej F."
+      },
+      {
+        "family": "Khosa",
+        "given": "Charanjit K."
+      },
+      {
+        "family": "Komiske",
+        "given": "Patrick"
+      },
+      {
+        "family": "Pottier",
+        "given": "Luc Le"
+      },
+      {
+        "family": "Martín-Ramiro",
+        "given": "Pablo"
+      },
+      {
+        "family": "Matevc",
+        "given": "Andrej"
+      },
+      {
+        "family": "Metodiev",
+        "given": "Eric"
+      },
+      {
+        "family": "Mikuni",
+        "given": "Vinicius"
+      },
+      {
+        "family": "Ochoa",
+        "given": "Inês"
+      },
+      {
+        "family": "Park",
+        "given": "Sang Eon"
+      },
+      {
+        "family": "Pierini",
+        "given": "Maurizio"
+      },
+      {
+        "family": "Rankin",
+        "given": "Dylan"
+      },
+      {
+        "family": "Sanz",
+        "given": "Veronica"
+      },
+      {
+        "family": "Sarda",
+        "given": "Nilai"
+      },
+      {
+        "family": "Seljak",
+        "given": "Urous"
+      },
+      {
+        "family": "Smolkovic",
+        "given": "Aleks"
+      },
+      {
+        "family": "Stein",
+        "given": "George"
+      },
+      {
+        "family": "Suarez",
+        "given": "Cristina Mantilla"
+      },
+      {
+        "family": "Szewc",
+        "given": "Manuel"
+      },
+      {
+        "family": "Thaler",
+        "given": "Jesse"
+      },
+      {
+        "family": "Tsan",
+        "given": "Steven"
+      },
+      {
+        "family": "Udrescu",
+        "given": "Silviu-Marian"
+      },
+      {
+        "family": "Vaslin",
+        "given": "Louis"
+      },
+      {
+        "family": "Vlimant",
+        "given": "Jean-Roch"
+      },
+      {
+        "family": "Williams",
+        "given": "Daniel"
+      },
+      {
+        "family": "Yunus",
+        "given": "Mikaeel"
       }
     ],
     "id": "Kasieczka2021",
@@ -92,5 +264,102 @@
     "keyword": "quant-ph, cond-mat.str-el",
     "title": "Quantum Computing in the NISQ era and beyond",
     "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevD.105.095004",
+    "URL": "http://arxiv.org/abs/2112.04958",
+    "abstract": "The lack of evidence for new interactions and particles at the Large Hadron Collider has motivated the high-energy physics community to explore model-agnostic data-analysis approaches to search for new physics. Autoencoders are unsupervised machine learning models based on artificial neural networks, capable of learning background distributions. We study quantum autoencoders based on variational quantum circuits for the problem of anomaly detection at the LHC. For a QCD $t\\bar{t}$ background and resonant heavy Higgs signals, we find that a simple quantum autoencoder outperforms classical autoencoders for the same inputs and trains very efficiently. Moreover, this performance is reproducible on present quantum devices. This shows that quantum autoencoders are good candidates for analysing high-energy physics data in future LHC runs.",
+    "author": [
+      {
+        "family": "Ngairangbam",
+        "given": "Vishal S."
+      },
+      {
+        "family": "Spannowsky",
+        "given": "Michael"
+      },
+      {
+        "family": "Takeuchi",
+        "given": "Michihisa"
+      }
+    ],
+    "container-title": "Phys. Rev. D 105, 095004, 2022",
+    "id": "Ngairangbam2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          12
+        ]
+      ]
+    },
+    "keyword": "hep-ph, quant-ph",
+    "title": "Anomaly detection in high-energy physics using a quantum autoencoder",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1088/2058-9565/aa8072",
+    "URL": "http://arxiv.org/abs/1612.02806",
+    "abstract": "Classical autoencoders are neural networks that can learn efficient low dimensional representations of data in higher dimensional space. The task of an autoencoder is, given an input $x$, is to map $x$ to a lower dimensional point $y$ such that $x$ can likely be recovered from $y$. The structure of the underlying autoencoder network can be chosen to represent the data on a smaller dimension, effectively compressing the input. Inspired by this idea, we introduce the model of a quantum autoencoder to perform similar tasks on quantum data. The quantum autoencoder is trained to compress a particular dataset of quantum states, where a classical compression algorithm cannot be employed. The parameters of the quantum autoencoder are trained using classical optimization algorithms. We show an example of a simple programmable circuit that can be trained as an efficient autoencoder. We apply our model in the context of quantum simulation to compress ground states of the Hubbard model and molecular Hamiltonians.",
+    "author": [
+      {
+        "family": "Romero",
+        "given": "Jonathan"
+      },
+      {
+        "family": "Olson",
+        "given": "Jonathan P."
+      },
+      {
+        "family": "Aspuru-Guzik",
+        "given": "Alan"
+      }
+    ],
+    "container-title": "Now published in 2017 Quantum Sci. Technol. 2 045001",
+    "id": "Romero2016",
+    "issued": {
+      "date-parts": [
+        [
+          2016,
+          12
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Quantum autoencoders for efficient compression of quantum data",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1109/ICSA-C52384.2021.00025",
+    "author": [
+      {
+        "family": "Weigold",
+        "given": "Manuela"
+      },
+      {
+        "family": "Barzen",
+        "given": "Johanna"
+      },
+      {
+        "family": "Leymann",
+        "given": "Frank"
+      },
+      {
+        "family": "Salm",
+        "given": "Marie"
+      }
+    ],
+    "container-title": "2021 IEEE 18th International Conference on Software Architecture Companion (ICSA-C)",
+    "id": "encodings",
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "page": "95-101",
+    "title": "Expanding Data Encoding Patterns For Quantum Algorithms",
+    "type": "paper-conference"
   }
 ]

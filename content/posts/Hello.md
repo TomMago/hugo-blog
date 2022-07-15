@@ -13,6 +13,6 @@ Such unsupervised learning paradigms can be used to search for new physics in a 
 These models are thereby trained on Standard Model data and search for anomalous events that deviate from the known physics. 
 With the rise of NISQ-devices {{< cite "Preskill2018" >}} the question comes up if quantum machine learning can enhance classical machine learning applications to hep problems.
 
-I set up this blog to document the project and share some of my scientific interests. 
+Since we are encouraged by Google to publicly share our work, I set up this blog to document the project and share some of my scientific interests. 
 
 {{< bibliography cited >}}

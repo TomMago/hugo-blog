@@ -56,3 +56,11 @@
 body.dark span.hugo-cite-citation {
   background-color: rgb(46, 46, 51)!important;
 }
+
+.post-content dd {
+  margin-bottom: 20px!important;
+}
+
+.post-content img {
+    border-radius: 8px!important;
+}
