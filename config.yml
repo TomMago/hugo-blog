@@ -87,7 +87,7 @@ params:
 
             - This year I'm participating in the Google Summer of Code, working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
 
-            - This blog will serve as a documentation of the projects and my experience.
+            - In this blog I will document the projects and my experience.
     socialIcons:
         - name: email
           url: "mailto:tommagorsch@gmail.com"
