@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Quantum Autoencoder | TomMago</title>
+<meta name="keywords" content="GSoC">
+<meta name="description" content="In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.
+A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.">
+<meta name="author" content="Tom Magorsch">
+<link rel="canonical" href="https://tommago.com/posts/qae/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4fd967528ad5a75f3ce961dbda94c03a4739e156197539fdac72973ab0f932e0.css" integrity="sha256-T9lnUorVp1886WHb2pTAOkc54VYZdTn9rHKXOrD5MuA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tommago.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+onload="renderMathInElement(document.body,
+    {
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '\\[', right: '\\]', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false}
+              ]
+          }
+    );"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Quantum Autoencoder" />
+<meta property="og:description" content="In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.
+A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tommago.com/posts/qae/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-12T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-12T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quantum Autoencoder"/>
+<meta name="twitter:description" content="In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.
+A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tommago.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Quantum Autoencoder",
+      "item": "https://tommago.com/posts/qae/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Quantum Autoencoder",
+  "name": "Quantum Autoencoder",
+  "description": "In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.\nA naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.",
+  "keywords": [
+    "GSoC"
+  ],
+  "articleBody": "In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.\nA naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure. Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.\nEach line represents a single qbit and reading from left to right, consecutive transformations are applied to them. The classical training data is first encoded into a quantum state indicated by $|\\psi\\big\u003e$. This can be done with different encodings e.g. the angle encoding ( Citation: Weigold, Barzen \u0026 al., 2021 Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ) . After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\\Theta)$. It consists of rotations on the block sphere and entanglement using CNOT gates. The parameters $\\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder. After applying the encoder, a second parametrized circuit follows, which acts as the decoder. The decoder only overlaps with the encoder at a subset of its qbits, in this example a single one. This qbit acts as the smaller latent space of the autoencoder. The rest of the decoder circuit acts on qbits which were initialized as $|0\\big\u003e$. The goal of an Autoencoder is to learn to reconstruct the input data after compressing it to the latent space. To verify this, we can use a SWAP-test with three reference bits. The reference bits were initialized to the input state of the data as well. The SWAP-test can then measure the similarity of the input data state $|\\psi\\big\u003e$ with the output of the decoder $|\\phi\\big\u003e$. This similarity $\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2$, called fidelity, can be measured at the readout bit.\nSince we want to learn parameters that enable the autoencoder to reconstruct the input, we can use $$\\mathcal{L} = 1-\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2$$ as loss function to train the parameters of the circuit. The loss function can be used to optimize the parameters by gradient descent similar to classical learning.\nAn example for a circuit of a $3\\rightarrow 1 \\rightarrow 3$ autoencoder is shown below.\nIn this example for simplicity the Encoder and Decoder consist of only a single layer using $R_y(\\Theta_i)$ gates and entaglement by CNOT. The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\\big\u003e$ and prepared with a Hadamard gate, leads to the state $\\frac{1}{\\sqrt{2}}|0\\big\u003e + \\frac{1}{\\sqrt{2}}|1\\big\u003e$. The controlled SWAP operation on two states $|\\psi\\big\u003e$ and $|\\phi\\big\u003e$ transfers the three qbit system into the state $\\frac{1}{\\sqrt{2}}|0,\\psi,\\phi\\big\u003e + \\frac{1}{\\sqrt{2}}|1,\\phi,\\psi\\big\u003e$. The $|\\psi\\big\u003e$ could thereby be the state of an output qbit of the decoder and $|\\phi\\big\u003e$ the state of a respective reference bit. Applying another Hadamard gate to the SWAP-qbit transfers the state to $\\frac{1}{2}\\big(|0,\\psi,\\phi\\big\u003e + |1,\\psi,\\phi\\big\u003e + |0,\\phi,\\psi\\big\u003e - |1,\\phi,\\psi\\big\u003e\\big)$. When we now measure the first qbit, which is the auxillary SWAP-qbit, it will turn out to be $|0\\big\u003e$ with the probability $$P(|0\\big\u003e)=\\frac{1}{4}(\\big\u003c\\psi,\\phi| + \\big\u003c\\phi,\\psi|)(|\\psi,\\phi\\big\u003e + |\\phi,\\psi\\big\u003e) = \\frac{1}{2} + \\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ The probability of measuring $|1\\big\u003e$ is therefore $$P(|1\\big\u003e) = 1 - P(|0\\big\u003e) = \\frac{1}{2}-\\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ To obtain the fidelity $|\\big\u003c\\phi|\\psi\\big\u003e|^2$ we measure the SWAP-qbit in the $Z$-basis. Since the eigenvalues of $\\sigma_z$ are $1$ and $-1$ the expectation value of the measurement calculates to $$\\big = 1\\cdot P(|0\\big\u003e) + (-1)\\cdot P(|1\\big\u003e) = |\\big\u003c\\phi|\\psi\\big\u003e|^2,$$ where $|q_8\\big\u003e$ denotes the SWAP-qbit. The output of measuring the last qbit of the shown circuit in the $Z$-basis therefore corresponds to the fidelity between the output of the decoder and the reference qbits.\nA simpler Quantum Autoencoder The naive implementation discussed above can be simplified as shown in ( Citation: Ngairangbam, Spannowsky \u0026 al., 2021 Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 ) based on ( Citation: Romero, Olson \u0026 al., 2016 Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ) . A $3\\rightarrow 1 \\rightarrow 3$ autoencoder circuit based on these ideas is displayed below.\nThe main idea is that, since the encoder circuit is a unitary transformation, if the fidelity of the non-latent qbits with some trash qbits which are just $|0\\big\u003e$ is one, the latent qbit will contain a compressed version $|\\psi\\big\u003e_c$ of the input state $|\\psi\\big\u003e$. Therefore it is sufficient to maximize the fidelity between the non-latent qbits and some trash qbits to train the autoencoder. Furthermore, a decoder is not necessary, since the decoder is just the adjoint of the encoder. As we can see the main advantage of this method is that it needs way fewer qbits and works with a shallower circuit. Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging.\nNgairangbam, Spannowsky \u0026 Takeuchi (2021) Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 Romero, Olson \u0026 Aspuru-Guzik (2016) Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 Weigold, Barzen, Leymann \u0026 Salm (2021) Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ",
+  "wordCount" : "976",
+  "inLanguage": "en",
+  "datePublished": "2022-07-12T00:00:00Z",
+  "dateModified": "2022-07-12T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tom Magorsch"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tommago.com/posts/qae/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TomMago",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tommago.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://notes.tommago.com" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Quantum Autoencoder
+    </h1>
+    <div class="post-meta"><span title='2022-07-12 00:00:00 +0000 UTC'>July 12, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Tom Magorsch
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#a-naive-quantum-autoencoder" aria-label="A naive Quantum Autoencoder">A naive Quantum Autoencoder</a></li>
+                <li>
+                    <a href="#a-simpler-quantum-autoencoder" aria-label="A simpler Quantum Autoencoder">A simpler Quantum Autoencoder</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>In my GSoC <a href="https://summerofcode.withgoogle.com/programs/2022/projects/ePnjKlJs">project</a>, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device.</p>
+<h1 id="a-naive-quantum-autoencoder">A naive Quantum Autoencoder<a hidden class="anchor" aria-hidden="true" href="#a-naive-quantum-autoencoder">#</a></h1>
+<p>My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.
+Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.</p>
+<p><img loading="lazy" src="../ae.svg#center" alt="structure of a quantum autoencoder ciruit"  />
+</p>
+<p>Each line represents a single qbit and reading from left to right, consecutive transformations are applied to them.
+The classical training data is first encoded into a quantum state indicated by $|\psi\big&gt;$. This can be done with different encodings e.g. the angle encoding 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#encodings"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Manuela"><span itemprop="familyName">Weigold</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Johanna"><span itemprop="familyName">Barzen</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/CreativeWork"
+      data-type="paper-conference"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Weigold</span>,&#32;
+    <meta itemprop="givenName" content="Manuela" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Barzen</span>,&#32;
+    <meta itemprop="givenName" content="Johanna" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Leymann</span>,&#32;
+    <meta itemprop="givenName" content="Frank" />
+    F.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Salm</span>,&#32;
+    <meta itemprop="givenName" content="Marie" />
+    M.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">
+    <i>Expanding Data Encoding Patterns For Quantum Algorithms</i></span>.
+  
+  <a href="https://doi.org/10.1109/ICSA-C52384.2021.00025"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1109/ICSA-C52384.2021.00025</a></span>
+
+</span></span>)</span>
+.
+After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\Theta)$. It consists of rotations on the block sphere and entanglement using CNOT gates. The parameters $\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder.
+After applying the encoder, a second parametrized circuit follows, which acts as the decoder.
+The decoder only overlaps with the encoder at a subset of its qbits, in this example a single one. This qbit acts as the smaller latent space of the autoencoder. The rest of the decoder circuit acts on qbits which were initialized as $|0\big&gt;$.
+The goal of an Autoencoder is to learn to reconstruct the input data after compressing it to the latent space. To verify this, we can use a SWAP-test with three reference bits.
+The reference bits were initialized to the input state of the data as well.
+The SWAP-test can then measure the similarity of the input data state $|\psi\big&gt;$ with the output of the decoder $|\phi\big&gt;$.
+This similarity $\big|\big&lt;\psi|\phi\big&gt;\big|^2$, called fidelity, can be measured at the readout bit.</p>
+<p>Since we want to learn parameters that enable the autoencoder to reconstruct the input, we can use $$\mathcal{L} = 1-\big|\big&lt;\psi|\phi\big&gt;\big|^2$$ as loss function to train the parameters of the circuit.
+The loss function can be used to optimize the parameters by <a href="https://pennylane.ai/qml/demos/tutorial_backprop.html">gradient descent</a> similar to classical learning.</p>
+<p>An example for a circuit of a $3\rightarrow 1 \rightarrow 3$ autoencoder is shown below.</p>
+<p><img loading="lazy" src="../QAE_circuit.svg#center" alt="quantum autoencoder circuits with gates"  />
+</p>
+<p>In this example for simplicity the Encoder and Decoder consist of only a single layer using $R_y(\Theta_i)$ gates and entaglement by CNOT.
+The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\big&gt;$ and prepared with a Hadamard gate, leads to the state $\frac{1}{\sqrt{2}}|0\big&gt; + \frac{1}{\sqrt{2}}|1\big&gt;$.
+The controlled SWAP operation on two states $|\psi\big&gt;$ and $|\phi\big&gt;$ transfers the three qbit system into the state $\frac{1}{\sqrt{2}}|0,\psi,\phi\big&gt; + \frac{1}{\sqrt{2}}|1,\phi,\psi\big&gt;$. The $|\psi\big&gt;$ could thereby be the state of an output qbit of the decoder and $|\phi\big&gt;$ the state of a respective reference bit.
+Applying another Hadamard gate to the SWAP-qbit transfers the state to $\frac{1}{2}\big(|0,\psi,\phi\big&gt; + |1,\psi,\phi\big&gt; + |0,\phi,\psi\big&gt; - |1,\phi,\psi\big&gt;\big)$.
+When we now measure the first qbit, which is the auxillary SWAP-qbit, it will turn out to be $|0\big&gt;$ with the probability
+$$P(|0\big&gt;)=\frac{1}{4}(\big&lt;\psi,\phi| + \big&lt;\phi,\psi|)(|\psi,\phi\big&gt; + |\phi,\psi\big&gt;) = \frac{1}{2} + \frac{1}{2}|\big&lt;\phi|\psi\big&gt;|^2.$$
+The probability of measuring $|1\big&gt;$ is therefore
+$$P(|1\big&gt;) = 1 - P(|0\big&gt;) = \frac{1}{2}-\frac{1}{2}|\big&lt;\phi|\psi\big&gt;|^2.$$
+To obtain the fidelity $|\big&lt;\phi|\psi\big&gt;|^2$ we measure the SWAP-qbit in the $Z$-basis.
+Since the eigenvalues of $\sigma_z$ are $1$ and $-1$ the expectation value of the measurement calculates to
+$$\big&lt;q_8|\sigma_z|q_8\big&gt; = 1\cdot P(|0\big&gt;) + (-1)\cdot P(|1\big&gt;) = |\big&lt;\phi|\psi\big&gt;|^2,$$
+where $|q_8\big&gt;$ denotes the SWAP-qbit.
+The output of measuring the last qbit of the shown circuit in the $Z$-basis therefore corresponds to the fidelity between the output of the decoder and the reference qbits.</p>
+<h1 id="a-simpler-quantum-autoencoder">A simpler Quantum Autoencoder<a hidden class="anchor" aria-hidden="true" href="#a-simpler-quantum-autoencoder">#</a></h1>
+<p>The naive implementation discussed above can be simplified as shown in 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#ngairangbam2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Vishal S."><span itemprop="familyName">Ngairangbam</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Spannowsky</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ngairangbam</span>,&#32;
+    <meta itemprop="givenName" content="Vishal S." />
+    V.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Spannowsky</span>,&#32;
+    <meta itemprop="givenName" content="Michael" />
+    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Takeuchi</span>,&#32;
+    <meta itemprop="givenName" content="Michihisa" />
+    M.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Anomaly detection in high-energy physics using a quantum autoencoder</span>.<i>
+    <span itemprop="about">Phys. Rev. D 105, 095004, 2022</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevD.105.095004"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevD.105.095004</a></span>
+
+
+
+
+</span></span>)</span>
+ based on 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#romero2016"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan"><span itemprop="familyName">Romero</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan P."><span itemprop="familyName">Olson</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2016</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Olson</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan P." />
+    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
+    <meta itemprop="givenName" content="Alan" />
+    A.</span>
+  &#32;
+    (<span itemprop="datePublished">2016</span>).
+  &#32;<span itemprop="name">Quantum autoencoders for efficient compression of quantum data</span>.<i>
+    <span itemprop="about">Now published in 2017 Quantum Sci. Technol. 2 045001</span></i>.
+  <a href="https://doi.org/10.1088/2058-9565/aa8072"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1088/2058-9565/aa8072</a></span>
+
+
+
+
+</span></span>)</span>
+.
+A $3\rightarrow 1 \rightarrow 3$ autoencoder circuit based on these ideas is displayed below.</p>
+<p><img loading="lazy" src="../SQAE_circuit.svg#center" alt="simpler quantum autoencoder circuits with gates"  />
+</p>
+<p>The main idea is that, since the encoder circuit is a unitary transformation, if the fidelity of the non-latent qbits with some trash qbits which are just $|0\big&gt;$ is one, the latent qbit will contain a compressed version $|\psi\big&gt;_c$ of the input state $|\psi\big&gt;$.
+Therefore it is sufficient to maximize the fidelity between the non-latent qbits and some trash qbits to train the autoencoder.
+Furthermore, a decoder is not necessary, since the decoder is just the adjoint of the encoder.
+As we can see the main advantage of this method is that it needs way fewer qbits and works with a shallower circuit.
+Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging.</p>
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+<section class="hugo-cite-bibliography">
+  <dl>
+    
+
+      <div id="ngairangbam2021">
+        <dt>
+          Ngairangbam,&#32;
+          Spannowsky&#32;&amp;&#32;Takeuchi
+
+          
+          (2021)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ngairangbam</span>,&#32;
+    <meta itemprop="givenName" content="Vishal S." />
+    V.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Spannowsky</span>,&#32;
+    <meta itemprop="givenName" content="Michael" />
+    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Takeuchi</span>,&#32;
+    <meta itemprop="givenName" content="Michihisa" />
+    M.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Anomaly detection in high-energy physics using a quantum autoencoder</span>.<i>
+    <span itemprop="about">Phys. Rev. D 105, 095004, 2022</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevD.105.095004"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevD.105.095004</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="romero2016">
+        <dt>
+          Romero,&#32;
+          Olson&#32;&amp;&#32;Aspuru-Guzik
+
+          
+          (2016)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Olson</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan P." />
+    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
+    <meta itemprop="givenName" content="Alan" />
+    A.</span>
+  &#32;
+    (<span itemprop="datePublished">2016</span>).
+  &#32;<span itemprop="name">Quantum autoencoders for efficient compression of quantum data</span>.<i>
+    <span itemprop="about">Now published in 2017 Quantum Sci. Technol. 2 045001</span></i>.
+  <a href="https://doi.org/10.1088/2058-9565/aa8072"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1088/2058-9565/aa8072</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="encodings">
+        <dt>
+          Weigold,&#32;
+          Barzen,&#32;
+          Leymann&#32;&amp;&#32;Salm
+
+          
+          (2021)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/CreativeWork"
+      data-type="paper-conference"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Weigold</span>,&#32;
+    <meta itemprop="givenName" content="Manuela" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Barzen</span>,&#32;
+    <meta itemprop="givenName" content="Johanna" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Leymann</span>,&#32;
+    <meta itemprop="givenName" content="Frank" />
+    F.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Salm</span>,&#32;
+    <meta itemprop="givenName" content="Marie" />
+    M.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">
+    <i>Expanding Data Encoding Patterns For Quantum Algorithms</i></span>.
+  
+  <a href="https://doi.org/10.1109/ICSA-C52384.2021.00025"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1109/ICSA-C52384.2021.00025</a></span>
+
+</dd>
+
+      </div>
+  </dl>
+</section>
+
+
+
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://tommago.com/tags/gsoc/">GSoC</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://tommago.com/">TomMago</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
