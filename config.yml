@@ -81,13 +81,13 @@ params:
     #          url: tags
 
     homeInfoParams:
-        Title: "Welcome"
+        Title: "Welcome!"
         Content: >
-            My name is Tom Magorsch and I'm a physicist interested in particle phenomenology, Machine learning and software development.
+            I'm Tom Magorsch, a physicist interested in particle phenomenology, machine learning and software development.
 
-            - This year I'm participating in the Google Summer of Code, working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
+            - This year I'm participating in the [Google Summer of Code](https://summerofcode.withgoogle.com), working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
 
-            - In this blog I will document the projects and my experience.
+            - Here I will document the projects and some of my scientific interests.
     socialIcons:
         - name: email
           url: "mailto:tommagorsch@gmail.com"

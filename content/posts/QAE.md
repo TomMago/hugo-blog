@@ -8,7 +8,7 @@ bibFile: content/posts/bib_lit.json
 math: true
 ---
 
-In my GSoC [project](https://summerofcode.withgoogle.com/programs/2022/projects/ePnjKlJs), I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. In this post, I want to show possible ideas for an Autoencoder circuit on a Quantum Device. 
+In my GSoC [project](https://summerofcode.withgoogle.com/programs/2022/projects/ePnjKlJs), I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analogue of a classical autoencoder equally aims to learn a smaller representation of data.
 
 # A naive Quantum Autoencoder
 
