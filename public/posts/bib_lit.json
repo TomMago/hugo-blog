@@ -361,5 +361,41 @@
     "page": "95-101",
     "title": "Expanding Data Encoding Patterns For Quantum Algorithms",
     "type": "paper-conference"
+  },
+  {
+    "DOI": "10.22331/q-2020-02-06-226",
+    "URL": "http://arxiv.org/abs/1907.02085",
+    "abstract": "A single qubit provides sufficient computational capabilities to construct a universal quantum classifier when assisted with a classical subroutine. This fact may be surprising since a single qubit only offers a simple superposition of two states and single-qubit gates only make a rotation in the Bloch sphere. The key ingredient to circumvent these limitations is to allow for multiple data re-uploading. A quantum circuit can then be organized as a series of data re-uploading and single-qubit processing units. Furthermore, both data re-uploading and measurements can accommodate multiple dimensions in the input and several categories in the output, to conform to a universal quantum classifier. The extension of this idea to several qubits enhances the efficiency of the strategy as entanglement expands the superpositions carried along with the classification. Extensive benchmarking on different examples of the single- and multi-qubit quantum classifier validates its ability to describe and classify complex data.",
+    "author": [
+      {
+        "family": "Pérez-Salinas",
+        "given": "Adrián"
+      },
+      {
+        "family": "Cervera-Lierta",
+        "given": "Alba"
+      },
+      {
+        "family": "Gil-Fuster",
+        "given": "Elies"
+      },
+      {
+        "family": "Latorre",
+        "given": "José I."
+      }
+    ],
+    "container-title": "Quantum 4, 226 (2020)",
+    "id": "PerezSalinas2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          7
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Data re-uploading for a universal quantum classifier",
+    "type": "article-journal"
   }
 ]

@@ -130,8 +130,8 @@ A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows 
   "keywords": [
     "GSoC"
   ],
-  "articleBody": "In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analogue of a classical autoencoder equally aims to learn a smaller representation of data.\nA naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure. Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.\nEach line represents a single qbit and reading from left to right, consecutive transformations are applied to them. The classical training data is first encoded into a quantum state indicated by $|\\psi\\big\u003e$. This can be done with different encodings e.g. the angle encoding ( Citation: Weigold, Barzen \u0026 al., 2021 Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ) . After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\\Theta)$. It consists of rotations on the block sphere and entanglement using CNOT gates. The parameters $\\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder. After applying the encoder, a second parametrized circuit follows, which acts as the decoder. The decoder only overlaps with the encoder at a subset of its qbits, in this example a single one. This qbit acts as the smaller latent space of the autoencoder. The rest of the decoder circuit acts on qbits which were initialized as $|0\\big\u003e$. The goal of an Autoencoder is to learn to reconstruct the input data after compressing it to the latent space. To verify this, we can use a SWAP-test with three reference bits. The reference bits were initialized to the input state of the data as well. The SWAP-test can then measure the similarity of the input data state $|\\psi\\big\u003e$ with the output of the decoder $|\\phi\\big\u003e$. This similarity $\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2$, called fidelity, can be measured at the readout bit.\nSince we want to learn parameters that enable the autoencoder to reconstruct the input, we can use $$\\mathcal{L} = 1-\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2$$ as loss function to train the parameters of the circuit. The loss function can be used to optimize the parameters by gradient descent similar to classical learning.\nAn example for a circuit of a $3\\rightarrow 1 \\rightarrow 3$ autoencoder is shown below.\nIn this example for simplicity the Encoder and Decoder consist of only a single layer using $R_y(\\Theta_i)$ gates and entaglement by CNOT. The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\\big\u003e$ and prepared with a Hadamard gate, leads to the state $\\frac{1}{\\sqrt{2}}|0\\big\u003e + \\frac{1}{\\sqrt{2}}|1\\big\u003e$. The controlled SWAP operation on two states $|\\psi\\big\u003e$ and $|\\phi\\big\u003e$ transfers the three qbit system into the state $\\frac{1}{\\sqrt{2}}|0,\\psi,\\phi\\big\u003e + \\frac{1}{\\sqrt{2}}|1,\\phi,\\psi\\big\u003e$. The $|\\psi\\big\u003e$ could thereby be the state of an output qbit of the decoder and $|\\phi\\big\u003e$ the state of a respective reference bit. Applying another Hadamard gate to the SWAP-qbit transfers the state to $\\frac{1}{2}\\big(|0,\\psi,\\phi\\big\u003e + |1,\\psi,\\phi\\big\u003e + |0,\\phi,\\psi\\big\u003e - |1,\\phi,\\psi\\big\u003e\\big)$. When we now measure the first qbit, which is the auxillary SWAP-qbit, it will turn out to be $|0\\big\u003e$ with the probability $$P(|0\\big\u003e)=\\frac{1}{4}(\\big\u003c\\psi,\\phi| + \\big\u003c\\phi,\\psi|)(|\\psi,\\phi\\big\u003e + |\\phi,\\psi\\big\u003e) = \\frac{1}{2} + \\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ The probability of measuring $|1\\big\u003e$ is therefore $$P(|1\\big\u003e) = 1 - P(|0\\big\u003e) = \\frac{1}{2}-\\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ To obtain the fidelity $|\\big\u003c\\phi|\\psi\\big\u003e|^2$ we measure the SWAP-qbit in the $Z$-basis. Since the eigenvalues of $\\sigma_z$ are $1$ and $-1$ the expectation value of the measurement calculates to $$\\big = 1\\cdot P(|0\\big\u003e) + (-1)\\cdot P(|1\\big\u003e) = |\\big\u003c\\phi|\\psi\\big\u003e|^2,$$ where $|q_8\\big\u003e$ denotes the SWAP-qbit. The output of measuring the last qbit of the shown circuit in the $Z$-basis therefore corresponds to the fidelity between the output of the decoder and the reference qbits.\nA simpler Quantum Autoencoder The naive implementation discussed above can be simplified as shown in ( Citation: Ngairangbam, Spannowsky \u0026 al., 2021 Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 ) based on ( Citation: Romero, Olson \u0026 al., 2016 Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ) . A $3\\rightarrow 1 \\rightarrow 3$ autoencoder circuit based on these ideas is displayed below.\nThe main idea is that, since the encoder circuit is a unitary transformation, if the fidelity of the non-latent qbits with some trash qbits which are just $|0\\big\u003e$ is one, the latent qbit will contain a compressed version $|\\psi\\big\u003e_c$ of the input state $|\\psi\\big\u003e$. Therefore it is sufficient to maximize the fidelity between the non-latent qbits and some trash qbits to train the autoencoder. Furthermore, a decoder is not necessary, since the decoder is just the adjoint of the encoder. As we can see the main advantage of this method is that it needs way fewer qbits and works with a shallower circuit. Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging.\nNgairangbam, Spannowsky \u0026 Takeuchi (2021) Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 Romero, Olson \u0026 Aspuru-Guzik (2016) Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 Weigold, Barzen, Leymann \u0026 Salm (2021) Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ",
-  "wordCount" : "975",
+  "articleBody": "In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analogue of a classical autoencoder equally aims to learn a smaller representation of data.\nA naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure. Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.\nEach line represents a single qbit and reading from left to right, consecutive transformations are applied to them. The classical training data is first encoded into a quantum state indicated by $|\\psi\\big\u003e$. This can be done with different encodings e.g. the angle encoding ( Citation: Weigold, Barzen \u0026 al., 2021 Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ) . After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\\Theta)$. It consists of rotations on the bloch sphere and entanglement using CNOT gates. The parameters $\\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder. After applying the encoder, a second parametrized circuit follows, which acts as the decoder. The decoder only overlaps with the encoder at a subset of its qbits, in this example a single one. This qbit acts as the smaller latent space of the autoencoder. The rest of the decoder circuit acts on qbits which were initialized as $|0\\big\u003e$. The goal of an Autoencoder is to learn to reconstruct the input data after compressing it to the latent space. To verify this, we can use a SWAP-test with three reference bits. The reference bits were initialized to the input state of the data as well. The SWAP-test can then measure the similarity of the input data state $|\\psi\\big\u003e$ with the output of the decoder $|\\phi\\big\u003e$. This similarity $F$ is called fidelity $$F(\\ket{\\psi},\\ket{\\phi})=\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2.$$ It can be measured at the readout bit.\nSince we want to learn parameters that enable the autoencoder to reconstruct the input, we can then use the fidelity to construct the loss function $$\\mathcal{L} = 1-\\big|\\big\u003c\\psi|\\phi\\big\u003e\\big|^2$$ to minimize. The loss function can be used to optimize the parameters by gradient descent similar to classical learning.\nAn example for a circuit of a $3\\rightarrow 1 \\rightarrow 3$ autoencoder is shown below.\nIn this example for simplicity the Encoder and Decoder consist of only a single layer using $R_y(\\Theta_i)$ gates and entaglement by CNOT. The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\\big\u003e$ and prepared with a Hadamard gate, which leads to the state $\\frac{1}{\\sqrt{2}}|0\\big\u003e + \\frac{1}{\\sqrt{2}}|1\\big\u003e$. The controlled SWAP operation on two states $|\\psi\\big\u003e$ and $|\\phi\\big\u003e$ transfers the three qbit system into the state $\\frac{1}{\\sqrt{2}}|0,\\psi,\\phi\\big\u003e + \\frac{1}{\\sqrt{2}}|1,\\phi,\\psi\\big\u003e$. The $|\\psi\\big\u003e$ could thereby be the state of an output qbit of the decoder, e.g. $(0,2)$ and $|\\phi\\big\u003e$ the state of the respective reference bit, e.g. $(0,5)$. Applying another Hadamard gate to the SWAP-qbit transfers the state to $\\frac{1}{2}\\big(|0,\\psi,\\phi\\big\u003e + |1,\\psi,\\phi\\big\u003e + |0,\\phi,\\psi\\big\u003e - |1,\\phi,\\psi\\big\u003e\\big)$. When we now measure the first qbit, which is the auxillary SWAP-qbit $(0,8)$ in the circuit shown above, it will turn out to be $|0\\big\u003e$ with the probability $$P(|0\\big\u003e)=\\frac{1}{4}(\\big\u003c\\psi,\\phi| + \\big\u003c\\phi,\\psi|)(|\\psi,\\phi\\big\u003e + |\\phi,\\psi\\big\u003e) = \\frac{1}{2} + \\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ The probability of measuring $|1\\big\u003e$ is therefore $$P(|1\\big\u003e) = 1 - P(|0\\big\u003e) = \\frac{1}{2}-\\frac{1}{2}|\\big\u003c\\phi|\\psi\\big\u003e|^2.$$ To obtain the fidelity $|\\big\u003c\\phi|\\psi\\big\u003e|^2$ we measure the SWAP-qbit in the $Z$-basis. Since the eigenvalues of $\\sigma_z$ are $1$ and $-1$ the expectation value of the measurement calculates to $$\\big = 1\\cdot P(|0\\big\u003e) + (-1)\\cdot P(|1\\big\u003e) = |\\big\u003c\\phi|\\psi\\big\u003e|^2,$$ where $|q_8\\big\u003e$ denotes the SWAP-qbit. The output of measuring the last qbit of the shown circuit in the $Z$-basis therefore corresponds to the fidelity between the output of the decoder and the reference qbits.\nA simpler Quantum Autoencoder The naive implementation discussed above can be simplified as shown in ( Citation: Ngairangbam, Spannowsky \u0026 al., 2021 Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 ) based on ( Citation: Romero, Olson \u0026 al., 2016 Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ) . A $3\\rightarrow 1 \\rightarrow 3$ autoencoder circuit without the SWAP test for measuring the fidelity of the output of the decoder is displayed below.\nThe Hilbertspace $\\mathcal{H}=\\mathcal{H}_T\\otimes\\mathcal{H}_A\\otimes\\mathcal{H}_L$ can be written as the product of the subspaces for the so called trash qubits $\\mathcal{H}_T$, the data qubits which are not part of the latent space $\\mathcal{H}_A$ and the compessed state at the latent bits $\\mathcal{H}_L$. In this depiction the trash bits are fed into the decoder by a SWAP operation ${V_T}_A$ between $\\mathcal{H}_A$ and $\\mathcal{H}_T$. The input state to the autoencoder can be written as $$|\\Psi\\big\u003e = {|\\psi\\big\u003e_L}_A \\otimes |t\\big\u003e_T,$$ where $\\ket{\\psi}$ is the actual input data and $\\ket{t}$ are the trash states which are initialized as $\\ket{0}$. The output state $|\\omicron\\big\u003e$ is the result of the unitary transformations and the SWAP applied to the input $$|\\omicron\\big\u003e = {U^\\dagger_L}_A {V_A}_T {U_L}_A {|\\psi\\big\u003e_L}_A \\otimes |t\\big\u003e_T.$$ The Fidelity between the input and the output $F(|\\Psi\\big\u003e,|\\omicron\\big\u003e)$ can be simplified $$ \\begin{align} \\begin{split} F(|\\Psi\\big\u003e,|\\omicron\\big\u003e) \u0026= \\big|\\braket{\\Psi|\\omicron}\\big|^2 \\\\ \u0026= \\big|\\braket{\\Psi|{U^\\dagger_L}_A{V_A}_T{U_L}_A|\\Psi}\\big|^2 \\\\ \u0026= F\\big({U_L}_A{|\\psi\\big\u003e_L}_A \\otimes |t\\big\u003e_T, {V_A}_T {U_L}_A{|\\psi\\big\u003e_L}_A \\otimes |t\\big\u003e_T\\big)\\\\ \u0026= F\\big({U_L}_A{|\\psi\\big\u003e_L}_A \\otimes |t\\big\u003e_T, {U_L}_T{|\\psi\\big\u003e_L}_T \\otimes |t\\big\u003e_A\\big)\\\\ \\end{split} \\end{align} $$ where in the last line the SWAP $V$ exchanged $\\mathcal{H}_A$ and $\\mathcal{H}_T$. We can now see that, if $${U_L}_Z{\\ket{\\psi}_L}_Z = {\\ket{\\psi_c}}_L\\otimes\\ket{t}_Z$$ the fidelity reduces to one. Here $\\ket{\\psi}_c$ denotes a compressed version of the input state. It is therefore sufficient to train the unitarity $U(\\Theta)$ to seperate the trash state $\\ket{t}$. To do so, the decoder, which is the adjoint $U^\\dagger$ is not needed. An example circuit is shown below.\nIn this case the SWAP test measures the fidelity between the trash qubits $\\ket{t}$ and the output bits of the encoder which are not latent bits. As we can see the main advantage of this method is that it needs way fewer qbits and works with a shallower circuit. Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging. Another useful advantage is the fact that we can upload more than one feature per qubit as shown in ( Citation: Pérez-Salinas, Cervera-Lierta \u0026 al., 2019 Pérez-Salinas, A., Cervera-Lierta, A., Gil-Fuster, E. \u0026 Latorre, J. (2019). Data re-uploading for a universal quantum classifier. Quantum 4, 226 (2020). https://doi.org/10.22331/q-2020-02-06-226 ) , Because we don’t have to compre the output of the decoder with the input data.\nIt should be noted, that the two fidelities for the first and the second approach are not identical. According to ( Citation: Romero, Olson \u0026 al., 2016 Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ) the fidelity of the naive QAE is always less or equalt to the simpler version.\nCurrently I am using this architecture and experimenting with different encoder circuits, as I am not aware of other fully quantum autoencoder architectures in the literature. It would be interesting to explore to what extend a potential quantum (variational ?) autoencoder could be used for generative purposes, which I will leave for the future.\nNgairangbam, Spannowsky \u0026 Takeuchi (2021) Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 Pérez-Salinas, Cervera-Lierta, Gil-Fuster \u0026 Latorre (2019) Pérez-Salinas, A., Cervera-Lierta, A., Gil-Fuster, E. \u0026 Latorre, J. (2019). Data re-uploading for a universal quantum classifier. Quantum 4, 226 (2020). https://doi.org/10.22331/q-2020-02-06-226 Romero, Olson \u0026 Aspuru-Guzik (2016) Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 Weigold, Barzen, Leymann \u0026 Salm (2021) Weigold, M., Barzen, J., Leymann, F. \u0026 Salm, M. (2021). Expanding Data Encoding Patterns For Quantum Algorithms. https://doi.org/10.1109/ICSA-C52384.2021.00025 ",
+  "wordCount" : "1381",
   "inLanguage": "en",
   "datePublished": "2022-07-12T00:00:00Z",
   "dateModified": "2022-07-12T00:00:00Z",
@@ -221,7 +221,7 @@ A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows 
     <h1 class="post-title">
       Quantum Autoencoder
     </h1>
-    <div class="post-meta"><span title='2022-07-12 00:00:00 +0000 UTC'>July 12, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Tom Magorsch
+    <div class="post-meta"><span title='2022-07-12 00:00:00 +0000 UTC'>July 12, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Tom Magorsch
 
 </div>
   </header> <div class="toc">
@@ -245,7 +245,7 @@ A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows 
 <h1 id="a-naive-quantum-autoencoder">A naive Quantum Autoencoder<a hidden class="anchor" aria-hidden="true" href="#a-naive-quantum-autoencoder">#</a></h1>
 <p>My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.
 Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.</p>
-<p><img loading="lazy" src="../ae.svg#center" alt="structure of a quantum autoencoder ciruit"  />
+<p><img loading="lazy" src="../ae.png#center" alt="structure of a quantum autoencoder ciruit"  />
 </p>
 <p>Each line represents a single qbit and reading from left to right, consecutive transformations are applied to them.
 The classical training data is first encoded into a quantum state indicated by $|\psi\big&gt;$. This can be done with different encodings e.g. the angle encoding 
@@ -292,23 +292,25 @@ The classical training data is first encoded into a quantum state indicated by $
 
 </span></span>)</span>
 .
-After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\Theta)$. It consists of rotations on the block sphere and entanglement using CNOT gates. The parameters $\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder.
+After feeding the data into the first three qbits, an encoding block is applied. The encoder is a parameterized unitary transformation $U(\Theta)$. It consists of rotations on the bloch sphere and entanglement using CNOT gates. The parameters $\Theta$ are angles for the rotations which will eventually be learned when training the autoencoder.
 After applying the encoder, a second parametrized circuit follows, which acts as the decoder.
 The decoder only overlaps with the encoder at a subset of its qbits, in this example a single one. This qbit acts as the smaller latent space of the autoencoder. The rest of the decoder circuit acts on qbits which were initialized as $|0\big&gt;$.
 The goal of an Autoencoder is to learn to reconstruct the input data after compressing it to the latent space. To verify this, we can use a SWAP-test with three reference bits.
 The reference bits were initialized to the input state of the data as well.
 The SWAP-test can then measure the similarity of the input data state $|\psi\big&gt;$ with the output of the decoder $|\phi\big&gt;$.
-This similarity $\big|\big&lt;\psi|\phi\big&gt;\big|^2$, called fidelity, can be measured at the readout bit.</p>
-<p>Since we want to learn parameters that enable the autoencoder to reconstruct the input, we can use $$\mathcal{L} = 1-\big|\big&lt;\psi|\phi\big&gt;\big|^2$$ as loss function to train the parameters of the circuit.
+This similarity $F$ is called fidelity
+$$F(\ket{\psi},\ket{\phi})=\big|\big&lt;\psi|\phi\big&gt;\big|^2.$$
+It can be measured at the readout bit.</p>
+<p>Since we want to learn parameters that enable the autoencoder to reconstruct the input, we can then use the fidelity to construct the loss function $$\mathcal{L} = 1-\big|\big&lt;\psi|\phi\big&gt;\big|^2$$ to minimize.
 The loss function can be used to optimize the parameters by <a href="https://pennylane.ai/qml/demos/tutorial_backprop.html">gradient descent</a> similar to classical learning.</p>
 <p>An example for a circuit of a $3\rightarrow 1 \rightarrow 3$ autoencoder is shown below.</p>
 <p><img loading="lazy" src="../QAE_circuit.svg#center" alt="quantum autoencoder circuits with gates"  />
 </p>
 <p>In this example for simplicity the Encoder and Decoder consist of only a single layer using $R_y(\Theta_i)$ gates and entaglement by CNOT.
-The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\big&gt;$ and prepared with a Hadamard gate, leads to the state $\frac{1}{\sqrt{2}}|0\big&gt; + \frac{1}{\sqrt{2}}|1\big&gt;$.
-The controlled SWAP operation on two states $|\psi\big&gt;$ and $|\phi\big&gt;$ transfers the three qbit system into the state $\frac{1}{\sqrt{2}}|0,\psi,\phi\big&gt; + \frac{1}{\sqrt{2}}|1,\phi,\psi\big&gt;$. The $|\psi\big&gt;$ could thereby be the state of an output qbit of the decoder and $|\phi\big&gt;$ the state of a respective reference bit.
+The SWAP-test is carried out using controlled SWAP-gates on the output of the decoder and the reference bits. The controlling bit is the last qbit which is used to readout the result of the SWAP-test. It is initialized as $|0\big&gt;$ and prepared with a Hadamard gate, which leads to the state $\frac{1}{\sqrt{2}}|0\big&gt; + \frac{1}{\sqrt{2}}|1\big&gt;$.
+The controlled SWAP operation on two states $|\psi\big&gt;$ and $|\phi\big&gt;$ transfers the three qbit system into the state $\frac{1}{\sqrt{2}}|0,\psi,\phi\big&gt; + \frac{1}{\sqrt{2}}|1,\phi,\psi\big&gt;$. The $|\psi\big&gt;$ could thereby be the state of an output qbit of the decoder, e.g. $(0,2)$ and $|\phi\big&gt;$ the state of the respective reference bit, e.g. $(0,5)$.
 Applying another Hadamard gate to the SWAP-qbit transfers the state to $\frac{1}{2}\big(|0,\psi,\phi\big&gt; + |1,\psi,\phi\big&gt; + |0,\phi,\psi\big&gt; - |1,\phi,\psi\big&gt;\big)$.
-When we now measure the first qbit, which is the auxillary SWAP-qbit, it will turn out to be $|0\big&gt;$ with the probability
+When we now measure the first qbit, which is the auxillary SWAP-qbit $(0,8)$ in the circuit shown above, it will turn out to be $|0\big&gt;$ with the probability
 $$P(|0\big&gt;)=\frac{1}{4}(\big&lt;\psi,\phi| + \big&lt;\phi,\psi|)(|\psi,\phi\big&gt; + |\phi,\psi\big&gt;) = \frac{1}{2} + \frac{1}{2}|\big&lt;\phi|\psi\big&gt;|^2.$$
 The probability of measuring $|1\big&gt;$ is therefore
 $$P(|1\big&gt;) = 1 - P(|0\big&gt;) = \frac{1}{2}-\frac{1}{2}|\big&lt;\phi|\psi\big&gt;|^2.$$
@@ -318,7 +320,7 @@ $$\big&lt;q_8|\sigma_z|q_8\big&gt; = 1\cdot P(|0\big&gt;) + (-1)\cdot P(|1\big&g
 where $|q_8\big&gt;$ denotes the SWAP-qbit.
 The output of measuring the last qbit of the shown circuit in the $Z$-basis therefore corresponds to the fidelity between the output of the decoder and the reference qbits.</p>
 <h1 id="a-simpler-quantum-autoencoder">A simpler Quantum Autoencoder<a hidden class="anchor" aria-hidden="true" href="#a-simpler-quantum-autoencoder">#</a></h1>
-<p>The naive implementation discussed above can be simplified as shown in 
+<p>The naive implementation discussed above can be simplified as shown in <nobr>
 
 
 
@@ -360,7 +362,7 @@ The output of measuring the last qbit of the shown circuit in the $Z$-basis ther
 
 
 </span></span>)</span>
- based on 
+</nobr> based on 
 
 
 
@@ -403,14 +405,128 @@ The output of measuring the last qbit of the shown circuit in the $Z$-basis ther
 
 </span></span>)</span>
 .
-A $3\rightarrow 1 \rightarrow 3$ autoencoder circuit based on these ideas is displayed below.</p>
+A $3\rightarrow 1 \rightarrow 3$ autoencoder circuit without the SWAP test for measuring the fidelity of the output of the decoder is displayed below.</p>
+<p><img loading="lazy" src="../sqae.png#center" alt="simpler quantum autoencoder circuits with gates"  />
+</p>
+<p>The Hilbertspace $\mathcal{H}=\mathcal{H}_T\otimes\mathcal{H}_A\otimes\mathcal{H}_L$ can be written as the product of the subspaces for the so called trash qubits $\mathcal{H}_T$, the data qubits which are not part of the latent space $\mathcal{H}_A$ and the compessed state at the latent bits $\mathcal{H}_L$. In this depiction the trash bits are fed into the decoder by a SWAP operation ${V_T}_A$ between $\mathcal{H}_A$ and $\mathcal{H}_T$.
+The input state to the autoencoder can be written as
+$$|\Psi\big&gt; = {|\psi\big&gt;_L}_A \otimes |t\big&gt;_T,$$
+where $\ket{\psi}$ is the actual input data and $\ket{t}$ are the trash states which are initialized as $\ket{0}$.
+The output state $|\omicron\big&gt;$ is the result of the unitary transformations and the SWAP applied to the input
+$$|\omicron\big&gt; = {U^\dagger_L}_A {V_A}_T {U_L}_A {|\psi\big&gt;_L}_A \otimes |t\big&gt;_T.$$
+The Fidelity between the input and the output $F(|\Psi\big&gt;,|\omicron\big&gt;)$ can be simplified
+$$
+\begin{align}
+\begin{split}
+F(|\Psi\big&gt;,|\omicron\big&gt;) &amp;= \big|\braket{\Psi|\omicron}\big|^2 \\
+&amp;= \big|\braket{\Psi|{U^\dagger_L}_A{V_A}_T{U_L}_A|\Psi}\big|^2 \\
+&amp;= F\big({U_L}_A{|\psi\big&gt;_L}_A \otimes |t\big&gt;_T, {V_A}_T {U_L}_A{|\psi\big&gt;_L}_A \otimes |t\big&gt;_T\big)\\
+&amp;= F\big({U_L}_A{|\psi\big&gt;_L}_A \otimes |t\big&gt;_T, {U_L}_T{|\psi\big&gt;_L}_T \otimes |t\big&gt;_A\big)\\
+\end{split}
+\end{align}
+$$
+where in the last line the SWAP $V$ exchanged $\mathcal{H}_A$ and $\mathcal{H}_T$.
+We can now see that, if
+$${U_L}_Z{\ket{\psi}_L}_Z = {\ket{\psi_c}}_L\otimes\ket{t}_Z$$
+the fidelity reduces to one.
+Here $\ket{\psi}_c$ denotes a compressed version of the input state.
+It is therefore sufficient to train the unitarity $U(\Theta)$ to seperate the trash state $\ket{t}$. To do so, the decoder, which is the adjoint $U^\dagger$ is not needed.
+An example circuit is shown below.</p>
 <p><img loading="lazy" src="../SQAE_circuit.svg#center" alt="simpler quantum autoencoder circuits with gates"  />
 </p>
-<p>The main idea is that, since the encoder circuit is a unitary transformation, if the fidelity of the non-latent qbits with some trash qbits which are just $|0\big&gt;$ is one, the latent qbit will contain a compressed version $|\psi\big&gt;_c$ of the input state $|\psi\big&gt;$.
-Therefore it is sufficient to maximize the fidelity between the non-latent qbits and some trash qbits to train the autoencoder.
-Furthermore, a decoder is not necessary, since the decoder is just the adjoint of the encoder.
+<p>In this case the SWAP test measures the fidelity between the trash qubits $\ket{t}$ and the output bits of the encoder which are not latent bits.
 As we can see the main advantage of this method is that it needs way fewer qbits and works with a shallower circuit.
-Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging.</p>
+Nevertheless, it can still be used for compression, as the lower dimensional representation of the input data could be extracted from the qbit $(0,0)$. Moreover, the fidelity used for training can equally be used for anomaly tagging.
+Another useful advantage is the fact that we can upload more than one feature per qubit as shown in <nobr>
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#perezsalinas2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Adrián"><span itemprop="familyName">Pérez-Salinas</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Alba"><span itemprop="familyName">Cervera-Lierta</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pérez-Salinas</span>,&#32;
+    <meta itemprop="givenName" content="Adrián" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Cervera-Lierta</span>,&#32;
+    <meta itemprop="givenName" content="Alba" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gil-Fuster</span>,&#32;
+    <meta itemprop="givenName" content="Elies" />
+    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latorre</span>,&#32;
+    <meta itemprop="givenName" content="José I." />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Data re-uploading for a universal quantum classifier</span>.<i>
+    <span itemprop="about">Quantum 4, 226 (2020)</span></i>.
+  <a href="https://doi.org/10.22331/q-2020-02-06-226"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-02-06-226</a></span>
+
+
+
+
+</span></span>)</span>
+</nobr>, Because we don&rsquo;t have to compre the output of the decoder with the input data.</p>
+<p>It should be noted, that the two fidelities for the first and the second approach are not identical. According to 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#romero2016"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan"><span itemprop="familyName">Romero</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan P."><span itemprop="familyName">Olson</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2016</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Olson</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan P." />
+    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
+    <meta itemprop="givenName" content="Alan" />
+    A.</span>
+  &#32;
+    (<span itemprop="datePublished">2016</span>).
+  &#32;<span itemprop="name">Quantum autoencoders for efficient compression of quantum data</span>.<i>
+    <span itemprop="about">Now published in 2017 Quantum Sci. Technol. 2 045001</span></i>.
+  <a href="https://doi.org/10.1088/2058-9565/aa8072"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1088/2058-9565/aa8072</a></span>
+
+
+
+
+</span></span>)</span>
+ the fidelity of the naive QAE is always less or equalt to the simpler version.</p>
+<p>Currently I am using this architecture and experimenting with different encoder circuits, as I am not aware of other fully quantum autoencoder architectures in the literature. It would be interesting to explore to what extend a potential quantum (variational ?) autoencoder could be used for generative purposes, which I will leave for the future.</p>
 
   
 
@@ -466,6 +582,55 @@ Nevertheless, it can still be used for compression, as the lower dimensional rep
   <a href="https://doi.org/10.1103/PhysRevD.105.095004"
      itemprop="identifier"
      itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevD.105.095004</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="perezsalinas2019">
+        <dt>
+          Pérez-Salinas,&#32;
+          Cervera-Lierta,&#32;
+          Gil-Fuster&#32;&amp;&#32;Latorre
+
+          
+          (2019)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pérez-Salinas</span>,&#32;
+    <meta itemprop="givenName" content="Adrián" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Cervera-Lierta</span>,&#32;
+    <meta itemprop="givenName" content="Alba" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gil-Fuster</span>,&#32;
+    <meta itemprop="givenName" content="Elies" />
+    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latorre</span>,&#32;
+    <meta itemprop="givenName" content="José I." />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Data re-uploading for a universal quantum classifier</span>.<i>
+    <span itemprop="about">Quantum 4, 226 (2020)</span></i>.
+  <a href="https://doi.org/10.22331/q-2020-02-06-226"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-02-06-226</a></span>
 
 
 
