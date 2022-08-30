@@ -397,5 +397,138 @@
     "keyword": "quant-ph",
     "title": "Data re-uploading for a universal quantum classifier",
     "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/1412.1193",
+    "abstract": "Natural gradient descent is an optimization method traditionally motivated from the perspective of information geometry, and works well for many applications as an alternative to stochastic gradient descent. In this paper we critically analyze this method and its properties, and show how it can be viewed as a type of 2nd-order optimization method, with the Fisher information matrix acting as a substitute for the Hessian. In many important cases, the Fisher information matrix is shown to be equivalent to the Generalized Gauss-Newton matrix, which both approximates the Hessian, but also has certain properties that favor its use over the Hessian. This perspective turns out to have significant implications for the design of a practical and robust natural gradient optimizer, as it motivates the use of techniques like trust regions and Tikhonov regularization. Additionally, we make a series of contributions to the understanding of natural gradient and 2nd-order methods, including: a thorough analysis of the convergence speed of stochastic natural gradient descent (and more general stochastic 2nd-order methods) as applied to convex quadratics, a critical examination of the oft-used \"empirical\" approximation of the Fisher matrix, and an analysis of the (approximate) parameterization invariance property possessed by natural gradient methods (which we show also holds for certain other curvature, but notably not the Hessian).",
+    "author": [
+      {
+        "family": "Martens",
+        "given": "James"
+      }
+    ],
+    "id": "Martens2014",
+    "issued": {
+      "date-parts": [
+        [
+          2014,
+          12
+        ]
+      ]
+    },
+    "keyword": "cs.LG, stat.ML",
+    "title": "New insights and perspectives on the natural gradient method",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.22331/q-2020-05-25-269",
+    "URL": "http://arxiv.org/abs/1909.02108",
+    "abstract": "A quantum generalization of Natural Gradient Descent is presented as part of a general-purpose optimization framework for variational quantum circuits. The optimization dynamics is interpreted as moving in the steepest descent direction with respect to the Quantum Information Geometry, corresponding to the real part of the Quantum Geometric Tensor (QGT), also known as the Fubini-Study metric tensor. An efficient algorithm is presented for computing a block-diagonal approximation to the Fubini-Study metric tensor for parametrized quantum circuits, which may be of independent interest.",
+    "author": [
+      {
+        "family": "Stokes",
+        "given": "James"
+      },
+      {
+        "family": "Izaac",
+        "given": "Josh"
+      },
+      {
+        "family": "Killoran",
+        "given": "Nathan"
+      },
+      {
+        "family": "Carleo",
+        "given": "Giuseppe"
+      }
+    ],
+    "container-title": "Quantum 4, 269 (2020)",
+    "id": "Stokes2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          9
+        ]
+      ]
+    },
+    "keyword": "quant-ph, cs.LG, stat.ML",
+    "title": "Quantum Natural Gradient",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevLett.126.140502",
+    "URL": "http://arxiv.org/abs/1901.05374",
+    "abstract": "A broad class of hybrid quantum-classical algorithms known as \"variational algorithms\" have been proposed in the context of quantum simulation, machine learning, and combinatorial optimization as a means of potentially achieving a quantum speedup on a near-term quantum device for a problem of practical interest. Such algorithms use the quantum device only to prepare parameterized quantum states and make simple measurements. A classical controller uses the measurement results to perform an optimization of a classical function induced by a quantum observable which defines the problem. While most prior works have considered optimization strategies based on estimating the objective function and doing a derivative-free or finite-difference-based optimization, some recent proposals involve directly measuring observables corresponding to the gradient of the objective function. The measurement procedure needed requires coherence time barely longer than that needed to prepare a trial state. We prove that strategies based on such gradient measurements can admit substantially faster rates of convergence to the optimum in some contexts. We first introduce a natural black-box setting for variational algorithms which we prove our results with respect to. We define a simple class of problems for which a variational algorithm based on low-depth gradient measurements and stochastic gradient descent converges to the optimum substantially faster than any possible strategy based on estimating the objective function itself, and show that stochastic gradient descent is essentially optimal for this problem. Importing known results from the stochastic optimization literature, we also derive rigorous upper bounds on the cost of variational optimization in a convex region when using gradient measurements in conjunction with certain stochastic gradient descent or stochastic mirror descent algorithms.",
+    "author": [
+      {
+        "family": "Harrow",
+        "given": "Aram"
+      },
+      {
+        "family": "Napp",
+        "given": "John"
+      }
+    ],
+    "container-title": "Phys. Rev. Lett. 126, 140502 (2021)",
+    "id": "Harrow2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          1
+        ]
+      ]
+    },
+    "keyword": "quant-ph, math.OC",
+    "title": "Low-depth gradient measurements can improve convergence in variational hybrid quantum-classical algorithms",
+    "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/1909.05074",
+    "abstract": "The variational quantum eigensolver is a hybrid algorithm composed of quantum state driving and classical parameter optimization, for finding the ground state of a given Hamiltonian. The natural gradient method is an optimization method taking into account the geometric structure of the parameter space. Very recently, Stokes et al. developed the general method for employing the natural gradient for the variational quantum eigensolver. This paper gives some simple case-studies of this optimization method, to see in detail how the natural gradient optimizer makes use of the geometric property to change and improve the ordinary gradient method.",
+    "author": [
+      {
+        "family": "Yamamoto",
+        "given": "Naoki"
+      }
+    ],
+    "id": "Yamamoto2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          9
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "On the natural gradient for variational quantum eigensolver",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1162/089976698300017746",
+    "author": [
+      {
+        "family": "Amari",
+        "given": "Shun-ichi"
+      }
+    ],
+    "container-title": "Neural Computation",
+    "id": "Amari1998",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          1998,
+          2
+        ]
+      ]
+    },
+    "page": "251-276",
+    "publisher": "MIT Press - Journals",
+    "title": "Natural Gradient Works Efficiently in Learning",
+    "type": "article-journal",
+    "volume": "10"
   }
 ]

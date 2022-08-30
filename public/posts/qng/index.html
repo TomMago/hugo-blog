@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Quantum Natural Gradient Descent | TomMago</title>
+<meta name="keywords" content="GSoC">
+<meta name="description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).">
+<meta name="author" content="Tom Magorsch">
+<link rel="canonical" href="https://tommago.com/posts/qng/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4fd967528ad5a75f3ce961dbda94c03a4739e156197539fdac72973ab0f932e0.css" integrity="sha256-T9lnUorVp1886WHb2pTAOkc54VYZdTn9rHKXOrD5MuA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tommago.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+onload="renderMathInElement(document.body,
+        {
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+              ],
+              throwOnError : false
+          });"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Quantum Natural Gradient Descent" />
+<meta property="og:description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tommago.com/posts/qng/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-27T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-08-27T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quantum Natural Gradient Descent"/>
+<meta name="twitter:description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG)."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tommago.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Quantum Natural Gradient Descent",
+      "item": "https://tommago.com/posts/qng/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Quantum Natural Gradient Descent",
+  "name": "Quantum Natural Gradient Descent",
+  "description": "When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).",
+  "keywords": [
+    "GSoC"
+  ],
+  "articleBody": "When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).\nNatural Gradient Descent When minimizing a cost function $\\mathcal{L}(\\Theta)$ the well known gradient descent iteratively updates the parameters $\\Theta$ by descenting into the direction of the gradient $$\\Theta_{t+1} := \\Theta_t - \\eta \\nabla \\mathcal{L}(\\Theta)\\big|_{\\Theta_t}.$$ Here and in the following all gradients are calculated with respect to $\\Theta$ In Stochastic Gradient Descent (SGD) specifically the gradient $\\nabla \\mathcal{L}(\\Theta)$ is approximated by the gradient of the cost funciton over a subset of the training data. With this update rule, gradient descent implicitly assumes a euclidean geometry of the parameter space. This can be seen when writing the update rule as $$\\Theta_{t+1} := \\argmin_\\Theta \\left[\\big\u003c\\Theta - \\Theta_t, \\nabla \\mathcal{L}(\\Theta)\\big|_{\\Theta_t}\\big\u003e + \\frac{1}{2\\eta} \\big|\\big|\\Theta-\\Theta_t\\big|\\big|^2_2 \\right],$$ where a proximity term is added, just like in the lagrangian of a spring mass. The equivalence to the gradient descent update rule can immediately be seen when solving the $\\argmin$ by setting the derivative equal to zero.\nThe choice of euclidean geometry does however not necessarily reflect the actual parameter space. Since it gives equal weight to all parameters $\\Theta_i$ ill conditioned situations can arise as e.g. shown below.\nThe algorithm bounces over the valley and only slowly approaches the minimum. In the shown example the large step size aggrevates the problem. For SGD a careful tuning of the learning rate is therefore especially important. Optimizers like Adam can adress this problem by adjusting the step size based on previous gradients. A reparameterization of the parameters space on the other hand could lead to problem way better suited for SGD.\nSo instead of using the euclidean metric $||\\Theta||_2$ a distance measure for an infinitesimal vector $\\text{d}\\Theta$ on a curved manifold is given by $$||\\Theta||_{g} = \\sum_{ij}g_{ij}(\\Theta)\\text{d}\\Theta_i\\text{d}\\Theta_j,$$ where $g_{ij}$ is the Riemannian metric tensor.\nFor every physicist this seems very familiar. Of course the euclidean metric is the special case of $g_{ij}=\\delta_{ij}$. Using this general metric for the method of steepest descent S. Amari shows in ( Citation: Amari, 1998 Amari, S. (1998). Natural Gradient Works Efficiently in Learning. Neural Computation, 10(2). 251–276. https://doi.org/10.1162/089976698300017746 ) that the gradient descent update rule becomes $$\\Theta_{t+1} := \\Theta_t - \\eta G^{-1}\\nabla\\mathcal{L}(\\Theta)\\big|_{\\Theta_{t+1}}\\tag{1},$$ where $G^{-1}$ is the inverse of the metric $G = (g_{ij})$.\nThe question remains how to determin the metric. In the framework of Information Geometry, instead of considering the parameter space, the optimization is performed on the so called statistical manifold. A statistical manifold is a riemannian manifold, where every point corresponds to a probability function.\nIn our case, we may consider the manifold of likelihoods $p(x|\\Theta)$ for the different possible parameters $\\Theta$. To measure the similarity between two probability distributions there exist different divergences, the most known one beeing the Kullback–Leibler (KL) divergence. For two distribution $p(x)$ and $q(x)$ it is defined as $$D_{KL}(p(x)||q(x)) = \\sum_x p(x)\\log\\left(\\frac{p(x)}{q(x)}\\right)\\tag{2}.$$ Note that formally the KL-divergence is not symmetric an thus is not a proper distance measure. However things work out for infinitesimal distance and thus it can be used to describe the manifold locally ( Citation: Martens, 2014 Martens, J. (2014). New insights and perspectives on the natural gradient method. Retrieved from http://arxiv.org/abs/1412.1193 ) .\nLet’s try to rewrite our gradient update from SGD with the KL-divergence as instead of the euclidean metric: $$\\Theta_{t+1} := \\argmin_\\Theta \\left[\\big\u003c\\Theta - \\Theta_t, \\nabla \\mathcal{L}(\\Theta)\\big|_{\\Theta_t}\\big\u003e + \\frac{1}{2\\eta}D_{KL}(q(x|\\Theta)||q(x|\\Theta_t)) \\right]$$ To minimize this expression we set the derivative to zero $$\\nabla \\mathcal{L}(\\Theta)\\bigg|_{\\Theta_t} + \\frac{1}{\\eta}\\nabla D_{KL}\\left(q(x|\\Theta)||q(x|\\Theta_t)\\right)\\bigg|_{\\Theta_{t+1}} = 0\\tag{3}.$$ So to solve this we need the gradient of the KL-divergence, which we will approximate by taylor expanding the $D_{KL}$ around $\\Theta_t$. In the following we denote $D_{KL}(\\Theta||\\Theta_t) := D_{KL}(q(x|\\Theta)||q(x|\\Theta_t))$ for brevity. In second order we obtain $$ \\begin{align*} D_{KL}(\\Theta||\\Theta_t)\\approx D_{KL}(\\Theta_t||\\Theta_t) + \\nabla D_{KL}(\\Theta||\\Theta_t)\\big|_{\\Theta_t}(\\Theta-\\Theta_t)\\\\ +\\frac{1}{2}(\\Theta - \\Theta_t)^T H_{D_{KL}}\\big|_{\\Theta_t} (\\Theta - \\Theta_t), \\end{align*} $$ where $H_{D_{KL}}$ denotes the Hessian with respect to $\\Theta$. The first term obviously vanishes since the divergance for identical distributions is zero. The second becomes zero as well, which we can see if we insert the definition from Eq. $(2)$: $$ \\begin{align*} \\nabla D_{KL}(\\Theta||\\Theta_t)\\big|_{\\Theta_t}=\u0026\\sum_x \\nabla p(\\Theta)\\big|_{\\Theta_t}\\log\\left(\\frac{p(\\Theta_t)}{p(\\Theta_t)}\\right) + p(\\Theta)\\nabla\\log\\left(\\frac{p(\\Theta)}{p(\\Theta_t)}\\right) \\\\ \u0026 =\\sum_x \\nabla p(\\Theta) - p(\\Theta) \\nabla\\log\\left(p(\\Theta_t)\\right) = \\nabla 1 = 0. \\end{align*} $$ We can now insert the taylor expression for the KL-divergence in Eq. $(3)$ to obtain $$\\nabla\\mathcal{L}(\\Theta)\\bigg|_{\\Theta_t}+\\frac{1}{\\eta}H_{D_{KL}}\\bigg|_{\\Theta_t}(\\Theta - \\Theta_t)=0,$$ which leads to our update rule $$\\Theta_{t+1} := \\Theta_t - \\eta H^{-1}_{D_{KL}}\\bigg|_{\\Theta_t}\\nabla\\mathcal{L}(\\Theta)\\bigg|_{\\Theta_t} \\tag{4}.$$ Comparing this with Eq. $(1)$ we can identify the metric $G$ with the hessian of the KL-divergence $H_{D_{KL}}$. Rearranging the terms we can bring the hessian of the KL-divergence in the familiar form of the fisher information matrix $${H_{D_{KL}}}_{ij} = g_{ij} = \\sum_x p(x|\\Theta)\\frac{\\partial \\log p(x|\\Theta)}{\\partial \\Theta_i}\\frac{\\partial \\log p(x|\\Theta)}{\\partial \\Theta_j}.$$ The fisher information matrix thus describes the local curvature of the statistical manifold. With Eq. $(4)$ it constitutes the classical natural gradient descent.\nQuantum natural gradient descent The optimization of PQCs is very similar to classical deep learning. We may have a quantum circuit with parameters $\\Theta$. The resulting states of the circuit define a parametrized hilbert space $\\mathcal{H}(\\Theta)$. We can define a distance measure $d$ between two states with an infinitesimal distance between the parameters $$d\\left(\\ket{\\psi(\\Theta)}, \\ket{\\psi(\\Theta + \\text{d}\\Theta)}\\right) = \\sum_{ij} g_{ij}(\\Theta)\\text{d}\\Theta_i\\text{d}\\Theta_j,$$ where $g_{ij}$ is the Fubini-Study metric ( Citation: Yamamoto, 2019 Yamamoto, N. (2019). On the natural gradient for variational quantum eigensolver. Retrieved from http://arxiv.org/abs/1909.05074 ) $$\\text{Re}\\left[\\braket{\\partial_i\\psi|\\partial_j\\psi}-\\braket{\\partial_i\\psi|\\psi}\\braket{\\psi|\\partial_j\\psi}\\right],$$ where $\\ket{\\partial_i\\psi}=\\partial\\ket{\\psi(\\Theta)}\\big/\\partial\\Theta_i$. With this metric we can again write out and simplify our formulation of steepest descent to obtain an update rule for the quantum natural gradient descent proposed in ( Citation: Stokes, Izaac \u0026 al., 2019 Stokes, J., Izaac, J., Killoran, N. \u0026 Carleo, G. (2019). Quantum Natural Gradient. Quantum 4, 269 (2020). https://doi.org/10.22331/q-2020-05-25-269 ) $$\\Theta_{t+1} := \\argmin_\\Theta \\left[\\big\u003c\\Theta - \\Theta_t, \\nabla \\mathcal{L}(\\Theta)\\big|_{\\Theta_t}\\big\u003e + \\frac{1}{2\\eta} \\big|\\big|\\Theta-\\Theta_t\\big|\\big|^2_{g(\\Theta_t)} \\right],$$ where using our metric $g(\\Theta)$ we have the norm as the scalar product $$\\big|\\big|\\Theta-\\Theta_t\\big|\\big|^2_{g(\\Theta_t)} = \\braket{\\Theta - \\Theta_t, g(\\Theta_t)(\\Theta - \\Theta_t)}.$$ Setting the derivative to zero like before directly leads to $$\\Theta_{t+1} = \\Theta_t - \\eta g^+(\\Theta_t)\\nabla\\mathcal{L}(\\Theta)\\big|_{\\Theta_t}.$$ Here $g^+$ denotes the pseudo-inverso of the metric tensor which is usually calculated as the Moore-Penrose-Inverse.\nComputing the metric tensor can be very expensive, which is why ( Citation: Stokes, Izaac \u0026 al., 2019 Stokes, J., Izaac, J., Killoran, N. \u0026 Carleo, G. (2019). Quantum Natural Gradient. Quantum 4, 269 (2020). https://doi.org/10.22331/q-2020-05-25-269 ) proposes to compute a diagonal or block-diagonal approximation of it.\nImplementation Fortunately the computation of the diagonal and block diagonal approximations of the metric tensor are already implemented in Pennylane\nI want to show a little example of the usage of QNG on a real dataset as I struggeled a bit with the implementation of the iteration over data. Suppose you have some circuit which takes the parameters and data as arguments. If you want to train the parameters you define some cost function e.g. a simple MSE\ndef cost(params, x, y): return (y - circuit(params, x)) ** 2 After initializing the parameters params we optimize them by iterating over the training data x_train, y_train and appling steps to the optimizer QNGOptimizer which is implemented in pennylane. To compute the step however, we need the metric tensor function, which is also implemented in pennylane. As the metric tensor function can only be obtained for function with a single argument, namely the parameters to be trained, we need to define a lambda function for every data sample that only depends on the parameters. Same goes for the cost function.\nopt = qml.QNGOptimizer(learning_rate) for it in range(epochs): for j, sample in enumerate(x_train): cost_fn = lambda p: cost_sample(p, sample, y[j]) metric_fn = lambda p: qml.metric_tensor(circuit, approx=\"block-diag\")(p, sample) params = opt.step(cost_fn, params, metric_tensor_fn=metric_fn) print(j, end=\"\\r\") loss = cost(params) print(f\"Epoch: {it} | Loss: {loss} |\") Note that the data needs to be defined in pennylane with requires_grad=False.\nThe QNG can be quite useful in avoiding Barren Plateaus in training. However of course computing the metric tensor takes time, which makes the QNG especially useful for models with a smaller number of parameters.\n",
+  "wordCount" : "1368",
+  "inLanguage": "en",
+  "datePublished": "2022-08-27T00:00:00Z",
+  "dateModified": "2022-08-27T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tom Magorsch"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tommago.com/posts/qng/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TomMago",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tommago.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://notes.tommago.com" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Quantum Natural Gradient Descent
+    </h1>
+    <div class="post-meta"><span title='2022-08-27 00:00:00 +0000 UTC'>August 27, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Tom Magorsch
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#natural-gradient-descent" aria-label="Natural Gradient Descent">Natural Gradient Descent</a></li>
+                <li>
+                    <a href="#quantum-natural-gradient-descent" aria-label="Quantum natural gradient descent">Quantum natural gradient descent</a></li>
+                <li>
+                    <a href="#implementation" aria-label="Implementation">Implementation</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning.
+Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning.
+However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).</p>
+<h1 id="natural-gradient-descent">Natural Gradient Descent<a hidden class="anchor" aria-hidden="true" href="#natural-gradient-descent">#</a></h1>
+<p>When minimizing a cost function $\mathcal{L}(\Theta)$ the well known gradient descent iteratively updates the parameters $\Theta$ by descenting into the direction of the gradient
+$$\Theta_{t+1} := \Theta_t - \eta \nabla \mathcal{L}(\Theta)\big|_{\Theta_t}.$$
+Here and in the following all gradients are calculated with respect to $\Theta$
+In Stochastic Gradient Descent (SGD) specifically the gradient $\nabla \mathcal{L}(\Theta)$ is approximated by the gradient of the cost funciton over a subset of the training data.
+With this update rule, gradient descent implicitly assumes a euclidean geometry of the parameter space. This can be seen when writing the update rule as
+$$\Theta_{t+1} := \argmin_\Theta \left[\big&lt;\Theta - \Theta_t, \nabla \mathcal{L}(\Theta)\big|_{\Theta_t}\big&gt; + \frac{1}{2\eta} \big|\big|\Theta-\Theta_t\big|\big|^2_2 \right],$$
+where a proximity term is added, just like in the lagrangian of a spring mass.
+The equivalence to the gradient descent update rule can immediately be seen when solving the $\argmin$ by setting the derivative equal to zero.</p>
+<p>The choice of euclidean geometry does however not necessarily reflect the actual parameter space.
+Since it gives equal weight to all parameters $\Theta_i$ ill conditioned situations can arise as e.g. shown below.</p>
+<p><img loading="lazy" src="../grad.png#center" alt="Example of a two dimensional function"  />
+</p>
+<p>The algorithm bounces over the valley and only slowly approaches the minimum. In the shown example the large step size aggrevates the problem. For SGD a careful tuning of the learning rate is therefore especially important. Optimizers like Adam can adress this problem by adjusting the step size based on previous gradients.
+A reparameterization of the parameters space on the other hand could lead to problem way better suited for SGD.</p>
+<p>So instead of using the euclidean metric $||\Theta||_2$ a distance measure for an infinitesimal vector $\text{d}\Theta$ on a curved manifold is given by
+$$||\Theta||_{g} = \sum_{ij}g_{ij}(\Theta)\text{d}\Theta_i\text{d}\Theta_j,$$
+where $g_{ij}$ is the Riemannian metric tensor.</p>
+<p>For every physicist this seems very familiar. Of course the euclidean metric is the special case of $g_{ij}=\delta_{ij}$.
+Using this general metric for the method of steepest descent S. Amari shows in 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#amari1998"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Shun-ichi"><span itemprop="familyName">Amari</span></span>,&#32;<span itemprop="datePublished">1998</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Amari</span>,&#32;
+    <meta itemprop="givenName" content="Shun-ichi" />
+    S.</span>
+  &#32;
+    (<span itemprop="datePublished">1998</span>).
+  &#32;<span itemprop="name">Natural Gradient Works Efficiently in Learning</span>.<i>
+    <span itemprop="about">Neural Computation</span>,&#32;10(2)</i>.&#32;<span itemprop="pagination">251–276</span>.
+  <a href="https://doi.org/10.1162/089976698300017746"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1162/089976698300017746</a></span>
+
+
+
+
+</span></span>)</span>
+ that the gradient descent update rule becomes
+$$\Theta_{t+1} := \Theta_t - \eta G^{-1}\nabla\mathcal{L}(\Theta)\big|_{\Theta_{t+1}}\tag{1},$$
+where $G^{-1}$ is the inverse of the metric $G = (g_{ij})$.</p>
+<p>The question remains how to determin the metric. In the framework of Information Geometry, instead of considering the parameter space, the optimization is performed on the so called statistical manifold.
+A statistical manifold is a riemannian manifold, where every point corresponds to a probability function.</p>
+<p>In our case, we may consider the manifold of likelihoods $p(x|\Theta)$ for the different possible parameters $\Theta$.
+To measure the similarity between two probability distributions there exist different divergences, the most known one beeing the Kullback–Leibler (KL) divergence. For two distribution $p(x)$ and $q(x)$ it is defined as
+$$D_{KL}(p(x)||q(x)) = \sum_x p(x)\log\left(\frac{p(x)}{q(x)}\right)\tag{2}.$$
+Note that formally the KL-divergence is not symmetric an thus is not a proper distance measure. However things work out for infinitesimal distance and thus it can be used to describe the manifold locally 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#martens2014"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="James"><span itemprop="familyName">Martens</span></span>,&#32;<span itemprop="datePublished">2014</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Martens</span>,&#32;
+    <meta itemprop="givenName" content="James" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2014</span>).
+  &#32;<span itemprop="name">New insights and perspectives on the natural gradient method</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1412.1193"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1412.1193</a></span>
+
+
+
+
+</span></span>)</span>
+.</p>
+<p>Let&rsquo;s try to rewrite our gradient update from SGD with the KL-divergence as instead of the euclidean metric:
+$$\Theta_{t+1} := \argmin_\Theta \left[\big&lt;\Theta - \Theta_t, \nabla \mathcal{L}(\Theta)\big|_{\Theta_t}\big&gt; + \frac{1}{2\eta}D_{KL}(q(x|\Theta)||q(x|\Theta_t)) \right]$$
+To minimize this expression we set the derivative to zero
+$$\nabla \mathcal{L}(\Theta)\bigg|_{\Theta_t} + \frac{1}{\eta}\nabla D_{KL}\left(q(x|\Theta)||q(x|\Theta_t)\right)\bigg|_{\Theta_{t+1}} = 0\tag{3}.$$
+So to solve this we need the gradient of the KL-divergence, which we will approximate by taylor expanding the $D_{KL}$ around $\Theta_t$. In the following we denote $D_{KL}(\Theta||\Theta_t) := D_{KL}(q(x|\Theta)||q(x|\Theta_t))$ for brevity. In second order we obtain
+$$
+\begin{align*}
+D_{KL}(\Theta||\Theta_t)\approx D_{KL}(\Theta_t||\Theta_t) + \nabla D_{KL}(\Theta||\Theta_t)\big|_{\Theta_t}(\Theta-\Theta_t)\\ +\frac{1}{2}(\Theta - \Theta_t)^T H_{D_{KL}}\big|_{\Theta_t} (\Theta - \Theta_t),
+\end{align*}
+$$
+where $H_{D_{KL}}$ denotes the Hessian with respect to $\Theta$.
+The first term obviously vanishes since the divergance for identical distributions is zero. The second becomes zero as well, which we can see if we insert the definition from Eq. $(2)$:
+$$
+\begin{align*}
+\nabla D_{KL}(\Theta||\Theta_t)\big|_{\Theta_t}=&amp;\sum_x \nabla p(\Theta)\big|_{\Theta_t}\log\left(\frac{p(\Theta_t)}{p(\Theta_t)}\right) + p(\Theta)\nabla\log\left(\frac{p(\Theta)}{p(\Theta_t)}\right) \\
+&amp; =\sum_x \nabla p(\Theta) - p(\Theta) \nabla\log\left(p(\Theta_t)\right) = \nabla 1 = 0.
+\end{align*}
+$$
+We can now insert the taylor expression for the KL-divergence in Eq. $(3)$ to obtain
+$$\nabla\mathcal{L}(\Theta)\bigg|_{\Theta_t}+\frac{1}{\eta}H_{D_{KL}}\bigg|_{\Theta_t}(\Theta - \Theta_t)=0,$$
+which leads to our update rule
+$$\Theta_{t+1} := \Theta_t - \eta H^{-1}_{D_{KL}}\bigg|_{\Theta_t}\nabla\mathcal{L}(\Theta)\bigg|_{\Theta_t} \tag{4}.$$
+Comparing this with Eq. $(1)$ we can identify the metric $G$ with the hessian of the KL-divergence $H_{D_{KL}}$.
+Rearranging the terms we can bring the hessian of the KL-divergence in the familiar form of the fisher information matrix
+$${H_{D_{KL}}}_{ij} = g_{ij} = \sum_x p(x|\Theta)\frac{\partial \log p(x|\Theta)}{\partial \Theta_i}\frac{\partial \log p(x|\Theta)}{\partial \Theta_j}.$$
+The fisher information matrix thus describes the local curvature of the statistical manifold.
+With Eq. $(4)$ it constitutes the classical natural gradient descent.</p>
+<h1 id="quantum-natural-gradient-descent">Quantum natural gradient descent<a hidden class="anchor" aria-hidden="true" href="#quantum-natural-gradient-descent">#</a></h1>
+<p>The optimization of PQCs is very similar to classical deep learning. We may have a quantum circuit with parameters $\Theta$. The resulting states of the circuit define a parametrized hilbert space $\mathcal{H}(\Theta)$.
+We can define a distance measure $d$ between two states with an infinitesimal distance between the parameters
+$$d\left(\ket{\psi(\Theta)}, \ket{\psi(\Theta + \text{d}\Theta)}\right) = \sum_{ij} g_{ij}(\Theta)\text{d}\Theta_i\text{d}\Theta_j,$$
+where $g_{ij}$ is the Fubini-Study metric 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#yamamoto2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Naoki"><span itemprop="familyName">Yamamoto</span></span>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Yamamoto</span>,&#32;
+    <meta itemprop="givenName" content="Naoki" />
+    N.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">On the natural gradient for variational quantum eigensolver</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1909.05074"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1909.05074</a></span>
+
+
+
+
+</span></span>)</span>
+
+$$\text{Re}\left[\braket{\partial_i\psi|\partial_j\psi}-\braket{\partial_i\psi|\psi}\braket{\psi|\partial_j\psi}\right],$$
+where $\ket{\partial_i\psi}=\partial\ket{\psi(\Theta)}\big/\partial\Theta_i$.
+With this metric we can again write out and simplify our formulation of steepest descent to obtain an update rule for the quantum natural gradient descent proposed in 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#stokes2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="James"><span itemprop="familyName">Stokes</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Josh"><span itemprop="familyName">Izaac</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Stokes</span>,&#32;
+    <meta itemprop="givenName" content="James" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Izaac</span>,&#32;
+    <meta itemprop="givenName" content="Josh" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Killoran</span>,&#32;
+    <meta itemprop="givenName" content="Nathan" />
+    N.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Carleo</span>,&#32;
+    <meta itemprop="givenName" content="Giuseppe" />
+    G.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Quantum Natural Gradient</span>.<i>
+    <span itemprop="about">Quantum 4, 269 (2020)</span></i>.
+  <a href="https://doi.org/10.22331/q-2020-05-25-269"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-05-25-269</a></span>
+
+
+
+
+</span></span>)</span>
+
+$$\Theta_{t+1} := \argmin_\Theta \left[\big&lt;\Theta - \Theta_t, \nabla \mathcal{L}(\Theta)\big|_{\Theta_t}\big&gt; + \frac{1}{2\eta} \big|\big|\Theta-\Theta_t\big|\big|^2_{g(\Theta_t)} \right],$$
+where using our metric $g(\Theta)$ we have the norm as the scalar product
+$$\big|\big|\Theta-\Theta_t\big|\big|^2_{g(\Theta_t)} = \braket{\Theta - \Theta_t, g(\Theta_t)(\Theta - \Theta_t)}.$$
+Setting the derivative to zero like before directly leads to
+$$\Theta_{t+1} = \Theta_t - \eta g^+(\Theta_t)\nabla\mathcal{L}(\Theta)\big|_{\Theta_t}.$$
+Here $g^+$ denotes the pseudo-inverso of the metric tensor which is usually calculated as the <a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse">Moore-Penrose-Inverse</a>.</p>
+<p>Computing the metric tensor can be very expensive, which is why 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#stokes2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="James"><span itemprop="familyName">Stokes</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Josh"><span itemprop="familyName">Izaac</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Stokes</span>,&#32;
+    <meta itemprop="givenName" content="James" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Izaac</span>,&#32;
+    <meta itemprop="givenName" content="Josh" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Killoran</span>,&#32;
+    <meta itemprop="givenName" content="Nathan" />
+    N.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Carleo</span>,&#32;
+    <meta itemprop="givenName" content="Giuseppe" />
+    G.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Quantum Natural Gradient</span>.<i>
+    <span itemprop="about">Quantum 4, 269 (2020)</span></i>.
+  <a href="https://doi.org/10.22331/q-2020-05-25-269"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-05-25-269</a></span>
+
+
+
+
+</span></span>)</span>
+ proposes to compute a diagonal or block-diagonal approximation of it.</p>
+<h1 id="implementation">Implementation<a hidden class="anchor" aria-hidden="true" href="#implementation">#</a></h1>
+<p>Fortunately the computation of the diagonal and block diagonal approximations of the metric tensor are already implemented in <a href="https://pennylane.ai">Pennylane</a></p>
+<p>I want to show a little example of the usage of QNG on a real dataset as I struggeled a bit with the implementation of the iteration over data. Suppose you have some <code>circuit</code> which takes the parameters and data as arguments.
+If you want to train the parameters you define some cost function e.g. a simple MSE</p>
+<pre tabindex="0"><code>def cost(params, x, y):
+    return (y - circuit(params, x)) ** 2
+</code></pre><p>After initializing the parameters <code>params</code> we optimize them by iterating over the training data <code>x_train, y_train</code> and appling steps to the optimizer <a href="https://docs.pennylane.ai/en/stable/code/api/pennylane.QNGOptimizer.html"><code>QNGOptimizer</code></a> which is implemented in pennylane.
+To compute the step however, we need the <a href="https://docs.pennylane.ai/en/stable/code/api/pennylane.metric_tensor.html">metric tensor function</a>, which is also implemented in pennylane.
+As the metric tensor function can only be obtained for function with a single argument, namely the parameters to be trained, we need to define a lambda function for every data sample that only depends on the parameters. Same goes for the cost function.</p>
+<pre tabindex="0"><code>opt = qml.QNGOptimizer(learning_rate)
+
+for it in range(epochs):
+    for j, sample in enumerate(x_train):        
+        cost_fn = lambda p: cost_sample(p, sample, y[j])
+        metric_fn = lambda p: qml.metric_tensor(circuit, approx=&#34;block-diag&#34;)(p, sample)
+        params = opt.step(cost_fn, params, metric_tensor_fn=metric_fn)
+        print(j, end=&#34;\r&#34;)
+
+    loss = cost(params)
+    
+    print(f&#34;Epoch: {it} | Loss: {loss} |&#34;)
+</code></pre><p>Note that the data needs to be defined in pennylane with <code>requires_grad=False</code>.</p>
+<p>The QNG can be quite useful in avoiding Barren Plateaus in training.
+However of course computing the metric tensor takes time, which makes the QNG especially useful for models with a smaller number of parameters.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://tommago.com/tags/gsoc/">GSoC</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://tommago.com/">TomMago</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

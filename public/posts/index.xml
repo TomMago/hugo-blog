@@ -5,7 +5,16 @@
     <link>https://tommago.com/posts/</link>
     <description>Recent content in Posts on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quantum Natural Gradient Descent</title>
+      <link>https://tommago.com/posts/qng/</link>
+      <pubDate>Sat, 27 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/qng/</guid>
+      <description>When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).</description>
+    </item>
+    
     <item>
       <title>Quantum Autoencoder</title>
       <link>https://tommago.com/posts/qae/</link>
