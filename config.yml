@@ -87,7 +87,7 @@ params:
 
             - This year I'm participating in the [Google Summer of Code](https://summerofcode.withgoogle.com), working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
 
-            - Here I will document the projects and some of my scientific interests.
+            - Here I will document the GSoC project and maybe write about some of my interests.
     socialIcons:
         - name: email
           url: "mailto:tommagorsch@gmail.com"
