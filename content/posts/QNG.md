@@ -130,3 +130,5 @@ Note that the data needs to be defined in pennylane with `requires_grad=False`.
 The QNG can be quite useful in avoiding Barren Plateaus in training.
 However of course computing the metric tensor takes time, which makes the QNG especially useful for models with a smaller number of parameters.
 
+{{< bibliography cited >}}
+
