@@ -5,7 +5,17 @@
     <link>https://tommago.com/tags/gsoc/</link>
     <description>Recent content in GSoC on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 27 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data re-uploading</title>
+      <link>https://tommago.com/posts/drc/</link>
+      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/drc/</guid>
+      <description>An important motivation for deep learning was the Universal Approximation Theorem which shows, that neural networks can theoretically aproximate any function. When it comes to quantum machine learning, a similar statement can be made. Suprisingly a single qubit is sufficient, to perform classification of arbitrary data distributions.
+Universial Approximation Theorem The Universial Approximation Theorem (there are many versions with different constraints) states that the functions which can be expressed by a neural network with a single hidden layer and arbitrarily many units are dense in the space of continous functions.</description>
+    </item>
+    
     <item>
       <title>Quantum Natural Gradient Descent</title>
       <link>https://tommago.com/posts/qng/</link>

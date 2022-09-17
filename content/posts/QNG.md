@@ -78,7 +78,7 @@ With Eq. $(4)$ it constitutes the classical natural gradient descent.
 
 # Quantum natural gradient descent
 
-The optimization of PQCs is very similar to classical deep learning. We may have a quantum circuit with parameters $\Theta$. The resulting states of the circuit define a parametrized hilbert space $\mathcal{H}(\Theta)$.
+The optimization of PQCs is very similar to classical deep learning. We may have a quantum circuit with parameters $\Theta$. The resulting states for of the circuit for fixed input data define a parametrized hilbert space $\mathcal{H}(\Theta)$.
 We can define a distance measure $d$ between two states with an infinitesimal distance between the parameters
 $$d\left(\ket{\psi(\Theta)}, \ket{\psi(\Theta + \text{d}\Theta)}\right) = \sum\_{ij} g\_{ij}(\Theta)\text{d}\Theta_i\text{d}\Theta_j,$$
 where $g\_{ij}$ is the Fubini-Study metric {{<cite "Yamamoto2019">}} 

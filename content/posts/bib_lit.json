@@ -530,5 +530,125 @@
     "title": "Natural Gradient Works Efficiently in Learning",
     "type": "article-journal",
     "volume": "10"
+  },
+  {
+    "DOI": "10.1007/JHEP08(2017)105",
+    "URL": "http://arxiv.org/abs/1705.05891",
+    "abstract": "We consider rare semileptonic decays of a heavy $D$-meson into a light vector meson in the framework of QCD factorization. In contrast to the corresponding $B$-meson decays, the naive factorization hypothesis does not even serve as a first approximation. Rather, the decay amplitudes appear to be dominated by non-factorizable dynamics, e.g. through annihilation topologies, which are particularly sensitive to long-distance hadronic contributions. We therefore pay particular attention to intermediate vector-meson resonances appearing in quark-loop and annihilation topologies. Compared to the analogous $B$-meson decays, we identify a number of effects that result in very large theoretical uncertainties for differential decay rates. Some of these effects are found to cancel in the ratio of partially integrated decay rates for transversely and longitudinally polarized $\\rho$ mesons. On the phenomenological side this implies a very limited potential to constrain physics beyond the Standard Model by means of these decays.",
+    "author": [
+      {
+        "family": "Feldmann",
+        "given": "Thorsten"
+      },
+      {
+        "family": "Mueller",
+        "given": "Bastian"
+      },
+      {
+        "family": "Seidel",
+        "given": "Dirk"
+      }
+    ],
+    "id": "Feldmann2017",
+    "issued": {
+      "date-parts": [
+        [
+          2017,
+          5
+        ]
+      ]
+    },
+    "keyword": "hep-ph, hep-ex",
+    "title": "$D \\to ρ\\,\\ell^+\\ell^-$ Decays in the QCD Factorization Approach",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1007/BF02551274",
+    "ISSN": "1435-568X",
+    "URL": "https://doi.org/10.1007/BF02551274",
+    "abstract": "In this paper we demonstrate that finite linear combinations of compositions of a fixed, univariate function and a set of affine functionals can uniformly approximate any continuous function ofn real variables with support in the unit hypercube; only mild conditions are imposed on the univariate function. Our results settle an open question about representability in the class of single hidden layer neural networks. In particular, we show that arbitrary decision regions can be arbitrarily well approximated by continuous feedforward neural networks with only a single internal, hidden layer and any continuous sigmoidal nonlinearity. The paper discusses approximation properties of other possible types of nonlinearities that might be implemented by artificial neural networks.",
+    "author": [
+      {
+        "family": "Cybenko",
+        "given": "G."
+      }
+    ],
+    "container-title": "Mathematics of Control, Signals and Systems",
+    "id": "Cybenko1989",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          1989,
+          12,
+          1
+        ]
+      ]
+    },
+    "page": "303-314",
+    "title": "Approximation by superpositions of a sigmoidal function",
+    "type": "article-journal",
+    "volume": "2"
+  },
+  {
+    "DOI": "https://doi.org/10.1016/0893-6080(91)90009-T",
+    "ISSN": "0893-6080",
+    "URL": "https://www.sciencedirect.com/science/article/pii/089360809190009T",
+    "abstract": "We show that standard multilayer feedforward networks with as few as a single hidden layer and arbitrary bounded and nonconstant activation function are universal approximators with respect to Lp(μ) performance criteria, for arbitrary finite input environment measures μ, provided only that sufficiently many hidden units are available. If the activation function is continuous, bounded and nonconstant, then continuous mappings can be learned uniformly over compact input sets. We also give very general conditions ensuring that networks with sufficiently smooth activation functions are capable of arbitrarily accurate approximation to a function and its derivatives.",
+    "author": [
+      {
+        "family": "Hornik",
+        "given": "Kurt"
+      }
+    ],
+    "container-title": "Neural Networks",
+    "id": "Hornik1991",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          1991
+        ]
+      ]
+    },
+    "keyword": "Multilayer feedforward networks, Activation function, Universal approximation capabilities, Input environment measure, () approximation, Uniform approximation, Sobolev spaces, Smooth approximation",
+    "page": "251-257",
+    "title": "Approximation capabilities of multilayer feedforward networks",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "DOI": "10.1109/ACCESS.2021.3075492",
+    "author": [
+      {
+        "family": "Easom-Mccaldin",
+        "given": "Philip"
+      },
+      {
+        "family": "Bouridane",
+        "given": "Ahmed"
+      },
+      {
+        "family": "Belatreche",
+        "given": "Ammar"
+      },
+      {
+        "family": "Jiang",
+        "given": "Richard"
+      }
+    ],
+    "container-title": "IEEE Access",
+    "id": "9415627",
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "page": "65127-65139",
+    "title": "On Depth, Robustness and Performance Using the Data Re-Uploading Single-Qubit Classifier",
+    "type": "article-journal",
+    "volume": "9"
   }
 ]
