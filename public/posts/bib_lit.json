@@ -48,184 +48,8 @@
         "given": "Benjamin"
       },
       {
-        "family": "Shih",
-        "given": "David"
-      },
-      {
-        "family": "Amram",
-        "given": "Oz"
-      },
-      {
-        "family": "Andreassen",
-        "given": "Anders"
-      },
-      {
-        "family": "Benkendorfer",
-        "given": "Kees"
-      },
-      {
-        "family": "Bortolato",
-        "given": "Blaz"
-      },
-      {
-        "family": "Brooijmans",
-        "given": "Gustaaf"
-      },
-      {
-        "family": "Canelli",
-        "given": "Florencia"
-      },
-      {
-        "family": "Collins",
-        "given": "Jack H."
-      },
-      {
-        "family": "Dai",
-        "given": "Biwei"
-      },
-      {
-        "family": "Freitas",
-        "given": "Felipe F. De"
-      },
-      {
-        "family": "Dillon",
-        "given": "Barry M."
-      },
-      {
-        "family": "Dinu",
-        "given": "Ioan-Mihail"
-      },
-      {
-        "family": "Dong",
-        "given": "Zhongtian"
-      },
-      {
-        "family": "Donini",
-        "given": "Julien"
-      },
-      {
-        "family": "Duarte",
-        "given": "Javier"
-      },
-      {
-        "family": "Faroughy",
-        "given": "D. A."
-      },
-      {
-        "family": "Gonski",
-        "given": "Julia"
-      },
-      {
-        "family": "Harris",
-        "given": "Philip"
-      },
-      {
-        "family": "Kahn",
-        "given": "Alan"
-      },
-      {
-        "family": "Kamenik",
-        "given": "Jernej F."
-      },
-      {
-        "family": "Khosa",
-        "given": "Charanjit K."
-      },
-      {
-        "family": "Komiske",
-        "given": "Patrick"
-      },
-      {
-        "family": "Pottier",
-        "given": "Luc Le"
-      },
-      {
-        "family": "Martín-Ramiro",
-        "given": "Pablo"
-      },
-      {
-        "family": "Matevc",
-        "given": "Andrej"
-      },
-      {
-        "family": "Metodiev",
-        "given": "Eric"
-      },
-      {
-        "family": "Mikuni",
-        "given": "Vinicius"
-      },
-      {
-        "family": "Ochoa",
-        "given": "Inês"
-      },
-      {
-        "family": "Park",
-        "given": "Sang Eon"
-      },
-      {
-        "family": "Pierini",
-        "given": "Maurizio"
-      },
-      {
-        "family": "Rankin",
-        "given": "Dylan"
-      },
-      {
-        "family": "Sanz",
-        "given": "Veronica"
-      },
-      {
-        "family": "Sarda",
-        "given": "Nilai"
-      },
-      {
-        "family": "Seljak",
-        "given": "Urous"
-      },
-      {
-        "family": "Smolkovic",
-        "given": "Aleks"
-      },
-      {
-        "family": "Stein",
-        "given": "George"
-      },
-      {
-        "family": "Suarez",
-        "given": "Cristina Mantilla"
-      },
-      {
-        "family": "Szewc",
-        "given": "Manuel"
-      },
-      {
-        "family": "Thaler",
-        "given": "Jesse"
-      },
-      {
-        "family": "Tsan",
-        "given": "Steven"
-      },
-      {
-        "family": "Udrescu",
-        "given": "Silviu-Marian"
-      },
-      {
-        "family": "Vaslin",
-        "given": "Louis"
-      },
-      {
-        "family": "Vlimant",
-        "given": "Jean-Roch"
-      },
-      {
-        "family": "Williams",
-        "given": "Daniel"
-      },
-      {
-        "family": "Yunus",
-        "given": "Mikaeel"
+        "dropping-particle": "et",
+        "family": "al."
       }
     ],
     "id": "Kasieczka2021",
@@ -650,5 +474,235 @@
     "title": "On Depth, Robustness and Performance Using the Data Re-Uploading Single-Qubit Classifier",
     "type": "article-journal",
     "volume": "9"
+  },
+  {
+    "DOI": "10.1007/JHEP03(2022)066",
+    "URL": "http://arxiv.org/abs/2110.06948",
+    "abstract": "Anomaly detection relies on designing a score to determine whether a particular event is uncharacteristic of a given background distribution. One way to define a score is to use autoencoders, which rely on the ability to reconstruct certain types of data (background) but not others (signals). In this paper, we study some challenges associated with variational autoencoders, such as the dependence on hyperparameters and the metric used, in the context of anomalous signal (top and $W$) jets in a QCD background. We find that the hyperparameter choices strongly affect the network performance and that the optimal parameters for one signal are non-optimal for another. In exploring the networks, we uncover a connection between the latent space of a variational autoencoder trained using mean-squared-error and the optimal transport distances within the dataset. We then show that optimal transport distances to representative events in the background dataset can be used directly for anomaly detection, with performance comparable to the autoencoders. Whether using autoencoders or optimal transport distances for anomaly detection, we find that the choices that best represent the background are not necessarily best for signal identification. These challenges with unsupervised anomaly detection bolster the case for additional exploration of semi-supervised or alternative approaches.",
+    "author": [
+      {
+        "family": "Fraser",
+        "given": "Katherine"
+      },
+      {
+        "family": "Homiller",
+        "given": "Samuel"
+      },
+      {
+        "family": "Mishra",
+        "given": "Rashmish K."
+      },
+      {
+        "family": "Ostdiek",
+        "given": "Bryan"
+      },
+      {
+        "family": "Schwartz",
+        "given": "Matthew D."
+      }
+    ],
+    "id": "Fraser2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          10
+        ]
+      ]
+    },
+    "keyword": "hep-ph, cs.LG, hep-ex, physics.data-an",
+    "title": "Challenges for Unsupervised Anomaly Detection in Particle Physics",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1007/JHEP06(2021)161",
+    "URL": "http://arxiv.org/abs/2104.09051",
+    "abstract": "Autoencoders are widely used in machine learning applications, in particular for anomaly detection. Hence, they have been introduced in high energy physics as a promising tool for model-independent new physics searches. We scrutinize the usage of autoencoders for unsupervised anomaly detection based on reconstruction loss to show their capabilities, but also their limitations. As a particle physics benchmark scenario, we study the tagging of top jet images in a background of QCD jet images. Although we reproduce the positive results from the literature, we show that the standard autoencoder setup cannot be considered as a model-independent anomaly tagger by inverting the task: due to the sparsity and the specific structure of the jet images, the autoencoder fails to tag QCD jets if it is trained on top jets even in a semi-supervised setup. Since the same autoencoder architecture can be a good tagger for a specific example of an anomaly and a bad tagger for a different example, we suggest improved performance measures for the task of model-independent anomaly detection. We also improve the capability of the autoencoder to learn non-trivial features of the jet images, such that it is able to achieve both top jet tagging and the inverse task of QCD jet tagging with the same setup. However, we want to stress that a truly model-independent and powerful autoencoder-based unsupervised jet tagger still needs to be developed.",
+    "author": [
+      {
+        "family": "Finke",
+        "given": "Thorben"
+      },
+      {
+        "family": "Krämer",
+        "given": "Michael"
+      },
+      {
+        "family": "Morandini",
+        "given": "Alessandro"
+      },
+      {
+        "family": "Mück",
+        "given": "Alexander"
+      },
+      {
+        "family": "Oleksiyuk",
+        "given": "Ivan"
+      }
+    ],
+    "container-title": "JHEP 06 (2021) 161",
+    "id": "Finke2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          4
+        ]
+      ]
+    },
+    "keyword": "hep-ph, cs.LG, physics.data-an",
+    "title": "Autoencoders for unsupervised anomaly detection in high energy physics",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1016/j.nima.2020.164304",
+    "URL": "http://arxiv.org/abs/1902.08276",
+    "abstract": "We describe the construction of end-to-end jet image classifiers based on simulated low-level detector data to discriminate quark- vs. gluon-initiated jets with high-fidelity simulated CMS Open Data. We highlight the importance of precise spatial information and demonstrate competitive performance to existing state-of-the-art jet classifiers. We further generalize the end-to-end approach to event-level classification of quark vs. gluon di-jet QCD events. We compare the fully end-to-end approach to using hand-engineered features and demonstrate that the end-to-end algorithm is robust against the effects of underlying event and pile-up.",
+    "author": [
+      {
+        "family": "Andrews",
+        "given": "Michael"
+      },
+      {
+        "family": "Alison",
+        "given": "John"
+      },
+      {
+        "family": "An",
+        "given": "Sitong"
+      },
+      {
+        "family": "Bryant",
+        "given": "Patrick"
+      },
+      {
+        "family": "Burkle",
+        "given": "Bjorn"
+      },
+      {
+        "family": "Gleyzer",
+        "given": "Sergei"
+      },
+      {
+        "family": "Narain",
+        "given": "Meenakshi"
+      },
+      {
+        "family": "Paulini",
+        "given": "Manfred"
+      },
+      {
+        "family": "Poczos",
+        "given": "Barnabas"
+      },
+      {
+        "family": "Usai",
+        "given": "Emanuele"
+      }
+    ],
+    "container-title": "Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020)",
+    "id": "Andrews2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          2
+        ]
+      ]
+    },
+    "keyword": "hep-ex, cs.CV, cs.LG, physics.data-an",
+    "title": "End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevLett.123.041801",
+    "URL": "http://arxiv.org/abs/1902.02346",
+    "abstract": "When are two collider events similar? Despite the simplicity and generality of this question, there is no established notion of the distance between two events. To address this question, we develop a metric for the space of collider events based on the earth mover’s distance: the \"work\" required to rearrange the radiation pattern of one event into another. We expose interesting connections between this metric and the structure of infrared- and collinear-safe observables, providing a novel technique to quantify event modifications due to hadronization, pileup, and detector effects. We showcase how this metrization unlocks powerful new tools for analyzing and visualizing collider data without relying upon a choice of observables. More broadly, this framework paves the way for data-driven collider phenomenology without specialized observables or machine learning models.",
+    "author": [
+      {
+        "family": "Komiske",
+        "given": "Patrick T."
+      },
+      {
+        "family": "Metodiev",
+        "given": "Eric M."
+      },
+      {
+        "family": "Thaler",
+        "given": "Jesse"
+      }
+    ],
+    "container-title": "Phys. Rev. Lett. 123, 041801 (2019)",
+    "id": "Komiske2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          2
+        ]
+      ]
+    },
+    "keyword": "hep-ph, hep-ex",
+    "title": "The Metric Space of Collider Events",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1109/CSCI54926.2021.00085",
+    "author": [
+      {
+        "family": "Rivas",
+        "given": "Pablo"
+      },
+      {
+        "family": "Zhao",
+        "given": "Liang"
+      },
+      {
+        "family": "Orduz",
+        "given": "Javier"
+      }
+    ],
+    "container-title": "2021 International Conference on Computational Science and Computational Intelligence (CSCI)",
+    "id": "9799154",
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "page": "52-57",
+    "title": "Hybrid Quantum Variational Autoencoders for Representation Learning",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "http://arxiv.org/abs/2205.05625",
+    "abstract": "An emerging direction of quantum computing is to establish meaningful quantum applications in various fields of artificial intelligence, including natural language processing (NLP). Although some efforts based on syntactic analysis have opened the door to research in Quantum NLP (QNLP), limitations such as heavy syntactic preprocessing and syntax-dependent network architecture make them impracticable on larger and real-world data sets. In this paper, we propose a new simple network architecture, called the quantum self-attention neural network (QSANN), which can make up for these limitations. Specifically, we introduce the self-attention mechanism into quantum neural networks and then utilize a Gaussian projected quantum self-attention serving as a sensible quantum version of self-attention. As a result, QSANN is effective and scalable on larger data sets and has the desirable property of being implementable on near-term quantum devices. In particular, our QSANN outperforms the best existing QNLP model based on syntactic analysis as well as a simple classical self-attention neural network in numerical experiments of text classification tasks on public data sets. We further show that our method exhibits robustness to low-level quantum noises.",
+    "author": [
+      {
+        "family": "Li",
+        "given": "Guangxi"
+      },
+      {
+        "family": "Zhao",
+        "given": "Xuanqiang"
+      },
+      {
+        "family": "Wang",
+        "given": "Xin"
+      }
+    ],
+    "id": "Li2022",
+    "issued": {
+      "date-parts": [
+        [
+          2022,
+          5
+        ]
+      ]
+    },
+    "keyword": "quant-ph, cs.AI, cs.LG",
+    "title": "Quantum Self-Attention Neural Networks for Text Classification",
+    "type": "article-journal"
   }
 ]
