@@ -827,7 +827,7 @@ In order to upload a whole image to a couple of qubits, I chose to upload the im
 
 </span></span>)</span>
 .</p>
-<p><img loading="lazy" src="../hae2.png#center" alt="upload of image in patches"  />
+<p><img loading="lazy" src="../hae3.png#center" alt="upload of image in patches"  />
 </p>
 <p>In order to make use of the PQC, I think it makes sense to use the same encoder as the fully quantum autoencoder. This way we can upload a larger image to the PQC and reduce the dimension down to the number of qubits. For a first implementation, I e.g. reduce the dimension of the image with convolutional layers down to 9x9. I then upload the image in patches like in the fully quantum case. However this time I use a kernel size of 3 and a stride of 2 to upload the data in 16 patches. This way I can measure all 16 qubits to obtain the latent space. A smaller latent space would be too small to fully reconstruct the image.</p>
 <p>Unfortunately training this model took very long and I was not able to train it until convergence. However, I achieved an AUC of $57$% without the model converging.</p>

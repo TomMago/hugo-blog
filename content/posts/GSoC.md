@@ -84,7 +84,7 @@ I trained the model with Adam, maximizing the fidelity of the swap test. Current
 
 The hybrid models I build are basically classical layers reducing the dimension of the data and feeding it into a PQC. The qubits get measured to obtain a classical latent space, which is reconstructed into an image by classical layers. Similar models have been proposed before, e.g. in {{<cite "9799154">}}.
 
-![upload of image in patches](../hae2.png#center)
+![upload of image in patches](../hae3.png#center)
 
 In order to make use of the PQC, I think it makes sense to use the same encoder as the fully quantum autoencoder. This way we can upload a larger image to the PQC and reduce the dimension down to the number of qubits. For a first implementation, I e.g. reduce the dimension of the image with convolutional layers down to 9x9. I then upload the image in patches like in the fully quantum case. However this time I use a kernel size of 3 and a stride of 2 to upload the data in 16 patches. This way I can measure all 16 qubits to obtain the latent space. A smaller latent space would be too small to fully reconstruct the image.
 
