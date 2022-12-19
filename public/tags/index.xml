@@ -5,7 +5,16 @@
     <link>https://tommago.com/tags/</link>
     <description>Recent content in Tags on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>QML</title>
+      <link>https://tommago.com/tags/qml/</link>
+      <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/tags/qml/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>GSoC</title>
       <link>https://tommago.com/tags/gsoc/</link>

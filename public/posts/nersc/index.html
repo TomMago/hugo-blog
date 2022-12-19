@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane | TomMago</title>
+<meta name="keywords" content="QML">
+<meta name="description" content="The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.">
+<meta name="author" content="Tom Magorsch">
+<link rel="canonical" href="https://tommago.com/posts/nersc/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4fd967528ad5a75f3ce961dbda94c03a4739e156197539fdac72973ab0f932e0.css" integrity="sha256-T9lnUorVp1886WHb2pTAOkc54VYZdTn9rHKXOrD5MuA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tommago.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+onload="renderMathInElement(document.body,
+        {
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+              ],
+              throwOnError : false
+          });"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane" />
+<meta property="og:description" content="The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tommago.com/posts/nersc/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-18T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-12-18T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane"/>
+<meta name="twitter:description" content="The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tommago.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane",
+      "item": "https://tommago.com/posts/nersc/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane",
+  "name": "NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane",
+  "description": "The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.",
+  "keywords": [
+    "QML"
+  ],
+  "articleBody": "The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.\nScaling quantum simulations During my GSoC project I worked on training QML models for HEP analysis tasks. In the process, a major bottleneck in validating current QML models were the long training times and the inability of simulating larger qbit systems. My goal for the hackathon was therefore to\nEnable scaling to larger qbit systems Enable faster training for medium sized qbit systems The simulation of quantum circuits can be performed on GPUs, with a promising implementation beeing the NVIDIA cuQuantum SDK. In previous benchmarks I found cuQuantum outperforming the simulation on comparable CPUs for qbit numbers of approximately $N\\geq 20$. An especially interesting feature is provided by the cuQuantum Appliance, as it is able to handle the splitting of the state vector across gpus. Since the state vector of an $N$ qubit system scales with $2^N$, it quickly supasses the memory of current GPUs when moving beyond $N=30$. Therefore splitting it across multiple gpus becomes mandatory to simulate larger systems.\nSetup: Pennylane + Cirq + cuQuantum Up until now I have been using the PennyLane-Lightning-GPU Plugin. This plugin is build on cuQuantum and conveniently enables to execute the circuits on the GPU. However, lightning.gpu has a limited multi-GPU support, as it only enables the execution of different measurements in a circuit on multiple GPUs. Especially it does not support the splitting of the state vector. Manual methods like circuit cutting can circumvent this, however I was looking for a more generic technical solution.\nThe solution we came up with during the hackathon was to use the cuQuantum Appliance, which supports the scaling to multiple GPUs with cirq, together with the PennyLane-Cirq Plugin to integrate it with pennylane. To set up your code this way you have to:\nRun the cuQuantum Appliance Add pennylane and pennylane-cirq with pip install pennylane pennylane-cirq Modify your code with import qsimcirq import pennylane as qml qs_opts = qsimcirq.QSimOptions(cpu_threads=64, verbosity=0, gpu_mode=4) qs = qsimcirq.QSimSimulator(qs_opts) dev1 = qml.device('cirq.simulator', wires=NUMBER_QBITS, simulator=qs) Done! You can run your job. However during our work we encountered a bug which resulted in the consoled beeing flooded, so you might consider redirecting the error output with python yourscript.py 2\u003e/dev/null. Of course you will loose all real errors like that. In this example gpu_mode describes the number of gpus to use. In Perlmutter there are four GPUs in a node. Unfortunately to this date, the current release of the cuQuantum Appliance only supports a single node, however a multi-node version already exists as shown in NVIDIAs Blog and is said to release to the public soon.\nBenchmark To validate this is working I used a simple sample script similar to pennylane’s gpu benchmark\nimport qsimcirq import pennylane as qml from timeit import default_timer as timer wires = 28 layers = 1 num_runs = 50 GPUs = 4 qs_opts = qsimcirq.QSimOptions(cpu_threads=64, verbosity=0, gpu_mode=GPUs) qs = qsimcirq.QSimSimulator(qs_opts) dev = qml.device('cirq.simulator', wires=wires, simulator=qs) @qml.qnode(dev) def circuit(parameters): qml.StronglyEntanglingLayers(weights=parameters, wires=range(wires)) return [qml.expval(qml.PauliZ(i)) for i in range(wires)] shape = qml.StronglyEntanglingLayers.shape(n_layers=layers, n_wires=wires) weights = qml.numpy.random.random(size=shape) timing = [] for t in range(num_runs): start = timer() val = circuit(weights) end = timer() timing.append(end - start) print('run: ', t, end=\"\\r\") print(qml.numpy.mean(timing)) As you can see I only benchmark the execution of circuits.\nBelow I show the results of the benchmark code for different numbers of GPUs.\nAs we can see, this setup has only has a speedup for system above approximately $28$ qubits. Below that, the overhead from splitting the circuit and distributing it between GPUs is too large. I only show systems up to $32$, since larger systems don’t fit into a single GPU anymore anyways.\nWhen training VQCs we don’t just want to execute circuits, but rather have to differentiate them with respect to the trainable parameters. The by far fastest method is the adjoint differentiation introduced in ( Citation: Jones \u0026 Gacon, 2020 Jones, T. \u0026 Gacon, J. (2020). Efficient calculation of gradients in classical simulations of variational quantum algorithms. Retrieved from http://arxiv.org/abs/2009.02823 ) . This method is only applicable to simulation, where it takes advantage of the fact, that we can access the state vector at any point in the circuit. When calculating the derivative with respect to many different parameters we then don’t have to simulate the whole circuit every time, but can ‘undo’ a small number of gates by applying the adjoint and in this way get the derivative to different parameters with a very small effort.\nUnfortunately this method of differentiation is not implemented in cirq, but only here in Pennylane-Lightning-GPU.\nSince the adjoint differentiation is magnitudes faster for larger amounts of trainable parameters, currently a single GPU with adjoint differentiation method is way faster than multi-GPU with e.g. parameter-shift.\nOutlook With regards to our goals, we were able to\nTrain larger qbits systems by splitting the state vector across gpus However, The training of medium sized qbits system is currently faster on a single due to the lack of adjoint differentiation in pennylane-cirq. Therefore the implementation of adjoint differentiation for cirq would be key to enable the scaling of VQC training in pennylane.\nIn addition, I am curious how the multi-node Appliance will perfom. Since the dirstribution across GPUs already has a sizable overhead, I expect the splitting across nodes to be even more expensive. Nevertheless, NVIDIA already demonstrated that the multi-node scaling still results in a worthwile speedup.\nReferences Jones \u0026 Gacon (2020) Jones, T. \u0026 Gacon, J. (2020). Efficient calculation of gradients in classical simulations of variational quantum algorithms. Retrieved from http://arxiv.org/abs/2009.02823 ",
+  "wordCount" : "975",
+  "inLanguage": "en",
+  "datePublished": "2022-12-18T00:00:00Z",
+  "dateModified": "2022-12-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tom Magorsch"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tommago.com/posts/nersc/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TomMago",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tommago.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://notes.tommago.com" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
+    <h1 class="post-title">
+      NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane
+    </h1>
+    <div class="post-meta"><span title='2022-12-18 00:00:00 +0000 UTC'>December 18, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Tom Magorsch
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#scaling-quantum-simulations" aria-label="Scaling quantum simulations">Scaling quantum simulations</a></li>
+                <li>
+                    <a href="#setup-pennylane--cirq--cuquantum" aria-label="Setup: Pennylane &#43; Cirq &#43; cuQuantum">Setup: Pennylane + Cirq + cuQuantum</a></li>
+                <li>
+                    <a href="#benchmark" aria-label="Benchmark">Benchmark</a></li>
+                <li>
+                    <a href="#outlook" aria-label="Outlook">Outlook</a></li>
+                <li>
+                    <a href="#references" aria-label="References">References</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>The past month I have been participating in the <a href="https://www.openhackathons.org/s/siteevent/a0C5e000005UNW4EAO/se000137">NERSC Open Hackathon</a> hosted together with NVIDIA.
+Throughout the event we had access to the <a href="https://perlmutter.carrd.co">Perlmutter compute system</a> and worked together with mentors on scaling our scientific software projects on GPUs.
+During the event I worked on scaling the training of VQCs in <a href="https://pennylane.ai">Pennylane</a> to multiple GPUs.
+A word of thanks goes to the organizers and all the mentors who helped us throghout the event.</p>
+<h1 id="scaling-quantum-simulations">Scaling quantum simulations<a hidden class="anchor" aria-hidden="true" href="#scaling-quantum-simulations">#</a></h1>
+<p>During my <a href="https://www.tommago.com/posts/gsoc/">GSoC project</a> I worked on training QML models for HEP analysis tasks.
+In the process, a major bottleneck in validating current QML models were the long training times and the inability of simulating larger qbit systems. My goal for the hackathon was therefore to</p>
+<ol>
+<li>Enable scaling to larger qbit systems</li>
+<li>Enable faster training for medium sized qbit systems</li>
+</ol>
+<p>The simulation of quantum circuits can be performed on GPUs, with a promising implementation beeing the <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a>.
+In previous benchmarks I found cuQuantum outperforming the simulation on comparable CPUs for qbit numbers of approximately $N\geq 20$.
+An especially interesting feature is provided by the <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance">cuQuantum Appliance</a>, as it is able to handle the splitting of the state vector across gpus.
+Since the state vector of an $N$ qubit system scales with $2^N$, it quickly supasses the memory of current GPUs when moving beyond $N=30$.
+Therefore splitting it across multiple gpus becomes mandatory to simulate larger systems.</p>
+<h1 id="setup-pennylane--cirq--cuquantum">Setup: Pennylane + Cirq + cuQuantum<a hidden class="anchor" aria-hidden="true" href="#setup-pennylane--cirq--cuquantum">#</a></h1>
+<p>Up until now I have been using the <a href="https://docs.pennylane.ai/projects/lightning-gpu/en/latest/index.html">PennyLane-Lightning-GPU Plugin</a>. This plugin is build on cuQuantum and conveniently enables to execute the circuits on the GPU.
+However, <code>lightning.gpu</code> has a limited multi-GPU support, as it only enables the execution of different measurements in a circuit on multiple GPUs. Especially it does not support the splitting of the state vector. Manual methods like <a href="https://pennylane.ai/qml/demos/tutorial_quantum_circuit_cutting.html">circuit cutting</a> can circumvent this, however I was looking for a more generic technical solution.</p>
+<p>The solution we came up with during the hackathon was to use the cuQuantum Appliance, which supports the scaling to multiple GPUs with cirq, together with the <a href="https://docs.pennylane.ai/projects/cirq/en/latest/">PennyLane-Cirq Plugin</a> to integrate it with pennylane.
+To set up your code this way you have to:</p>
+<ol>
+<li>Run the <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuquantum-appliance">cuQuantum Appliance</a></li>
+<li>Add pennylane and pennylane-cirq with <code>pip install pennylane pennylane-cirq</code></li>
+<li>Modify your code with</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">qsimcirq</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">qs_opts</span> <span class="o">=</span> <span class="n">qsimcirq</span><span class="o">.</span><span class="n">QSimOptions</span><span class="p">(</span><span class="n">cpu_threads</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gpu_mode</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">qs</span> <span class="o">=</span> <span class="n">qsimcirq</span><span class="o">.</span><span class="n">QSimSimulator</span><span class="p">(</span><span class="n">qs_opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dev1</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cirq.simulator&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">NUMBER_QBITS</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="n">qs</span><span class="p">)</span>
+</span></span></code></pre></div><ol start="4">
+<li>Done! You can run your job. However during our work we encountered a bug which resulted in the consoled beeing flooded, so you might consider redirecting the error output with <code>python yourscript.py 2&gt;/dev/null</code>. Of course you will loose all real errors like that.</li>
+</ol>
+<p>In this example <code>gpu_mode</code> describes the number of gpus to use. In Perlmutter there are four GPUs in a node. Unfortunately to this date, the current release of the cuQuantum Appliance only supports a single node, however a multi-node version already exists as shown in <a href="https://developer.nvidia.com/blog/accelerating-quantum-circuit-simulation-with-nvidia-custatevec/">NVIDIAs Blog</a> and is said to release to the public soon.</p>
+<h1 id="benchmark">Benchmark<a hidden class="anchor" aria-hidden="true" href="#benchmark">#</a></h1>
+<p>To validate this is working I used a simple sample script similar to </br><a href="https://pennylane.ai/blog/2022/07/lightning-fast-simulations-with-pennylane-and-the-nvidia-cuquantum-sdk/">pennylane&rsquo;s gpu benchmark</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">qsimcirq</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">default_timer</span> <span class="k">as</span> <span class="n">timer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">wires</span> <span class="o">=</span> <span class="mi">28</span>
+</span></span><span class="line"><span class="cl"><span class="n">layers</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">num_runs</span> <span class="o">=</span> <span class="mi">50</span>
+</span></span><span class="line"><span class="cl"><span class="n">GPUs</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">qs_opts</span> <span class="o">=</span> <span class="n">qsimcirq</span><span class="o">.</span><span class="n">QSimOptions</span><span class="p">(</span><span class="n">cpu_threads</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gpu_mode</span><span class="o">=</span><span class="n">GPUs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">qs</span> <span class="o">=</span> <span class="n">qsimcirq</span><span class="o">.</span><span class="n">QSimSimulator</span><span class="p">(</span><span class="n">qs_opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cirq.simulator&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="n">qs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">StronglyEntanglingLayers</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">wires</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">wires</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">shape</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">StronglyEntanglingLayers</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">n_layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">n_wires</span><span class="o">=</span><span class="n">wires</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">weights</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">timing</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">start</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">end</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run: &#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">timing</span><span class="p">))</span>
+</span></span></code></pre></div><p>As you can see I only benchmark the <em>execution of circuits</em>.</p>
+<p>Below I show the results of the benchmark code for different numbers of GPUs.</p>
+<p><img loading="lazy" src="../nersc_bench.png#center" alt="Plot of benchmark"  />
+</p>
+<p>As we can see, this setup has only has a speedup for system above approximately $28$ qubits.
+Below that, the overhead from splitting the circuit and distributing it between GPUs is too large.
+I only show systems up to $32$, since larger systems don&rsquo;t fit into a single GPU anymore anyways.</p>
+<p>When training VQCs we don&rsquo;t just want to execute circuits, but rather have to differentiate them with respect to the trainable parameters.
+The by far fastest method is the <em>adjoint differentiation</em> introduced in 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jones2020"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Tyson"><span itemprop="familyName">Jones</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Julien"><span itemprop="familyName">Gacon</span></span>,&#32;<span itemprop="datePublished">2020</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jones</span>,&#32;
+    <meta itemprop="givenName" content="Tyson" />
+    T.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gacon</span>,&#32;
+    <meta itemprop="givenName" content="Julien" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2020</span>).
+  &#32;<span itemprop="name">Efficient calculation of gradients in classical simulations of variational quantum algorithms</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2009.02823"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2009.02823</a></span>
+
+
+
+
+</span></span>)</span>
+.
+This method is only applicable to simulation, where it takes advantage of the fact, that we can access the state vector at any point in the circuit. When calculating the derivative with respect to many different parameters we then don&rsquo;t have to simulate the whole circuit every time, but can &lsquo;undo&rsquo; a small number of gates by applying the adjoint and in this way get the derivative to different parameters with a very small effort.</p>
+<p>Unfortunately this method of differentiation is not implemented in cirq, but only <a href="https://github.com/PennyLaneAI/pennylane-lightning-gpu/blob/main/pennylane_lightning_gpu/src/algorithms/AdjointDiffGPU.hpp">here</a> in Pennylane-Lightning-GPU.</p>
+<p>Since the adjoint differentiation is magnitudes faster for larger amounts of trainable parameters, currently a single GPU with adjoint differentiation method is way faster than multi-GPU with e.g. <a href="https://pennylane.ai/qml/glossary/parameter_shift.html">parameter-shift</a>.</p>
+<h1 id="outlook">Outlook<a hidden class="anchor" aria-hidden="true" href="#outlook">#</a></h1>
+<p>With regards to our goals, we were able to</p>
+<ol>
+<li>Train larger qbits systems by splitting the state vector across gpus
+However,</li>
+<li>The training of medium sized qbits system is currently faster on a single due to the lack of <em>adjoint differentiation</em> in pennylane-cirq.</li>
+</ol>
+<p>Therefore <em>the implementation of adjoint differentiation for cirq would be key to enable the scaling of VQC training in pennylane</em>.</p>
+<p>In addition, I am curious how the multi-node Appliance will perfom. Since the dirstribution across GPUs already has a sizable overhead, I expect the splitting across nodes to be even more expensive. Nevertheless, NVIDIA <a href="https://developer.nvidia.com/blog/accelerating-quantum-circuit-simulation-with-nvidia-custatevec/">already demonstrated</a> that the multi-node scaling still results in a worthwile speedup.</p>
+<h1 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h1>
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+<section class="hugo-cite-bibliography">
+  <dl>
+    
+
+      <div id="jones2020">
+        <dt>
+          Jones&#32;&amp;&#32;Gacon
+
+          
+          (2020)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jones</span>,&#32;
+    <meta itemprop="givenName" content="Tyson" />
+    T.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gacon</span>,&#32;
+    <meta itemprop="givenName" content="Julien" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2020</span>).
+  &#32;<span itemprop="name">Efficient calculation of gradients in classical simulations of variational quantum algorithms</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2009.02823"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2009.02823</a></span>
+
+
+
+
+</dd>
+
+      </div>
+  </dl>
+</section>
+
+
+
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://tommago.com/tags/qml/">QML</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://tommago.com/">TomMago</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

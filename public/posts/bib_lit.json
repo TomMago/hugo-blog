@@ -704,5 +704,31 @@
     "keyword": "quant-ph, cs.AI, cs.LG",
     "title": "Quantum Self-Attention Neural Networks for Text Classification",
     "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/2009.02823",
+    "abstract": "Calculating the energy gradient in parameter space has become an almost ubiquitous subroutine of variational near-term quantum algorithms. \"Faithful\" classical emulation of this subroutine mimics its quantum evaluation, and scales as O(P\\^2) gate operations for P variational parameters. This is often the bottleneck for the moderately-sized simulations, and has attracted HPC strategies like \"batch-circuit\" evaluation. We here present a novel derivation of an emulation strategy to precisely calculate the gradient in O(P) time and using O(1) state-vectors, compatible with \"full-state\" state-vector simulators. The prescribed algorithm resembles the optimised technique for automatic differentiation of reversible cost functions, often used in classical machine learning, and first employed in quantum simulators like Yao.jl. In contrast, our scheme derives directly from a recurrent form of quantum operators, and may be more familiar to a quantum computing community. Our strategy is very simple, uses only ’apply gate’, ’clone state’ and ’inner product’ primitives and is hence straightforward to implement and integrate with existing simulators. It is compatible with gate parallelisation schemes, and hardware accelerated and distributed simulators. We describe the scheme in an instructive way, including details of how common gate derivatives can be performed, to clearly guide implementation in existing quantum simulators. We furthermore demonstrate the scheme by implementing it in Qiskit, and perform some comparative benchmarking with faithful simulation. Finally, we remark upon the difficulty of extending the scheme to density-matrix simulation of noisy channels.",
+    "author": [
+      {
+        "family": "Jones",
+        "given": "Tyson"
+      },
+      {
+        "family": "Gacon",
+        "given": "Julien"
+      }
+    ],
+    "id": "Jones2020",
+    "issued": {
+      "date-parts": [
+        [
+          2020,
+          9
+        ]
+      ]
+    },
+    "keyword": "quant-ph, physics.comp-ph",
+    "title": "Efficient calculation of gradients in classical simulations of variational quantum algorithms",
+    "type": "article-journal"
   }
 ]
