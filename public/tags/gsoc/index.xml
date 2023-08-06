@@ -5,7 +5,18 @@
     <link>https://tommago.com/tags/gsoc/</link>
     <description>Recent content in GSoC on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sat, 29 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quantum GANs</title>
+      <link>https://tommago.com/posts/qgan/</link>
+      <pubDate>Sat, 29 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/qgan/</guid>
+      <description>This year I&amp;rsquo;m participating in the Google Summer of Code again. Just like last year I&amp;rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
+GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&amp;#32;Pouget-Abadie &amp;amp; al.,&amp;#32;2014 Goodfellow,&amp;#32; I.,&amp;#32; Pouget-Abadie,&amp;#32; J.,&amp;#32; Mirza,&amp;#32; M.,&amp;#32; Xu,&amp;#32; B.,&amp;#32; Warde-Farley,&amp;#32; D.,&amp;#32; Ozair,&amp;#32; S.,&amp;#32; Courville,&amp;#32; A.&amp;#32;&amp;amp;&amp;#32;Bengio,&amp;#32; Y. &amp;#32; (2014). &amp;#32;Generative Adversarial Networks.</description>
+    </item>
+    
     <item>
       <title>GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC</title>
       <link>https://tommago.com/posts/gsoc/</link>

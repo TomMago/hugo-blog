@@ -730,5 +730,384 @@
     "keyword": "quant-ph, physics.comp-ph",
     "title": "Efficient calculation of gradients in classical simulations of variational quantum algorithms",
     "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/1406.2661",
+    "abstract": "We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.",
+    "author": [
+      {
+        "family": "Goodfellow",
+        "given": "Ian J."
+      },
+      {
+        "family": "Pouget-Abadie",
+        "given": "Jean"
+      },
+      {
+        "family": "Mirza",
+        "given": "Mehdi"
+      },
+      {
+        "family": "Xu",
+        "given": "Bing"
+      },
+      {
+        "family": "Warde-Farley",
+        "given": "David"
+      },
+      {
+        "family": "Ozair",
+        "given": "Sherjil"
+      },
+      {
+        "family": "Courville",
+        "given": "Aaron"
+      },
+      {
+        "family": "Bengio",
+        "given": "Yoshua"
+      }
+    ],
+    "id": "Goodfellow2014",
+    "issued": {
+      "date-parts": [
+        [
+          2014,
+          6
+        ]
+      ]
+    },
+    "keyword": "stat.ML, cs.LG",
+    "title": "Generative Adversarial Networks",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.21468/SciPostPhys.7.6.075",
+    "URL": "http://arxiv.org/abs/1907.03764",
+    "abstract": "Event generation for the LHC can be supplemented by generative adversarial networks, which generate physical events and avoid highly inefficient event unweighting. For top pair production we show how such a network describes intermediate on-shell particles, phase space boundaries, and tails of distributions. In particular, we introduce the maximum mean discrepancy to resolve sharp local features. It can be extended in a straightforward manner to include for instance off-shell contributions, higher orders, or approximate detector effects.",
+    "author": [
+      {
+        "family": "Butter",
+        "given": "Anja"
+      },
+      {
+        "family": "Plehn",
+        "given": "Tilman"
+      },
+      {
+        "family": "Winterhalder",
+        "given": "Ramon"
+      }
+    ],
+    "container-title": "SciPost Phys. 7, 075 (2019)",
+    "id": "Butter2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          7
+        ]
+      ]
+    },
+    "keyword": "hep-ph",
+    "title": "How to GAN LHC Events",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1007/s41781-017-0004-6",
+    "URL": "http://arxiv.org/abs/1701.05927",
+    "abstract": "We provide a bridge between generative modeling in the Machine Learning community and simulated physical processes in High Energy Particle Physics by applying a novel Generative Adversarial Network (GAN) architecture to the production of jet images – 2D representations of energy depositions from particles interacting with a calorimeter. We propose a simple architecture, the Location-Aware Generative Adversarial Network, that learns to produce realistic radiation patterns from simulated high energy particle collisions. The pixel intensities of GAN-generated images faithfully span over many orders of magnitude and exhibit the desired low-dimensional physical properties (i.e., jet mass, n-subjettiness, etc.). We shed light on limitations, and provide a novel empirical validation of image quality and validity of GAN-produced simulations of the natural world. This work provides a base for further explorations of GANs for use in faster simulation in High Energy Particle Physics.",
+    "author": [
+      {
+        "dropping-particle": "de",
+        "family": "Oliveira",
+        "given": "Luke"
+      },
+      {
+        "family": "Paganini",
+        "given": "Michela"
+      },
+      {
+        "family": "Nachman",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "Comput Softw Big Sci (2017) 1: 4",
+    "id": "Oliveira2017",
+    "issued": {
+      "date-parts": [
+        [
+          2017,
+          1
+        ]
+      ]
+    },
+    "keyword": "stat.ML, hep-ex, physics.data-an",
+    "title": "Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis",
+    "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/2104.01725",
+    "abstract": "Accurate and fast simulation of particle physics processes is crucial for the high-energy physics community. Simulating particle interactions with detectors is both time consuming and computationally expensive. With the proton-proton collision energy of 13 TeV, the Large Hadron Collider is uniquely positioned to detect and measure the rare phenomena that can shape our knowledge of new interactions. The High-Luminosity Large Hadron Collider (HL-LHC) upgrade will put a significant strain on the computing infrastructure due to increased event rate and levels of pile-up. Simulation of high-energy physics collisions needs to be significantly faster without sacrificing the physics accuracy. Machine learning approaches can offer faster solutions, while maintaining a high level of fidelity. We discuss a graph generative model that provides effective reconstruction of LHC events, paving the way for full detector level fast simulation for HL-LHC.",
+    "author": [
+      {
+        "family": "Hariri",
+        "given": "Ali"
+      },
+      {
+        "family": "Dyachkova",
+        "given": "Darya"
+      },
+      {
+        "family": "Gleyzer",
+        "given": "Sergei"
+      }
+    ],
+    "id": "Hariri2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          4
+        ]
+      ]
+    },
+    "keyword": "hep-ex, cs.LG",
+    "title": "Graph Generative Models for Fast Detector Simulations in High Energy Physics",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevLett.121.040502",
+    "URL": "http://arxiv.org/abs/1804.09139",
+    "abstract": "Generative adversarial networks (GANs) represent a powerful tool for classical machine learning: a generator tries to create statistics for data that mimics those of a true data set, while a discriminator tries to discriminate between the true and fake data. The learning process for generator and discriminator can be thought of as an adversarial game, and under reasonable assumptions, the game converges to the point where the generator generates the same statistics as the true data and the discriminator is unable to discriminate between the true and the generated data. This paper introduces the notion of quantum generative adversarial networks (QuGANs), where the data consists either of quantum states, or of classical data, and the generator and discriminator are equipped with quantum information processors. We show that the unique fixed point of the quantum adversarial game also occurs when the generator produces the same statistics as the data. Since quantum systems are intrinsically probabilistic the proof of the quantum case is different from - and simpler than - the classical case. We show that when the data consists of samples of measurements made on high-dimensional spaces, quantum adversarial networks may exhibit an exponential advantage over classical adversarial networks.",
+    "author": [
+      {
+        "family": "Lloyd",
+        "given": "Seth"
+      },
+      {
+        "family": "Weedbrook",
+        "given": "Christian"
+      }
+    ],
+    "container-title": "Phys. Rev. Lett. 121, 040502 (2018)",
+    "id": "Lloyd2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018,
+          4
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Quantum generative adversarial learning",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevA.98.012324",
+    "URL": "http://arxiv.org/abs/1804.08641",
+    "abstract": "Quantum machine learning is expected to be one of the first potential general-purpose applications of near-term quantum devices. A major recent breakthrough in classical machine learning is the notion of generative adversarial training, where the gradients of a discriminator model are used to train a separate generative model. In this work and a companion paper, we extend adversarial training to the quantum domain and show how to construct generative adversarial networks using quantum circuits. Furthermore, we also show how to compute gradients – a key element in generative adversarial network training – using another quantum circuit. We give an example of a simple practical circuit ansatz to parametrize quantum machine learning models and perform a simple numerical experiment to demonstrate that quantum generative adversarial networks can be trained successfully.",
+    "author": [
+      {
+        "family": "Dallaire-Demers",
+        "given": "Pierre-Luc"
+      },
+      {
+        "family": "Killoran",
+        "given": "Nathan"
+      }
+    ],
+    "container-title": "Phys. Rev. A 98, 012324 (2018)",
+    "id": "DallaireDemers2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018,
+          4
+        ]
+      ]
+    },
+    "keyword": "quant-ph, cs.LG",
+    "title": "Quantum generative adversarial networks",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1103/PhysRevLett.100.160501",
+    "URL": "http://arxiv.org/abs/0708.1879",
+    "abstract": "A random access memory (RAM) uses n bits to randomly address N=2\\^n distinct memory cells. A quantum random access memory (qRAM) uses n qubits to address any quantum superposition of N memory cells. We present an architecture that exponentially reduces the requirements for a memory call: O(log N) switches need be thrown instead of the N used in conventional (classical or quantum) RAM designs. This yields a more robust qRAM algorithm, as it in general requires entanglement among exponentially less gates, and leads to an exponential decrease in the power needed for addressing. A quantum optical implementation is presented.",
+    "author": [
+      {
+        "family": "Giovannetti",
+        "given": "Vittorio"
+      },
+      {
+        "family": "Lloyd",
+        "given": "Seth"
+      },
+      {
+        "family": "Maccone",
+        "given": "Lorenzo"
+      }
+    ],
+    "container-title": "V. Giovannetti, S. Lloyd, L. Maccone, Phys. Rev. Lett. 100, 160501 (2008).",
+    "id": "Giovannetti2007",
+    "issued": {
+      "date-parts": [
+        [
+          2007,
+          8
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Quantum random access memory",
+    "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/1901.00848",
+    "abstract": "We propose a hybrid quantum-classical approach to model continuous classical probability distributions using a variational quantum circuit. The architecture of the variational circuit consists of two parts: a quantum circuit employed to encode a classical random variable into a quantum state, called the quantum encoder, and a variational circuit whose parameters are optimized to mimic a target probability distribution. Samples are generated by measuring the expectation values of a set of operators chosen at the beginning of the calculation. Our quantum generator can be complemented with a classical function, such as a neural network, as part of the classical post-processing. We demonstrate the application of the quantum variational generator using a generative adversarial learning approach, where the quantum generator is trained via its interaction with a discriminator model that compares the generated samples with those coming from the real data distribution. We show that our quantum generator is able to learn target probability distributions using either a classical neural network or a variational quantum circuit as the discriminator. Our implementation takes advantage of automatic differentiation tools to perform the optimization of the variational circuits employed. The framework presented here for the design and implementation of variational quantum generators can serve as a blueprint for designing hybrid quantum-classical architectures for other machine learning tasks on near-term quantum devices.",
+    "author": [
+      {
+        "family": "Romero",
+        "given": "Jonathan"
+      },
+      {
+        "family": "Aspuru-Guzik",
+        "given": "Alan"
+      }
+    ],
+    "id": "Romero2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          1
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Variational quantum generators: Generative adversarial quantum machine learning for continuous distributions",
+    "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/2206.03066",
+    "abstract": "Quantum computers are next-generation devices that hold promise to perform calculations beyond the reach of classical computers. A leading method towards achieving this goal is through quantum machine learning, especially quantum generative learning. Due to the intrinsic probabilistic nature of quantum mechanics, it is reasonable to postulate that quantum generative learning models (QGLMs) may surpass their classical counterparts. As such, QGLMs are receiving growing attention from the quantum physics and computer science communities, where various QGLMs that can be efficiently implemented on near-term quantum machines with potential computational advantages are proposed. In this paper, we review the current progress of QGLMs from the perspective of machine learning. Particularly, we interpret these QGLMs, covering quantum circuit born machines, quantum generative adversarial networks, quantum Boltzmann machines, and quantum autoencoders, as the quantum extension of classical generative learning models. In this context, we explore their intrinsic relation and their fundamental differences. We further summarize the potential applications of QGLMs in both conventional machine learning tasks and quantum physics. Last, we discuss the challenges and further research directions for QGLMs.",
+    "author": [
+      {
+        "family": "Tian",
+        "given": "Jinkai"
+      },
+      {
+        "family": "Sun",
+        "given": "Xiaoyu"
+      },
+      {
+        "family": "Du",
+        "given": "Yuxuan"
+      },
+      {
+        "family": "Zhao",
+        "given": "Shanshan"
+      },
+      {
+        "family": "Liu",
+        "given": "Qing"
+      },
+      {
+        "family": "Zhang",
+        "given": "Kaining"
+      },
+      {
+        "family": "Yi",
+        "given": "Wei"
+      },
+      {
+        "family": "Huang",
+        "given": "Wanrong"
+      },
+      {
+        "family": "Wang",
+        "given": "Chaoyue"
+      },
+      {
+        "family": "Wu",
+        "given": "Xingyao"
+      },
+      {
+        "family": "Hsieh",
+        "given": "Min-Hsiu"
+      },
+      {
+        "family": "Liu",
+        "given": "Tongliang"
+      },
+      {
+        "family": "Yang",
+        "given": "Wenjing"
+      },
+      {
+        "family": "Tao",
+        "given": "Dacheng"
+      }
+    ],
+    "id": "Tian2022",
+    "issued": {
+      "date-parts": [
+        [
+          2022,
+          6
+        ]
+      ]
+    },
+    "keyword": "quant-ph, cs.CV, cs.LG",
+    "title": "Recent Advances for Quantum Neural Networks in Generative Learning",
+    "type": "article-journal"
+  },
+  {
+    "URL": "http://arxiv.org/abs/2105.00080",
+    "abstract": "Generative adversarial networks (GANs) are one of the most widely adopted semisupervised and unsupervised machine learning methods for high-definition image, video, and audio generation. In this work, we propose a new type of architecture for quantum generative adversarial networks (entangling quantum GAN, EQ-GAN) that overcomes some limitations of previously proposed quantum GANs. Leveraging the entangling power of quantum circuits, EQ-GAN guarantees the convergence to a Nash equilibrium under minimax optimization of the discriminator and generator circuits by performing entangling operations between both the generator output and true quantum data. We show that EQ-GAN has additional robustness against coherent errors and demonstrate the effectiveness of EQ-GAN experimentally in a Google Sycamore superconducting quantum processor. By adversarially learning efficient representations of quantum states, we prepare an approximate quantum random access memory (QRAM) and demonstrate its use in applications including the training of quantum neural networks.",
+    "author": [
+      {
+        "family": "Niu",
+        "given": "Murphy Yuezhen"
+      },
+      {
+        "family": "Zlokapa",
+        "given": "Alexander"
+      },
+      {
+        "family": "Broughton",
+        "given": "Michael"
+      },
+      {
+        "family": "Boixo",
+        "given": "Sergio"
+      },
+      {
+        "family": "Mohseni",
+        "given": "Masoud"
+      },
+      {
+        "family": "Smelyanskyi",
+        "given": "Vadim"
+      },
+      {
+        "family": "Neven",
+        "given": "Hartmut"
+      }
+    ],
+    "id": "Niu2021",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          4
+        ]
+      ]
+    },
+    "keyword": "quant-ph",
+    "title": "Entangling Quantum Generative Adversarial Networks",
+    "type": "article-journal"
   }
 ]

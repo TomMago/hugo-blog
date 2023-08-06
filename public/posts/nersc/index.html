@@ -295,7 +295,7 @@ To set up your code this way you have to:</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cirq.simulator&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">,</span> <span class="n">simulator</span><span class="o">=</span><span class="n">qs</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@qml.qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">StronglyEntanglingLayers</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">wires</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">wires</span><span class="p">)]</span>
@@ -446,7 +446,7 @@ However,</li>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://tommago.com/">TomMago</a></span>
+    <span>&copy; 2023 <a href="https://tommago.com/">TomMago</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

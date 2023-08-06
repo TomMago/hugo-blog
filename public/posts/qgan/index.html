@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Quantum GANs | TomMago</title>
+<meta name="keywords" content="GSoC">
+<meta name="description" content="This year I&rsquo;m participating in the Google Summer of Code again. Just like last year I&rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
+GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&#32;Pouget-Abadie &amp; al.,&#32;2014 Goodfellow,&#32; I.,&#32; Pouget-Abadie,&#32; J.,&#32; Mirza,&#32; M.,&#32; Xu,&#32; B.,&#32; Warde-Farley,&#32; D.,&#32; Ozair,&#32; S.,&#32; Courville,&#32; A.&#32;&amp;&#32;Bengio,&#32; Y. &#32; (2014). &#32;Generative Adversarial Networks.">
+<meta name="author" content="Tom Magorsch">
+<link rel="canonical" href="https://tommago.com/posts/qgan/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4fd967528ad5a75f3ce961dbda94c03a4739e156197539fdac72973ab0f932e0.css" integrity="sha256-T9lnUorVp1886WHb2pTAOkc54VYZdTn9rHKXOrD5MuA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tommago.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+onload="renderMathInElement(document.body,
+        {
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+              ],
+              throwOnError : false
+          });"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Quantum GANs" />
+<meta property="og:description" content="This year I&rsquo;m participating in the Google Summer of Code again. Just like last year I&rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
+GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&#32;Pouget-Abadie &amp; al.,&#32;2014 Goodfellow,&#32; I.,&#32; Pouget-Abadie,&#32; J.,&#32; Mirza,&#32; M.,&#32; Xu,&#32; B.,&#32; Warde-Farley,&#32; D.,&#32; Ozair,&#32; S.,&#32; Courville,&#32; A.&#32;&amp;&#32;Bengio,&#32; Y. &#32; (2014). &#32;Generative Adversarial Networks." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tommago.com/posts/qgan/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2023-07-29T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quantum GANs"/>
+<meta name="twitter:description" content="This year I&rsquo;m participating in the Google Summer of Code again. Just like last year I&rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
+GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&#32;Pouget-Abadie &amp; al.,&#32;2014 Goodfellow,&#32; I.,&#32; Pouget-Abadie,&#32; J.,&#32; Mirza,&#32; M.,&#32; Xu,&#32; B.,&#32; Warde-Farley,&#32; D.,&#32; Ozair,&#32; S.,&#32; Courville,&#32; A.&#32;&amp;&#32;Bengio,&#32; Y. &#32; (2014). &#32;Generative Adversarial Networks."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tommago.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Quantum GANs",
+      "item": "https://tommago.com/posts/qgan/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Quantum GANs",
+  "name": "Quantum GANs",
+  "description": "This year I\u0026rsquo;m participating in the Google Summer of Code again. Just like last year I\u0026rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.\nGANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,\u0026#32;Pouget-Abadie \u0026amp; al.,\u0026#32;2014 Goodfellow,\u0026#32; I.,\u0026#32; Pouget-Abadie,\u0026#32; J.,\u0026#32; Mirza,\u0026#32; M.,\u0026#32; Xu,\u0026#32; B.,\u0026#32; Warde-Farley,\u0026#32; D.,\u0026#32; Ozair,\u0026#32; S.,\u0026#32; Courville,\u0026#32; A.\u0026#32;\u0026amp;\u0026#32;Bengio,\u0026#32; Y. \u0026#32; (2014). \u0026#32;Generative Adversarial Networks.",
+  "keywords": [
+    "GSoC"
+  ],
+  "articleBody": "This year I’m participating in the Google Summer of Code again. Just like last year I’m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.\nGANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow, Pouget-Abadie \u0026 al., 2014 Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. \u0026 Bengio, Y. (2014). Generative Adversarial Networks. Retrieved from http://arxiv.org/abs/1406.2661 ) . GANs aim to train a generator $G(z,\\Theta_g)$ with a latent space $z$ and parameters $\\Theta_g$ to replicate a reference probability distribution when sampling from the latent space $z$.\nA GAN consists of two networks, the generator $G$ and a discriminator $D$. The networks are trained by playing a zero sum game, where the generator tries to generate samples which are as realistic as possible, while the discriminator tries to classify real data samples and tag samples generated by the generator as fake.\nA schematic sketch of a GAN is shown below.\nBoth the generator and the discriminator are trained independently by the classification results of the discriminator. If the generator $G(z,\\Theta_g)$ is neural network which maps from the latent space to the space $\\Omega$, then the discriminator $D:\\Omega\\to[0,1]$ classifies the data with $D=1$ corresponding to the discriminator tagging a sample as real and $D=0$ as fake. The objective function $\\mathcal{L}(\\Theta_g, \\Theta_d)$ can then be written as $$\\mathcal{L}(\\Theta_g, \\Theta_d) = E_{x~\\mu_{train}}[\\ln D(x)]+E_{z~\\mu_z}[\\ln(1-D(G(z)))],$$ and the training as a min-max optimization of the form $$\\min_{\\Theta_g}\\max_{\\Theta_d}\\mathcal{L}(\\Theta_g,\\Theta_d).$$ The expecation values $E$ run over the training data and the latent space distribution respectively.\nThis min-max loss can be recast into a different form with two distinct loss functions, one for the discriminator $\\mathcal{L}D$ and one for the generator $\\mathcal{L}G$ $$\\mathcal{L}D(\\Theta_g,\\Theta_d) = E{z~\\mu_z}[\\ln D(G(z))]+E{x~x{train}}[\\ln(1-D(x))],$$ $$\\mathcal{L}G(\\Theta_g,\\Theta_d) = -E{z~\\mu_z}[\\ln D(1-G(z))].$$ Both of these are minimized, with respect to their parameters, while freezing the parameters of the opponent network. $$\\min_{\\Theta_d} \\mathcal{L}D(\\Theta_g,\\Theta_d),$$ $$\\min{\\Theta_g} \\mathcal{L}_G(\\Theta_g,\\Theta_d).$$\nTo check that this make sense, we can think about the terms in the loss function: The discriminator wants to tag the generators samples as fake ($D(G(z))=0$) and data samples as real ($D(x)=1$). Inserting these values in $\\mathcal{L}_D$ would minimize both terms.\nGANs in hep There has been a vast amount of work on generative models applied to high energy physics tasks, e.g. ( Citation: Oliveira, Paganini \u0026 al., 2017 Oliveira, L., Paganini, M. \u0026 Nachman, B. (2017). Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis. Comput Softw Big Sci (2017) 1: 4. https://doi.org/10.1007/s41781-017-0004-6 ; Citation: Butter, Plehn \u0026 al., 2019 Butter, A., Plehn, T. \u0026 Winterhalder, R. (2019). How to GAN LHC Events. SciPost Phys. 7, 075 (2019). https://doi.org/10.21468/SciPostPhys.7.6.075 ; Citation: Hariri, Dyachkova \u0026 al., 2021 Hariri, A., Dyachkova, D. \u0026 Gleyzer, S. (2021). Graph Generative Models for Fast Detector Simulations in High Energy Physics. Retrieved from http://arxiv.org/abs/2104.01725 ) . The main incentive is to speed up the simulation of particle physics processes by training a GAN, which then cheaply be sampled from.\nIn the typical analysis pipline of a high energy physics (HEP) experiment, one of the computationally most demanding steps is the generation of expected reference data from our assumed theory (the Standard Model of particle physics). Classical event generator rely on Monte-Carlo techniques to sample from the respective event distributions, which is a very demanding step. A GAN can in principle learn the structure even of complex events once and then generate events more efficiently.\nQGAN Building on the success of classical GANs in generative tasks, similar models have been proposed to perform generative tasks on quantum computers ( Citation: Lloyd \u0026 Weedbrook, 2018 Lloyd, S. \u0026 Weedbrook, C. (2018). Quantum generative adversarial learning. Phys. Rev. Lett. 121, 040502 (2018). https://doi.org/10.1103/PhysRevLett.121.040502 ; Citation: Dallaire-Demers \u0026 Killoran, 2018 Dallaire-Demers, P. \u0026 Killoran, N. (2018). Quantum generative adversarial networks. Phys. Rev. A 98, 012324 (2018). https://doi.org/10.1103/PhysRevA.98.012324 ) . There are different motivations for a Quantum Generative Adversarial Network (QGAN), what I find particularly intersting is:\nThe measurement of a quantum system can, under certain assumptions, generate classical data, which can not be generted efficiently by a classical model (based on a classical random number generator) ( Citation: Preskill, 2018 Preskill, J. (2018). Quantum Computing in the NISQ era and beyond. Quantum 2, 79 (2018). https://doi.org/10.22331/q-2018-08-06-79 ) , which implies a quantum advantage in generative tasks of such distributions. The concept of a QRAM ( Citation: Giovannetti, Lloyd \u0026 al., 2007 Giovannetti, V., Lloyd, S. \u0026 Maccone, L. (2007). Quantum random access memory. V. Giovannetti, S. Lloyd, L. Maccone, Phys. Rev. Lett. 100, 160501 (2008).. https://doi.org/10.1103/PhysRevLett.100.160501 ; No matching key was found for `` in the references. Please make sure to provide an available ID in your `bib.json` file.) aims to represent a large data vector of size $N$ in $\\log N$ qubits. Together with the ability of quantum computers to perform maniputlations of sparse and low rank $N\\times N$ matrices with a scaling of $\\mathcal{O}(\\text{poly}(\\log N))$ implies that there is a potential advantage in the scaling of sampling in QGANs ( Citation: Lloyd \u0026 Weedbrook, 2018 Lloyd, S. \u0026 Weedbrook, C. (2018). Quantum generative adversarial learning. Phys. Rev. Lett. 121, 040502 (2018). https://doi.org/10.1103/PhysRevLett.121.040502 ) From a practical point of view I think QGANs offer interesing applications for e.g. state preperation, to learn a shallower circuit to load an approximation of a probability distribution, instead of deeper exact circuits. QGAN circuit There are many different proposals for QGANs, with both fully quantum architectures, or hybrid models with a classical discriminator network, see e.g. ( Citation: Romero \u0026 Aspuru-Guzik, 2019 Romero, J. \u0026 Aspuru-Guzik, A. (2019). Variational quantum generators: Generative adversarial quantum machine learning for continuous distributions. Retrieved from http://arxiv.org/abs/1901.00848 ; Citation: Tian, Sun \u0026 al., 2022 Tian, J., Sun, X., Du, Y., Zhao, S., Liu, Q., Zhang, K., Yi, W., Huang, W., Wang, C., Wu, X., Hsieh, M., Liu, T., Yang, W. \u0026 Tao, D. (2022). Recent Advances for Quantum Neural Networks in Generative Learning. Retrieved from http://arxiv.org/abs/2206.03066 ) for reviews.\nThe simplest version of a fully quantum QGAN can be build with a SWAP test as discriminator.\nIn this case the discriminator does not have parameters and therefore, we do not have an adversarial min-max training. Also, we do not have a latent space $z$ to sample from. Instead we just want to train the generator unitarity $G(\\Theta_g)$ to produce a state which is a superposition of the input states $\\sigma_i$ $$G(\\Theta_g)\\ket{0} = \\sum P_i \\sigma_i.$$\nThe generator parameters can be trained by maximizing the fidelity $F(\\sigma,G(\\Theta))$ of the generator $G(\\Theta)$ and the input data $\\sigma$ $$F(\\sigma,G(\\Theta))=\\left|\\braket{\\sigma|G(\\Theta)}\\right|^2.$$ In practice I use the following loss function for minimization $$\\mathcal{L}(\\Theta_g) = -\\log\\left(G(\\Theta_g)\\epsilon\\right),$$ with some small regularization $\\epsilon$.\nMeasuring the generetor circuit would then correspond to sampling from the data distribution. While I perfom this simple training on a noiseless simulator, ( Citation: Niu, Zlokapa \u0026 al., 2021 Niu, M., Zlokapa, A., Broughton, M., Boixo, S., Mohseni, M., Smelyanskyi, V. \u0026 Neven, H. (2021). Entangling Quantum Generative Adversarial Networks. Retrieved from http://arxiv.org/abs/2105.00080 ) shows that adding parameters $\\Theta_d$ to the SWAP test, making the fidelity loss “imperfect”, can make the training more robust to device noise.\nImplementing a simple QGAN (toy data) As a simple toy example I want to train a QGAN to load a gaussian peak. So I start off by generating a toy dataset drawing $N=120$ integers between $0$ and $15$ from a normal distribution with $\\mu=7$ and $\\sigma=1.5$.\nTo load the data, I convert the integers to 4 bit values and encode them in quantum states of a four qubit quantum register. To implement the quantum circuits and the optimization I use the pennylane library. The for the generator circuit, I use a strongly entangled layer. The code for the training circuit is given below.\ndev = qml.device('lightning.qubit', wires=9) def num_circuit(num, wires): # Cast numberst to binary bin_str = format(num, '#06b')[2:] # Apply X to appropiate wires for i, c in enumerate(bin_str): if c == '1': qml.PauliX(wires=i+wires[0]) def generator(params_g, qubits): qml.StronglyEntanglingLayers(weights=params_g, wires=qubits) @qml.qnode(dev) def training_circ(data, params_g): # Real data num_circuit(data, [1,2,3,4]) # Generator circuit generator(params_g, [5,6,7,8]) # SWAP test qml.Hadamard(wires=0) qml.CSWAP(wires=[0,1,5]) qml.CSWAP(wires=[0,2,6]) qml.CSWAP(wires=[0,3,7]) qml.CSWAP(wires=[0,4,8]) qml.Hadamard(wires=0) return qml.expval(qml.PauliZ(0)) To perform the training, I loop over the data samples and optimize the parameters using Adam.\n# The first dimension corresponds to the number of layers in the generator params_g = np.random.uniform(0,np.pi, size=(8,4,3), requires_grad=True) epochs = 110 batch_size=16 learning_rate=0.01 def iterate_minibatches(data, batch_size): for start_idx in range(0, data.shape[0] - batch_size + 1, batch_size): idxs = slice(start_idx, start_idx + batch_size) yield data[idxs] def cost_batch(paramsg, paramsd, batch, reg=0.000001): loss = 0.0 for i in batch: f = training_circ(i, paramsg) + reg loss += - np.log(f) return loss / len(batch) # Training loop for it in range(epochs): for j,Xbatch in enumerate(iterate_minibatches(data, batch_size=batch_size)): cost_fn = lambda p: cost_batch(p, Xbatch) params_g = optg.step(cost_fn, params_g) print(j, end=\"\\r\") loss = cost_batch(params_g, data) print(f\"Epoch: {it} | Loss: {loss:.3} | \") print(\"____\") Performing the optimization until convergence sets the generator parameters. We can then define a circuit which only contains the generator and sample in the computational basis.\nsample_dev = qml.device('lightning.qubit', wires=4, shots = N) @qml.qnode(sample_dev) def sample_test(): generator(paramsg, [0,1,2,3]) return qml.sample() testresult = [int(''.join(str(i) for i in a), 2) for a in sample_test()] If we convert the computational basis results back to integers we can check how well the generator aprroximates our data distribution.\nOutlook For further work, I’m interested in a couple of things. First I want to see how complex the distributions can be which I can train in this matter. Then I want to implement the same model with a classical discriminator and compare the training with the fully quantum one. Finally, I want to extend the model to a continous value QGAN by using an embedding for the continous input data, and add a latent space $z$ to the generator. In this way it should be possible to sample from a continous distribution, by taking an expectatin value over a number of shots when drawing from the generator.\nReferences Butter, Plehn \u0026 Winterhalder (2019) Butter, A., Plehn, T. \u0026 Winterhalder, R. (2019). How to GAN LHC Events. SciPost Phys. 7, 075 (2019). https://doi.org/10.21468/SciPostPhys.7.6.075 Dallaire-Demers \u0026 Killoran (2018) Dallaire-Demers, P. \u0026 Killoran, N. (2018). Quantum generative adversarial networks. Phys. Rev. A 98, 012324 (2018). https://doi.org/10.1103/PhysRevA.98.012324 Giovannetti, Lloyd \u0026 Maccone (2007) Giovannetti, V., Lloyd, S. \u0026 Maccone, L. (2007). Quantum random access memory. V. Giovannetti, S. Lloyd, L. Maccone, Phys. Rev. Lett. 100, 160501 (2008).. https://doi.org/10.1103/PhysRevLett.100.160501 Goodfellow, Pouget-Abadie, Mirza, Xu, Warde-Farley, Ozair, Courville \u0026 Bengio (2014) Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. \u0026 Bengio, Y. (2014). Generative Adversarial Networks. Retrieved from http://arxiv.org/abs/1406.2661 Hariri, Dyachkova \u0026 Gleyzer (2021) Hariri, A., Dyachkova, D. \u0026 Gleyzer, S. (2021). Graph Generative Models for Fast Detector Simulations in High Energy Physics. Retrieved from http://arxiv.org/abs/2104.01725 Lloyd \u0026 Weedbrook (2018) Lloyd, S. \u0026 Weedbrook, C. (2018). Quantum generative adversarial learning. Phys. Rev. Lett. 121, 040502 (2018). https://doi.org/10.1103/PhysRevLett.121.040502 Niu, Zlokapa, Broughton, Boixo, Mohseni, Smelyanskyi \u0026 Neven (2021) Niu, M., Zlokapa, A., Broughton, M., Boixo, S., Mohseni, M., Smelyanskyi, V. \u0026 Neven, H. (2021). Entangling Quantum Generative Adversarial Networks. Retrieved from http://arxiv.org/abs/2105.00080 Oliveira, Paganini \u0026 Nachman (2017) Oliveira, L., Paganini, M. \u0026 Nachman, B. (2017). Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis. Comput Softw Big Sci (2017) 1: 4. https://doi.org/10.1007/s41781-017-0004-6 Preskill (2018) Preskill, J. (2018). Quantum Computing in the NISQ era and beyond. Quantum 2, 79 (2018). https://doi.org/10.22331/q-2018-08-06-79 Romero \u0026 Aspuru-Guzik (2019) Romero, J. \u0026 Aspuru-Guzik, A. (2019). Variational quantum generators: Generative adversarial quantum machine learning for continuous distributions. Retrieved from http://arxiv.org/abs/1901.00848 Tian, Sun, Du, Zhao, Liu, Zhang, Yi, Huang, Wang, Wu, Hsieh, Liu, Yang \u0026 Tao (2022) Tian, J., Sun, X., Du, Y., Zhao, S., Liu, Q., Zhang, K., Yi, W., Huang, W., Wang, C., Wu, X., Hsieh, M., Liu, T., Yang, W. \u0026 Tao, D. (2022). Recent Advances for Quantum Neural Networks in Generative Learning. Retrieved from http://arxiv.org/abs/2206.03066 ",
+  "wordCount" : "1908",
+  "inLanguage": "en",
+  "datePublished": "2023-07-29T00:00:00Z",
+  "dateModified": "2023-07-29T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tom Magorsch"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tommago.com/posts/qgan/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TomMago",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tommago.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://notes.tommago.com" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tommago.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Quantum GANs
+    </h1>
+    <div class="post-meta"><span title='2023-07-29 00:00:00 +0000 UTC'>July 29, 2023</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Tom Magorsch
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#gans" aria-label="GANs">GANs</a></li>
+                <li>
+                    <a href="#gans-in-hep" aria-label="GANs in hep">GANs in hep</a></li>
+                <li>
+                    <a href="#qgan" aria-label="QGAN">QGAN</a><ul>
+                        
+                <li>
+                    <a href="#qgan-circuit" aria-label="QGAN circuit">QGAN circuit</a></li>
+                <li>
+                    <a href="#implementing-a-simple-qgan-toy-data" aria-label="Implementing a simple QGAN (toy data)">Implementing a simple QGAN (toy data)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#outlook" aria-label="Outlook">Outlook</a></li>
+                <li>
+                    <a href="#references" aria-label="References">References</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>This year I&rsquo;m participating in the Google Summer of Code again. Just like last year I&rsquo;m working with the <a href="https://ml4sci.org">ML4SCI</a> organization. In this years <a href="https://summerofcode.withgoogle.com/programs/2023/projects/ggoiGDQ5">project</a> I am working on Quantum Generative Adversarial Networks.</p>
+<h2 id="gans">GANs<a hidden class="anchor" aria-hidden="true" href="#gans">#</a></h2>
+<p>Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#goodfellow2014"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Ian J."><span itemprop="familyName">Goodfellow</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jean"><span itemprop="familyName">Pouget-Abadie</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2014</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Goodfellow</span>,&#32;
+    <meta itemprop="givenName" content="Ian J." />
+    I.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pouget-Abadie</span>,&#32;
+    <meta itemprop="givenName" content="Jean" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mirza</span>,&#32;
+    <meta itemprop="givenName" content="Mehdi" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Xu</span>,&#32;
+    <meta itemprop="givenName" content="Bing" />
+    B.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Warde-Farley</span>,&#32;
+    <meta itemprop="givenName" content="David" />
+    D.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ozair</span>,&#32;
+    <meta itemprop="givenName" content="Sherjil" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Courville</span>,&#32;
+    <meta itemprop="givenName" content="Aaron" />
+    A.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Bengio</span>,&#32;
+    <meta itemprop="givenName" content="Yoshua" />
+    Y.</span>
+  &#32;
+    (<span itemprop="datePublished">2014</span>).
+  &#32;<span itemprop="name">Generative Adversarial Networks</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1406.2661"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1406.2661</a></span>
+
+
+
+
+</span></span>)</span>
+. GANs aim to train a generator $G(z,\Theta_g)$ with a latent space $z$ and parameters $\Theta_g$ to replicate a reference probability distribution when sampling from the latent space $z$.</p>
+<p>A GAN consists of two networks, the generator $G$ and a discriminator $D$. The networks are trained by playing a zero sum game, where the generator tries to generate samples which are as realistic as possible, while the discriminator tries to classify real data samples and tag samples generated by the generator as fake.</p>
+<p>A schematic sketch of a GAN is shown below.</p>
+<p><img loading="lazy" src="../ae2.png#center" alt="schematic sketch of a GAN"  />
+</p>
+<p>Both the generator and the discriminator are trained independently by the classification results of the discriminator.
+If the generator $G(z,\Theta_g)$ is neural network which maps from the latent space to the space $\Omega$, then the discriminator $D:\Omega\to[0,1]$ classifies the data with $D=1$ corresponding to the discriminator tagging a sample as real and $D=0$ as fake.
+The objective function $\mathcal{L}(\Theta_g, \Theta_d)$ can then be written as
+$$\mathcal{L}(\Theta_g, \Theta_d) = E_{x~\mu_{train}}[\ln D(x)]+E_{z~\mu_z}[\ln(1-D(G(z)))],$$
+and the training as a min-max optimization of the form
+$$\min_{\Theta_g}\max_{\Theta_d}\mathcal{L}(\Theta_g,\Theta_d).$$
+The expecation values $E$ run over the training data and the latent space distribution respectively.</p>
+<p>This min-max loss can be recast into a different form with two distinct loss functions, one for the discriminator $\mathcal{L}<em>D$ and one for the generator $\mathcal{L}<em>G$
+$$\mathcal{L}<em>D(\Theta_g,\Theta_d) = E</em>{z~\mu_z}[\ln D(G(z))]+E</em>{x~x</em>{train}}[\ln(1-D(x))],$$
+$$\mathcal{L}<em>G(\Theta_g,\Theta_d) = -E</em>{z~\mu_z}[\ln D(1-G(z))].$$
+Both of these are minimized, with respect to their parameters, while freezing the parameters of the opponent network.
+$$\min_{\Theta_d} \mathcal{L}<em>D(\Theta_g,\Theta_d),$$
+$$\min</em>{\Theta_g} \mathcal{L}_G(\Theta_g,\Theta_d).$$</p>
+<p>To check that this make sense, we can think about the terms in the loss function: The discriminator wants to tag the generators samples as fake ($D(G(z))=0$) and data samples as real ($D(x)=1$). Inserting these values in $\mathcal{L}_D$ would minimize both terms.</p>
+<h2 id="gans-in-hep">GANs in hep<a hidden class="anchor" aria-hidden="true" href="#gans-in-hep">#</a></h2>
+<p>There has been a vast amount of work on generative models applied to high energy physics tasks, e.g. 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#oliveira2017"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Luke"><span itemprop="familyName">Oliveira</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michela"><span itemprop="familyName">Paganini</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2017</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Oliveira</span>,&#32;
+    <meta itemprop="givenName" content="Luke" />
+    L.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Paganini</span>,&#32;
+    <meta itemprop="givenName" content="Michela" />
+    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Nachman</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2017</span>).
+  &#32;<span itemprop="name">Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis</span>.<i>
+    <span itemprop="about">Comput Softw Big Sci (2017) 1: 4</span></i>.
+  <a href="https://doi.org/10.1007/s41781-017-0004-6"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1007/s41781-017-0004-6</a></span>
+
+
+
+
+</span></span>;&#32;<span class="hugo-cite-group">
+
+          <a href="#butter2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Anja"><span itemprop="familyName">Butter</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Tilman"><span itemprop="familyName">Plehn</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Butter</span>,&#32;
+    <meta itemprop="givenName" content="Anja" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Plehn</span>,&#32;
+    <meta itemprop="givenName" content="Tilman" />
+    T.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Winterhalder</span>,&#32;
+    <meta itemprop="givenName" content="Ramon" />
+    R.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">How to GAN LHC Events</span>.<i>
+    <span itemprop="about">SciPost Phys. 7, 075 (2019)</span></i>.
+  <a href="https://doi.org/10.21468/SciPostPhys.7.6.075"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.21468/SciPostPhys.7.6.075</a></span>
+
+
+
+
+</span></span>;&#32;<span class="hugo-cite-group">
+
+          <a href="#hariri2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Ali"><span itemprop="familyName">Hariri</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Darya"><span itemprop="familyName">Dyachkova</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Hariri</span>,&#32;
+    <meta itemprop="givenName" content="Ali" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Dyachkova</span>,&#32;
+    <meta itemprop="givenName" content="Darya" />
+    D.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gleyzer</span>,&#32;
+    <meta itemprop="givenName" content="Sergei" />
+    S.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Graph Generative Models for Fast Detector Simulations in High Energy Physics</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2104.01725"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2104.01725</a></span>
+
+
+
+
+</span></span>)</span>
+. The main incentive is to speed up the simulation of particle physics processes by training a GAN, which then cheaply be sampled from.</p>
+<p>In the typical analysis pipline of a high energy physics (HEP) experiment, one of the computationally most demanding steps is the generation of expected reference data from our assumed theory (the Standard Model of particle physics). Classical event generator rely on Monte-Carlo techniques to sample from the respective event distributions, which is a very demanding step. A GAN can in principle learn the structure even of complex events once and then generate events more efficiently.</p>
+<h2 id="qgan">QGAN<a hidden class="anchor" aria-hidden="true" href="#qgan">#</a></h2>
+<p>Building on the success of classical GANs in generative tasks, similar models have been proposed to perform generative tasks on quantum computers 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#lloyd2018"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Seth"><span itemprop="familyName">Lloyd</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Christian"><span itemprop="familyName">Weedbrook</span></span>,&#32;<span itemprop="datePublished">2018</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lloyd</span>,&#32;
+    <meta itemprop="givenName" content="Seth" />
+    S.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Weedbrook</span>,&#32;
+    <meta itemprop="givenName" content="Christian" />
+    C.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum generative adversarial learning</span>.<i>
+    <span itemprop="about">Phys. Rev. Lett. 121, 040502 (2018)</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevLett.121.040502"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.121.040502</a></span>
+
+
+
+
+</span></span>;&#32;<span class="hugo-cite-group">
+
+          <a href="#dallairedemers2018"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Pierre-Luc"><span itemprop="familyName">Dallaire-Demers</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Nathan"><span itemprop="familyName">Killoran</span></span>,&#32;<span itemprop="datePublished">2018</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Dallaire-Demers</span>,&#32;
+    <meta itemprop="givenName" content="Pierre-Luc" />
+    P.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Killoran</span>,&#32;
+    <meta itemprop="givenName" content="Nathan" />
+    N.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum generative adversarial networks</span>.<i>
+    <span itemprop="about">Phys. Rev. A 98, 012324 (2018)</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevA.98.012324"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevA.98.012324</a></span>
+
+
+
+
+</span></span>)</span>
+. There are different motivations for a Quantum Generative Adversarial Network (QGAN), what I find particularly intersting is:</p>
+<ol>
+<li>The measurement of a quantum system can, under certain assumptions, generate classical data, which can not be generted efficiently by a classical model (based on a classical random number generator) 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#preskill2018"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="John"><span itemprop="familyName">Preskill</span></span>,&#32;<span itemprop="datePublished">2018</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Preskill</span>,&#32;
+    <meta itemprop="givenName" content="John" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum Computing in the NISQ era and beyond</span>.<i>
+    <span itemprop="about">Quantum 2, 79 (2018)</span></i>.
+  <a href="https://doi.org/10.22331/q-2018-08-06-79"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2018-08-06-79</a></span>
+
+
+
+
+</span></span>)</span>
+, which implies a quantum advantage in generative tasks of such distributions.</li>
+<li>The concept of a QRAM 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#giovannetti2007"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Vittorio"><span itemprop="familyName">Giovannetti</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Seth"><span itemprop="familyName">Lloyd</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2007</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Giovannetti</span>,&#32;
+    <meta itemprop="givenName" content="Vittorio" />
+    V.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lloyd</span>,&#32;
+    <meta itemprop="givenName" content="Seth" />
+    S.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Maccone</span>,&#32;
+    <meta itemprop="givenName" content="Lorenzo" />
+    L.</span>
+  &#32;
+    (<span itemprop="datePublished">2007</span>).
+  &#32;<span itemprop="name">Quantum random access memory</span>.<i>
+    <span itemprop="about">V. Giovannetti, S. Lloyd, L. Maccone, Phys. Rev. Lett. 100, 160501 (2008).</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevLett.100.160501"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.100.160501</a></span>
+
+
+
+
+</span></span>;&#32;<span style="background-color: #f00; color: #fff;">No matching key was found for `` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
+ aims to represent a large data vector of size $N$ in $\log N$ qubits. Together with the ability of quantum computers to perform maniputlations of sparse and low rank $N\times N$ matrices with a scaling of $\mathcal{O}(\text{poly}(\log N))$ implies that there is a potential advantage in the scaling of sampling in QGANs 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#lloyd2018"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Seth"><span itemprop="familyName">Lloyd</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Christian"><span itemprop="familyName">Weedbrook</span></span>,&#32;<span itemprop="datePublished">2018</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lloyd</span>,&#32;
+    <meta itemprop="givenName" content="Seth" />
+    S.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Weedbrook</span>,&#32;
+    <meta itemprop="givenName" content="Christian" />
+    C.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum generative adversarial learning</span>.<i>
+    <span itemprop="about">Phys. Rev. Lett. 121, 040502 (2018)</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevLett.121.040502"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.121.040502</a></span>
+
+
+
+
+</span></span>)</span>
+</li>
+<li>From a practical point of view I think QGANs offer interesing applications for e.g. state preperation, to learn a shallower circuit to load an approximation of a probability distribution, instead of deeper exact circuits.</li>
+</ol>
+<h3 id="qgan-circuit">QGAN circuit<a hidden class="anchor" aria-hidden="true" href="#qgan-circuit">#</a></h3>
+<p>There are many different proposals for QGANs, with both fully quantum architectures, or hybrid models with a classical discriminator network, see e.g. 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#romero2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan"><span itemprop="familyName">Romero</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Alan"><span itemprop="familyName">Aspuru-Guzik</span></span>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan" />
+    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
+    <meta itemprop="givenName" content="Alan" />
+    A.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Variational quantum generators: Generative adversarial quantum machine learning for continuous distributions</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1901.00848"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1901.00848</a></span>
+
+
+
+
+</span></span>;&#32;<span class="hugo-cite-group">
+
+          <a href="#tian2022"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jinkai"><span itemprop="familyName">Tian</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Xiaoyu"><span itemprop="familyName">Sun</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2022</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Tian</span>,&#32;
+    <meta itemprop="givenName" content="Jinkai" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Sun</span>,&#32;
+    <meta itemprop="givenName" content="Xiaoyu" />
+    X.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Du</span>,&#32;
+    <meta itemprop="givenName" content="Yuxuan" />
+    Y.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
+    <meta itemprop="givenName" content="Shanshan" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Liu</span>,&#32;
+    <meta itemprop="givenName" content="Qing" />
+    Q.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhang</span>,&#32;
+    <meta itemprop="givenName" content="Kaining" />
+    K.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Yi</span>,&#32;
+    <meta itemprop="givenName" content="Wei" />
+    W.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Huang</span>,&#32;
+    <meta itemprop="givenName" content="Wanrong" />
+    W.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wang</span>,&#32;
+    <meta itemprop="givenName" content="Chaoyue" />
+    C.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wu</span>,&#32;
+    <meta itemprop="givenName" content="Xingyao" />
+    X.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Hsieh</span>,&#32;
+    <meta itemprop="givenName" content="Min-Hsiu" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Liu</span>,&#32;
+    <meta itemprop="givenName" content="Tongliang" />
+    T.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Yang</span>,&#32;
+    <meta itemprop="givenName" content="Wenjing" />
+    W.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Tao</span>,&#32;
+    <meta itemprop="givenName" content="Dacheng" />
+    D.</span>
+  &#32;
+    (<span itemprop="datePublished">2022</span>).
+  &#32;<span itemprop="name">Recent Advances for Quantum Neural Networks in Generative Learning</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2206.03066"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2206.03066</a></span>
+
+
+
+
+</span></span>)</span>
+ for reviews.</p>
+<p>The simplest version of a fully quantum QGAN can be build with a <a href="https://en.wikipedia.org/wiki/Swap_test">SWAP test</a> as discriminator.</p>
+<p><img loading="lazy" src="../qgan_circuit.png#center" alt="schematic sketch of a GAN"  />
+</p>
+<p>In this case the discriminator does not have parameters and therefore, we do not have an adversarial min-max training. Also, we do not have a latent space $z$ to sample from. Instead we just want to train the generator unitarity $G(\Theta_g)$ to produce a state which is a superposition of the input states $\sigma_i$
+$$G(\Theta_g)\ket{0} = \sum P_i \sigma_i.$$</p>
+<p>The generator parameters can be trained by maximizing the fidelity $F(\sigma,G(\Theta))$ of the generator $G(\Theta)$ and the input data $\sigma$
+$$F(\sigma,G(\Theta))=\left|\braket{\sigma|G(\Theta)}\right|^2.$$
+In practice I use the following loss function for minimization
+$$\mathcal{L}(\Theta_g) = -\log\left(G(\Theta_g)\epsilon\right),$$
+with some small regularization $\epsilon$.</p>
+<p>Measuring the generetor circuit would then correspond to sampling from the data distribution. While I perfom this simple training on a noiseless simulator, 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#niu2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Murphy Yuezhen"><span itemprop="familyName">Niu</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Alexander"><span itemprop="familyName">Zlokapa</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Niu</span>,&#32;
+    <meta itemprop="givenName" content="Murphy Yuezhen" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zlokapa</span>,&#32;
+    <meta itemprop="givenName" content="Alexander" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Broughton</span>,&#32;
+    <meta itemprop="givenName" content="Michael" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Boixo</span>,&#32;
+    <meta itemprop="givenName" content="Sergio" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mohseni</span>,&#32;
+    <meta itemprop="givenName" content="Masoud" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Smelyanskyi</span>,&#32;
+    <meta itemprop="givenName" content="Vadim" />
+    V.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Neven</span>,&#32;
+    <meta itemprop="givenName" content="Hartmut" />
+    H.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Entangling Quantum Generative Adversarial Networks</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2105.00080"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2105.00080</a></span>
+
+
+
+
+</span></span>)</span>
+ shows that adding parameters $\Theta_d$ to the SWAP test, making the fidelity loss &ldquo;imperfect&rdquo;, can make the training more robust to device noise.</p>
+<h3 id="implementing-a-simple-qgan-toy-data">Implementing a simple QGAN (toy data)<a hidden class="anchor" aria-hidden="true" href="#implementing-a-simple-qgan-toy-data">#</a></h3>
+<p>As a simple toy example I want to train a QGAN to load a gaussian peak.
+So I start off by generating a toy dataset drawing $N=120$ integers between $0$ and $15$ from a normal distribution with $\mu=7$ and $\sigma=1.5$.</p>
+<p><img loading="lazy" src="../peak.png#center" alt="schematic sketch of a GAN"  />
+</p>
+<p>To load the data, I convert the integers to 4 bit values and encode them in quantum states of a four qubit quantum register.
+To implement the quantum circuits and the optimization I use the <a href="https://pennylane.ai/">pennylane library</a>.
+The for the generator circuit, I use a strongly entangled layer. The code for the training circuit is given below.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;lightning.qubit&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">num_circuit</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Cast numberst to binary</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bin_str</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s1">&#39;#06b&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Apply X to appropiate wires</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bin_str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">wires</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generator</span><span class="p">(</span><span class="n">params_g</span><span class="p">,</span> <span class="n">qubits</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">StronglyEntanglingLayers</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">params_g</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">qubits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@qml.qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">training_circ</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">params_g</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Real data</span>
+</span></span><span class="line"><span class="cl">    <span class="n">num_circuit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Generator circuit</span>
+</span></span><span class="line"><span class="cl">    <span class="n">generator</span><span class="p">(</span><span class="n">params_g</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># SWAP test</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">Hadamard</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">CSWAP</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">CSWAP</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">CSWAP</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">CSWAP</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qml</span><span class="o">.</span><span class="n">Hadamard</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span></code></pre></div><p>To perform the training, I loop over the data samples and optimize the parameters using Adam.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># The first dimension corresponds to the number of layers in the generator</span>
+</span></span><span class="line"><span class="cl"><span class="n">params_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">epochs</span> <span class="o">=</span> <span class="mi">110</span>
+</span></span><span class="line"><span class="cl"><span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span>
+</span></span><span class="line"><span class="cl"><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">iterate_minibatches</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">start_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">batch_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idxs</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">start_idx</span><span class="p">,</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="n">data</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cost_batch</span><span class="p">(</span><span class="n">paramsg</span><span class="p">,</span> <span class="n">paramsd</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="n">training_circ</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">paramsg</span><span class="p">)</span> <span class="o">+</span> <span class="n">reg</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Training loop</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">Xbatch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterate_minibatches</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)):</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">cost_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">cost_batch</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Xbatch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">params_g</span> <span class="o">=</span> <span class="n">optg</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params_g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">loss</span> <span class="o">=</span> <span class="n">cost_batch</span><span class="p">(</span><span class="n">params_g</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Epoch: </span><span class="si">{</span><span class="n">it</span><span class="si">}</span><span class="s2"> | Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2"> | &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;____&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Performing the optimization until convergence sets the generator parameters.
+We can then define a circuit which only contains the generator and sample in the computational basis.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sample_dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;lightning.qubit&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shots</span> <span class="o">=</span> <span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@qml.qnode</span><span class="p">(</span><span class="n">sample_dev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sample_test</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">generator</span><span class="p">(</span><span class="n">paramsg</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">testresult</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sample_test</span><span class="p">()]</span>
+</span></span></code></pre></div><p>If we convert the computational basis results back to integers we can check how well the generator aprroximates our data distribution.</p>
+<p><img loading="lazy" src="../peakgan.png#center" alt="schematic sketch of a GAN"  />
+</p>
+<h2 id="outlook">Outlook<a hidden class="anchor" aria-hidden="true" href="#outlook">#</a></h2>
+<p>For further work, I&rsquo;m interested in a couple of things. First I want to see how complex the distributions can be which I can train in this matter. Then I want to implement the same model with a classical discriminator and compare the training with the fully quantum one. Finally, I want to extend the model to a continous value QGAN by using an embedding for the continous input data, and add a latent space $z$ to the generator. In this way it should be possible to sample from a continous distribution, by taking an expectatin value over a number of shots when drawing from the generator.</p>
+<h2 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h2>
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+<section class="hugo-cite-bibliography">
+  <dl>
+    
+
+      <div id="butter2019">
+        <dt>
+          Butter,&#32;
+          Plehn&#32;&amp;&#32;Winterhalder
+
+          
+          (2019)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Butter</span>,&#32;
+    <meta itemprop="givenName" content="Anja" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Plehn</span>,&#32;
+    <meta itemprop="givenName" content="Tilman" />
+    T.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Winterhalder</span>,&#32;
+    <meta itemprop="givenName" content="Ramon" />
+    R.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">How to GAN LHC Events</span>.<i>
+    <span itemprop="about">SciPost Phys. 7, 075 (2019)</span></i>.
+  <a href="https://doi.org/10.21468/SciPostPhys.7.6.075"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.21468/SciPostPhys.7.6.075</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="dallairedemers2018">
+        <dt>
+          Dallaire-Demers&#32;&amp;&#32;Killoran
+
+          
+          (2018)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Dallaire-Demers</span>,&#32;
+    <meta itemprop="givenName" content="Pierre-Luc" />
+    P.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Killoran</span>,&#32;
+    <meta itemprop="givenName" content="Nathan" />
+    N.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum generative adversarial networks</span>.<i>
+    <span itemprop="about">Phys. Rev. A 98, 012324 (2018)</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevA.98.012324"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevA.98.012324</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="giovannetti2007">
+        <dt>
+          Giovannetti,&#32;
+          Lloyd&#32;&amp;&#32;Maccone
+
+          
+          (2007)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Giovannetti</span>,&#32;
+    <meta itemprop="givenName" content="Vittorio" />
+    V.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lloyd</span>,&#32;
+    <meta itemprop="givenName" content="Seth" />
+    S.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Maccone</span>,&#32;
+    <meta itemprop="givenName" content="Lorenzo" />
+    L.</span>
+  &#32;
+    (<span itemprop="datePublished">2007</span>).
+  &#32;<span itemprop="name">Quantum random access memory</span>.<i>
+    <span itemprop="about">V. Giovannetti, S. Lloyd, L. Maccone, Phys. Rev. Lett. 100, 160501 (2008).</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevLett.100.160501"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.100.160501</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="goodfellow2014">
+        <dt>
+          Goodfellow,&#32;
+          Pouget-Abadie,&#32;
+          Mirza,&#32;
+          Xu,&#32;
+          Warde-Farley,&#32;
+          Ozair,&#32;
+          Courville&#32;&amp;&#32;Bengio
+
+          
+          (2014)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Goodfellow</span>,&#32;
+    <meta itemprop="givenName" content="Ian J." />
+    I.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pouget-Abadie</span>,&#32;
+    <meta itemprop="givenName" content="Jean" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mirza</span>,&#32;
+    <meta itemprop="givenName" content="Mehdi" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Xu</span>,&#32;
+    <meta itemprop="givenName" content="Bing" />
+    B.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Warde-Farley</span>,&#32;
+    <meta itemprop="givenName" content="David" />
+    D.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ozair</span>,&#32;
+    <meta itemprop="givenName" content="Sherjil" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Courville</span>,&#32;
+    <meta itemprop="givenName" content="Aaron" />
+    A.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Bengio</span>,&#32;
+    <meta itemprop="givenName" content="Yoshua" />
+    Y.</span>
+  &#32;
+    (<span itemprop="datePublished">2014</span>).
+  &#32;<span itemprop="name">Generative Adversarial Networks</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1406.2661"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1406.2661</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="hariri2021">
+        <dt>
+          Hariri,&#32;
+          Dyachkova&#32;&amp;&#32;Gleyzer
+
+          
+          (2021)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Hariri</span>,&#32;
+    <meta itemprop="givenName" content="Ali" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Dyachkova</span>,&#32;
+    <meta itemprop="givenName" content="Darya" />
+    D.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gleyzer</span>,&#32;
+    <meta itemprop="givenName" content="Sergei" />
+    S.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Graph Generative Models for Fast Detector Simulations in High Energy Physics</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2104.01725"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2104.01725</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="lloyd2018">
+        <dt>
+          Lloyd&#32;&amp;&#32;Weedbrook
+
+          
+          (2018)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lloyd</span>,&#32;
+    <meta itemprop="givenName" content="Seth" />
+    S.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Weedbrook</span>,&#32;
+    <meta itemprop="givenName" content="Christian" />
+    C.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum generative adversarial learning</span>.<i>
+    <span itemprop="about">Phys. Rev. Lett. 121, 040502 (2018)</span></i>.
+  <a href="https://doi.org/10.1103/PhysRevLett.121.040502"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.121.040502</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="niu2021">
+        <dt>
+          Niu,&#32;
+          Zlokapa,&#32;
+          Broughton,&#32;
+          Boixo,&#32;
+          Mohseni,&#32;
+          Smelyanskyi&#32;&amp;&#32;Neven
+
+          
+          (2021)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Niu</span>,&#32;
+    <meta itemprop="givenName" content="Murphy Yuezhen" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zlokapa</span>,&#32;
+    <meta itemprop="givenName" content="Alexander" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Broughton</span>,&#32;
+    <meta itemprop="givenName" content="Michael" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Boixo</span>,&#32;
+    <meta itemprop="givenName" content="Sergio" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mohseni</span>,&#32;
+    <meta itemprop="givenName" content="Masoud" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Smelyanskyi</span>,&#32;
+    <meta itemprop="givenName" content="Vadim" />
+    V.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Neven</span>,&#32;
+    <meta itemprop="givenName" content="Hartmut" />
+    H.</span>
+  &#32;
+    (<span itemprop="datePublished">2021</span>).
+  &#32;<span itemprop="name">Entangling Quantum Generative Adversarial Networks</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2105.00080"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2105.00080</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="oliveira2017">
+        <dt>
+          Oliveira,&#32;
+          Paganini&#32;&amp;&#32;Nachman
+
+          
+          (2017)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Oliveira</span>,&#32;
+    <meta itemprop="givenName" content="Luke" />
+    L.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Paganini</span>,&#32;
+    <meta itemprop="givenName" content="Michela" />
+    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Nachman</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2017</span>).
+  &#32;<span itemprop="name">Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis</span>.<i>
+    <span itemprop="about">Comput Softw Big Sci (2017) 1: 4</span></i>.
+  <a href="https://doi.org/10.1007/s41781-017-0004-6"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.1007/s41781-017-0004-6</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="preskill2018">
+        <dt>
+          Preskill
+
+          
+          (2018)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Preskill</span>,&#32;
+    <meta itemprop="givenName" content="John" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2018</span>).
+  &#32;<span itemprop="name">Quantum Computing in the NISQ era and beyond</span>.<i>
+    <span itemprop="about">Quantum 2, 79 (2018)</span></i>.
+  <a href="https://doi.org/10.22331/q-2018-08-06-79"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2018-08-06-79</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="romero2019">
+        <dt>
+          Romero&#32;&amp;&#32;Aspuru-Guzik
+
+          
+          (2019)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
+    <meta itemprop="givenName" content="Jonathan" />
+    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
+    <meta itemprop="givenName" content="Alan" />
+    A.</span>
+  &#32;
+    (<span itemprop="datePublished">2019</span>).
+  &#32;<span itemprop="name">Variational quantum generators: Generative adversarial quantum machine learning for continuous distributions</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/1901.00848"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/1901.00848</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="tian2022">
+        <dt>
+          Tian,&#32;
+          Sun,&#32;
+          Du,&#32;
+          Zhao,&#32;
+          Liu,&#32;
+          Zhang,&#32;
+          Yi,&#32;
+          Huang,&#32;
+          Wang,&#32;
+          Wu,&#32;
+          Hsieh,&#32;
+          Liu,&#32;
+          Yang&#32;&amp;&#32;Tao
+
+          
+          (2022)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Tian</span>,&#32;
+    <meta itemprop="givenName" content="Jinkai" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Sun</span>,&#32;
+    <meta itemprop="givenName" content="Xiaoyu" />
+    X.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Du</span>,&#32;
+    <meta itemprop="givenName" content="Yuxuan" />
+    Y.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
+    <meta itemprop="givenName" content="Shanshan" />
+    S.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Liu</span>,&#32;
+    <meta itemprop="givenName" content="Qing" />
+    Q.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhang</span>,&#32;
+    <meta itemprop="givenName" content="Kaining" />
+    K.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Yi</span>,&#32;
+    <meta itemprop="givenName" content="Wei" />
+    W.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Huang</span>,&#32;
+    <meta itemprop="givenName" content="Wanrong" />
+    W.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wang</span>,&#32;
+    <meta itemprop="givenName" content="Chaoyue" />
+    C.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wu</span>,&#32;
+    <meta itemprop="givenName" content="Xingyao" />
+    X.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Hsieh</span>,&#32;
+    <meta itemprop="givenName" content="Min-Hsiu" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Liu</span>,&#32;
+    <meta itemprop="givenName" content="Tongliang" />
+    T.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Yang</span>,&#32;
+    <meta itemprop="givenName" content="Wenjing" />
+    W.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Tao</span>,&#32;
+    <meta itemprop="givenName" content="Dacheng" />
+    D.</span>
+  &#32;
+    (<span itemprop="datePublished">2022</span>).
+  &#32;<span itemprop="name">Recent Advances for Quantum Neural Networks in Generative Learning</span>.&#32;Retrieved from&#32;
+  <a href="http://arxiv.org/abs/2206.03066"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">http://arxiv.org/abs/2206.03066</a></span>
+
+
+
+
+</dd>
+
+      </div>
+  </dl>
+</section>
+
+
+
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://tommago.com/tags/gsoc/">GSoC</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://tommago.com/">TomMago</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

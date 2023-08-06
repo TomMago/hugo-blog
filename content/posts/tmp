@@ -1,0 +1,40 @@
+import qsimcirq
+import pennylane as qml
+import pdb
+from timeit import default_timer as timer
+
+wires = 28
+layers = 1
+num_runs = 2
+GPUs = 4
+
+qs_opts = qsimcirq.QSimOptions(cpu_threads=64, verbosity=0, gpu_mode=GPUs)
+qs = qsimcirq.QSimSimulator(qs_opts)
+
+dev = qml.device('cirq.simulator', wires=wires, simulator=qs)
+
+print("wires: ", wires)
+print("layers: ", layers)
+print("GPUs: ", GPUs)
+print("num runs: ", num_runs)
+print("start")
+
+@qml.qnode(dev)
+def circuit(parameters):
+    qml.StronglyEntanglingLayers(weights=parameters, wires=range(wires))
+    return [qml.expval(qml.PauliZ(i)) for i in range(wires)]
+
+shape = qml.StronglyEntanglingLayers.shape(n_layers=layers, n_wires=wires)
+weights = qml.numpy.random.random(size=shape)
+
+timing = []
+for t in range(num_runs):
+    start = timer()
+    #jac = qml.jacobian(circuit)(weights)
+    #breakpoint()
+    val = circuit(weights)
+    end = timer()
+    print("sim: ", t)
+    timing.append(end - start)
+
+print(qml.numpy.mean(timing))
