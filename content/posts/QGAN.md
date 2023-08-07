@@ -23,14 +23,14 @@ A schematic sketch of a GAN is shown below.
 Both the generator and the discriminator are trained independently by the classification results of the discriminator. 
 If the generator $G(z,\Theta_g)$ is neural network which maps from the latent space to the space $\Omega$, then the discriminator $D:\Omega\to[0,1]$ classifies the data with $D=1$ corresponding to the discriminator tagging a sample as real and $D=0$ as fake. 
 The objective function $\mathcal{L}(\Theta_g, \Theta_d)$ can then be written as
-$$\mathcal{L}(\Theta_g, \Theta_d) = E_{x~\mu_{train}}[\ln D(x)]+E_{z~\mu_z}[\ln(1-D(G(z)))],$$
+$$\mathcal{L}(\Theta_g, \Theta_d) = E_{x\~\mu_{train}}[\ln D(x)]+E_{z\~\mu_z}[\ln(1-D(G(z)))],$$
 and the training as a min-max optimization of the form
 $$\min_{\Theta_g}\max_{\Theta_d}\mathcal{L}(\Theta_g,\Theta_d).$$
 The expecation values $E$ run over the training data and the latent space distribution respectively.
 
 This min-max loss can be recast into a different form with two distinct loss functions, one for the discriminator $\mathcal{L}\_D$ and one for the generator $\mathcal{L}\_G$
-$$\mathcal{L}\_D(\Theta_g,\Theta_d) = E\_{z~\mu_z}[\ln D(G(z))]+E\_{x~x_{train}}[\ln(1-D(x))],$$
-$$\mathcal{L}\_G(\Theta_g,\Theta_d) = -E\_{z~\mu_z}[\ln D(1-G(z))].$$
+$$\mathcal{L}\_D(\Theta_g,\Theta_d) = E\_{z\~\mu_z}[\ln D(G(z))]+E\_{x\~x_{train}}[\ln(1-D(x))],$$
+$$\mathcal{L}\_G(\Theta_g,\Theta_d) = -E\_{z\~\mu_z}[\ln D(1-G(z))].$$
 Both of these are minimized, with respect to their parameters, while freezing the parameters of the opponent network.
 $$\min_{\Theta_d} \mathcal{L}\_D(\Theta_g,\Theta_d),$$
 $$\min_{\Theta_g} \mathcal{L}\_G(\Theta_g,\Theta_d).$$
@@ -114,7 +114,8 @@ To perform the training, I loop over the data samples and optimize the parameter
 
 ```python
 # The first dimension corresponds to the number of layers in the generator
-params_g = np.random.uniform(0,np.pi, size=(8,4,3), requires_grad=True)
+# Since we need some expressiveness a higher number will give better results
+params_g = np.random.uniform(0,np.pi, size=(18,4,3), requires_grad=True)
 
 epochs = 110
 batch_size=16
