@@ -83,11 +83,13 @@ params:
     homeInfoParams:
         Title: "Welcome!"
         Content: >
-            I'm Tom Magorsch, a physicist interested in particle phenomenology, machine learning and software development.
+            I'm Tom Magorsch, I'm a physicist mainly interested in Particle Phenomenology, Machine Learning, Quantum Computing and Scientific Computing in general.
 
-            - This year I'm participating in the [Google Summer of Code](https://summerofcode.withgoogle.com), working on a Quantum Autoencoder for the [ML4SCI](https://ml4sci.org) organization
+            - Currently I am at the [TU Munich](https://einrichtungen.ph.nat.tum.de//T30f/index.html) working on non-equilibrium physics in heavy ion collisions and new computational techniques to treat them.
 
-            - Here I will document the GSoC project and maybe write about some of my interests.
+            - Furthermore, I am part of the [ML4SCI-Organization](https://ml4sci.org), where I participate in the Google Summer of Code program
+
+            - In this blog I will document my GSoC project and maybe write about some other interests
     socialIcons:
         - name: email
           url: "mailto:tommagorsch@gmail.com"
