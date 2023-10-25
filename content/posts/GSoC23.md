@@ -127,3 +127,8 @@ I think this is an interesting model for generative tasks on classical data. Of 
 I tried applying this model to larger images, however on a classical simulator the requried qubits were too many to simulate reasonably.
 
 The main thing I would like to understand now is what advantages Quantum assisted machine learning can bring over classical methods. My main motivation for this model was the complexity theory based argument that by measurement quantum computers can efficiently sample from distributions, which are hard to sample for classical algorithms. However, I would like to understand this point better, develop an insight to what kind of data distribtuions this applies and especially make sure that the classical discriminator is able to learn these distribtuions.
+
+
+# References
+
+{{< bibliography cited >}}
