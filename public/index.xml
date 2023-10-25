@@ -6,7 +6,17 @@
     <description>Recent content on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSoC 23 | Quantum Generative Adversarial Networks for HEP event generation the LHC</title>
+      <link>https://tommago.com/posts/gsoc23/</link>
+      <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/gsoc23/</guid>
+      <description>This is a summary of my 2023 GSoC project with the ML4SCI-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data. The full code for all my work can be found on Github. In the following post I will outline my work and describe some parts of the implementation and the results
+Event generation in HEP experiments In high energy physics experiements like they are conducted at CERN, an integral part of the analysis process is the comparison of measurements with results expected based on predictions from our theory of nature, the Standard Model of particle physics.</description>
+    </item>
+    
     <item>
       <title>Quantum GANs</title>
       <link>https://tommago.com/posts/qgan/</link>
