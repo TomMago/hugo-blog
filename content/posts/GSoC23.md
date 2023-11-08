@@ -9,7 +9,7 @@ math: true
 ---
 
 This is a summary of my 2023 GSoC [project](https://summerofcode.withgoogle.com/programs/2023/projects/ggoiGDQ5) with the [ML4SCI](https://ml4sci.org)-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data.
-The full code for all my work can be found on [Github]().
+The full code for all my work can be found on [Github](https://github.com/ML4SCI/QMLHEP/tree/main/Quantum_GAN_for_HEP_Tom_Magorsch).
 In the following post I will outline my work and describe some parts of the implementation and the results
 
 ### Event generation in HEP experiments
