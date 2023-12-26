@@ -5,12 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | TomMago</title>
+<title>News | TomMago</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - TomMago">
+<meta name="description" content="News - TomMago">
 <meta name="author" content="Tom Magorsch">
-<link rel="canonical" href="https://tommago.com/posts/">
+<link rel="canonical" href="https://tommago.com/news/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.18c187d9a47d1bb26b9343ff3062c17d3ec3fafc4f83bd2fd8c235ccdb100f6d.css" integrity="sha256-GMGH2aR9G7Jrk0P/MGLBfT7D&#43;vxPg70v2MI1zNsQD20=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://tommago.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
@@ -18,7 +20,6 @@
 <link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://tommago.com/posts/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -82,14 +83,16 @@ if (!doNotTrack) {
 	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
 }
 </script>
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="Tom Magorsch - writing about particle physics, machine learning and other interests" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tommago.com/posts/" />
+<meta property="og:title" content="News" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tommago.com/news/" /><meta property="article:section" content="" />
+
+
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="Tom Magorsch - writing about particle physics, machine learning and other interests"/>
+<meta name="twitter:title" content="News"/>
+<meta name="twitter:description" content=""/>
 
 
 <script type="application/ld+json">
@@ -100,15 +103,48 @@ if (!doNotTrack) {
     {
       "@type": "ListItem",
       "position":  1 ,
-      "name": "Posts",
-      "item": "https://tommago.com/posts/"
+      "name": "News",
+      "item": "https://tommago.com/news/"
     }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "News",
+  "name": "News",
+  "description": "",
+  "keywords": [
+    
+  ],
+  "articleBody": "",
+  "wordCount" : "0",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tom Magorsch"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tommago.com/news/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TomMago",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tommago.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -166,62 +202,19 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://tommago.com/">Home</a></div>
-  <h1>
-    Posts
-    <a href="index.xml" title="RSS" aria-label="RSS">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" height="23">
-        <path d="M4 11a9 9 0 0 1 9 9" />
-        <path d="M4 4a16 16 0 0 1 16 16" />
-        <circle cx="5" cy="19" r="1" />
-      </svg>
-    </a>
-  </h1>
+<main class="main">
+
+<header class="page-header">
+    <h1>News </h1>
+    <div class="post-meta"></div>
 </header>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Quantum Natural Gradient Descent
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG)....</p>
-  </div>
-  <footer class="entry-footer">&lt;span title=&#39;2022-08-27 00:00:00 &#43;0000 UTC&#39;&gt;August 27, 2022&lt;/span&gt;&amp;nbsp;·&amp;nbsp;7 min&amp;nbsp;·&amp;nbsp;Tom Magorsch</footer>
-  <a class="entry-link" aria-label="post link to Quantum Natural Gradient Descent" href="https://tommago.com/posts/qng/"></a>
-</article>
+<ul>
+<li><strong>[03/2024]</strong> I will be at <a href="https://indico.ph.tum.de/event/7422/">Quarkonia meet Dark Matter</a> in Munich</li>
+<li><strong>[02/2024]</strong> I will be at <a href="https://indico.cern.ch/event/1226860/">16th QWG</a></li>
+<li><strong>[01/2024]</strong> I will be at <a href="https://indico.gsi.de/event/18061/overview">Hirschegg 2024</a></li>
+</ul>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Quantum Autoencoder
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analog of a classical autoencoder equally aims to learn a smaller representation of data.
-A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure....</p>
-  </div>
-  <footer class="entry-footer">&lt;span title=&#39;2022-07-12 00:00:00 &#43;0000 UTC&#39;&gt;July 12, 2022&lt;/span&gt;&amp;nbsp;·&amp;nbsp;7 min&amp;nbsp;·&amp;nbsp;Tom Magorsch</footer>
-  <a class="entry-link" aria-label="post link to Quantum Autoencoder" href="https://tommago.com/posts/qae/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Hello World! | Hello GSoC!
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>This year I’m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka, Nachman &amp; al., 2021 Kasieczka,  G.,  Nachman,  B. &amp; al.   (2021).  The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics....</p>
-  </div>
-  <footer class="entry-footer">&lt;span title=&#39;2022-06-12 00:00:00 &#43;0000 UTC&#39;&gt;June 12, 2022&lt;/span&gt;&amp;nbsp;·&amp;nbsp;1 min&amp;nbsp;·&amp;nbsp;Tom Magorsch</footer>
-  <a class="entry-link" aria-label="post link to Hello World! | Hello GSoC!" href="https://tommago.com/posts/hello/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="https://tommago.com/posts/">« Prev</a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">
@@ -291,6 +284,53 @@ A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows 
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

@@ -84,6 +84,15 @@ A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows 
       <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka,&amp;#32;Nachman &amp;amp; al.,&amp;#32;2021 Kasieczka,&amp;#32; G.,&amp;#32; Nachman,&amp;#32; B.&amp;#32;&amp;amp;&amp;#32;al. &amp;#32; (2021). &amp;#32;The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics.</description>
     </item>
     
+    <item>
+      <title>News</title>
+      <link>https://tommago.com/news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/news/</guid>
+      <description></description>
+    </item>
+    
     
   </channel>
 </rss>
