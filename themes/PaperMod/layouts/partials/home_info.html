@@ -11,6 +11,13 @@
     </footer>
 </article>
 <article class="second-entry">
-   {{ partial "news.html"  }}
+<div class="second-entry news">
+  <div>
+    <b>News:</b>
+  </div>
+  <div class="news-list">
+   {{ partial "news.md" | markdownify }}
+  </div>
+</div>
 </article>
 {{- end -}}
