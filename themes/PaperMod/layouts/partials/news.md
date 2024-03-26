@@ -1,3 +1,4 @@
+- **[03/2024]** New preprint on bottomonium suppression [2403.15545](https://arxiv.org/abs/2403.15545)!
 - **[03/2024]** I will be at [Quarkonia meet Dark Matter](https://indico.ph.tum.de/event/7422/) in Munich
 - **[02/2024]** I will be at [16th QWG](https://indico.cern.ch/event/1226860/)
 - **[01/2024]** I will be at [Hirschegg 2024](https://indico.gsi.de/event/18061/overview)
