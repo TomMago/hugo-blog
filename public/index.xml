@@ -6,7 +6,17 @@
     <description>Recent content on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 12 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bottomonium suppression as an open quantum system</title>
+      <link>https://tommago.com/posts/vpert/</link>
+      <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/vpert/</guid>
+      <description>We recently put out a paper on bottomonium suppression in the quark gluon plasma 2403.15545. This is a project I&amp;rsquo;ve been working on for some time now and I want to show real quick what we have been doing.
+Quarkonium suppression Heavy ion collisions are experiments where two heavy nuclei are collided. Such experiments are conducted e.g. at CERN. In these collisions a state of matter called the quark gluon plasma is created.</description>
+    </item>
+    
     <item>
       <title>GSoC 23 | Quantum Generative Adversarial Networks for HEP event generation the LHC</title>
       <link>https://tommago.com/posts/gsoc23/</link>
