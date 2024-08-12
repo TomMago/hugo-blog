@@ -74,16 +74,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="Hello World! | Hello GSoC!" />
 <meta property="og:description" content="This year I&rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka,&#32;Nachman &amp; al.,&#32;2021 Kasieczka,&#32; G.,&#32; Nachman,&#32; B.&#32;&amp;&#32;al. &#32; (2021). &#32;The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics." />
 <meta property="og:type" content="article" />

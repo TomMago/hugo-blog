@@ -73,16 +73,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="Search" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />

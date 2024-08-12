@@ -75,16 +75,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="GSoC 23 | Quantum Generative Adversarial Networks for HEP event generation the LHC" />
 <meta property="og:description" content="This is a summary of my 2023 GSoC project with the ML4SCI-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data. The full code for all my work can be found on Github. In the following post I will outline my work and describe some parts of the implementation and the results
 Event generation in HEP experiments In high energy physics experiements like they are conducted at CERN, an integral part of the analysis process is the comparison of measurements with results expected based on predictions from our theory of nature, the Standard Model of particle physics." />

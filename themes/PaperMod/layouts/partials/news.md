@@ -1,3 +1,5 @@
+- **[09/2024]** I will be at the workshop [QCD challenges from pp to AA collisions](https://indico.uni-muenster.de/event/2607/page/98-venue-and-travel-information)
+- **[08/2024]** I will be at [Strong and Electro-Weak Matter 2024](https://indico.physik.uni-bielefeld.de/event/100/)
 - **[03/2024]** New preprint on bottomonium suppression [2403.15545](https://arxiv.org/abs/2403.15545)!
 - **[03/2024]** I will be at [Quarkonia meet Dark Matter](https://indico.ph.tum.de/event/7422/) in Munich
 - **[02/2024]** I will be at [16th QWG](https://indico.cern.ch/event/1226860/)

@@ -75,16 +75,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="Quantum GANs" />
 <meta property="og:description" content="This year I&rsquo;m participating in the Google Summer of Code again. Just like last year I&rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
 GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&#32;Pouget-Abadie &amp; al.,&#32;2014 Goodfellow,&#32; I.,&#32; Pouget-Abadie,&#32; J.,&#32; Mirza,&#32; M.,&#32; Xu,&#32; B.,&#32; Warde-Farley,&#32; D.,&#32; Ozair,&#32; S.,&#32; Courville,&#32; A.&#32;&amp;&#32;Bengio,&#32; Y. &#32; (2014). &#32;Generative Adversarial Networks." />

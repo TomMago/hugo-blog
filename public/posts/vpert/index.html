@@ -75,16 +75,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="Bottomonium suppression as an open quantum system" />
 <meta property="og:description" content="We recently put out a paper on bottomonium suppression in the quark gluon plasma 2403.15545. This is a project I&rsquo;ve been working on for some time now and I want to show real quick what we have been doing.
 Quarkonium suppression Heavy ion collisions are experiments where two heavy nuclei are collided. Such experiments are conducted e.g. at CERN. In these collisions a state of matter called the quark gluon plasma is created." />

@@ -74,16 +74,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane" />
 <meta property="og:description" content="The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event." />
 <meta property="og:type" content="article" />

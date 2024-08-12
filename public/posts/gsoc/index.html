@@ -75,16 +75,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC" />
 <meta property="og:description" content="This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
 Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature." />

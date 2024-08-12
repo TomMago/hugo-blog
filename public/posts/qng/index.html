@@ -74,16 +74,25 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-9MSJDZKGWH', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9MSJDZKGWH');
+        }
+      </script>
+    
+  
+
 <meta property="og:title" content="Quantum Natural Gradient Descent" />
 <meta property="og:description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG)." />
 <meta property="og:type" content="article" />
