@@ -6,7 +6,7 @@ type: "page"
 
 A record of our regular wine fuled update talks.
 
-![decanting](../decanting_logo.png =500x)
+<img src="../decanting_logo.png" alt="decanting logo" width="300"/>
 
 # 09.11.24
 
