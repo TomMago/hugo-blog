@@ -6,7 +6,7 @@ type: "page"
 
 # 09.11.24
 
-**Tom:** [Quarkonium Thermalization](pdfs/DecantingTheUniverse-09.11.24_QuarkoniumThermalization.pdf)
+**Tom:** [Quarkonium Thermalization](../pdfs/DecantingTheUniverse-09.11.24_QuarkoniumThermalization.pdf)
 
 **Mara:** [Bakteria Canniblism]()
 
