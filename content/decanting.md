@@ -2,6 +2,7 @@
 title: "Decanting the Universe"
 layout: "single"
 type: "page"
+robots: "noindex, follow"
 ---
 
 A record of our regular wine fuled update talks.
@@ -18,3 +19,4 @@ A record of our regular wine fuled update talks.
 **Wine:** Regional semi-dry red wine
 
 **Conclusion:** We will stay with dry wines
+
