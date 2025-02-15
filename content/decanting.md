@@ -2,7 +2,7 @@
 title: "Decanting the Universe"
 layout: "single"
 type: "page"
-robots: "noindex, follow"
+robots: "noindex, nofollow"
 ---
 
 A record of our regular wine fuled update talks.
@@ -20,3 +20,12 @@ A record of our regular wine fuled update talks.
 
 **Conclusion:** We will stay with dry wines
 
+# 09.11.24
+
+**Tom:** [Projects for 2025]()
+
+**Mara:** [2 steps]()
+
+**Wine:** L'Arjolle Cabernet 2022, Languedoc, France
+
+**Conclusion:**

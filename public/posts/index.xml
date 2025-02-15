@@ -6,7 +6,16 @@
     <description>Recent content in Posts on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gradient estimator in Variational Monte Carlo</title>
+      <link>https://tommago.com/posts/vmcgrad/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://tommago.com/posts/vmcgrad/</guid>
+      <description>I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula.</description>
+    </item>
+    
     <item>
       <title>Bottomonium suppression as an open quantum system</title>
       <link>https://tommago.com/posts/vpert/</link>
