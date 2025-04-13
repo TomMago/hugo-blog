@@ -198,15 +198,15 @@ as the survival probability of a state, in this case the $1S$ Bottomonium. The s
 <span class="math-responsive">
 $$\vec{\sigma} = \\{\Upsilon(1S), \Upsilon(2S), \chi_{b0}(1P), \chi_{b1}(1P), \chi_{b2}(1P),\allowbreak\Upsilon(3S)$$
 $$,\chi_{b0}(2P),\allowbreak\chi_{b1}(2P),\chi_{b2}(2P)\\}.$$
-<span>
+</span>
 Using the feeddown matrix we can effectively convert between an  experimental cross section $\vec{\sigma}\_\mathrm{exp}$ which is the measurement in the detector, and the direct production cross section $\vec{\sigma}\_\mathrm{direct}$ which is the cross section before taking into account the feed down of the exited states. The relation between the two is 
 <span class="math-responsive">
 $$\vec{\sigma}\_\mathrm{exp}=F\cdot\vec{\sigma}\_\mathrm{direct}.$$
-<span>
+</span>
 Including the feeddown we can calculate the Nuclar Modification Factor as 
 <span class="math-responsive">
 $$ R^i\_{AA} = \frac{(F\cdot S\cdot\vec{\sigma}\_\text{direct})^i}{\sigma^i\_\text{exp}}.$$
-<span>
+</span>
 Here the $S$ is a matrix containing the survival probabilities $p_i$ for the different states on its diagonal. Note that here we take the survival probabilities at the time at which the QGP hadronizes.
 This equation amounts to 
 1. Taking the direct production cross section from proton-proton collision
