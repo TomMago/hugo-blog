@@ -52,7 +52,7 @@ params:
     author: "Tom Magorsch"
     # author: ["Me", "You"] # multiple authors
 
-    defaultTheme: auto
+    defaultTheme: light
     # disableThemeToggle: true
     ShowShareButtons: false
     ShowReadingTime: true

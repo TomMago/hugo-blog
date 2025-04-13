@@ -2,113 +2,113 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>TomMago</title>
-    <link>https://tommago.com/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gradient estimator in Variational Monte Carlo</title>
-      <link>https://tommago.com/posts/vmcgrad/</link>
+      <link>http://localhost:1313/posts/vmcgrad/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/vmcgrad/</guid>
+      <guid>http://localhost:1313/posts/vmcgrad/</guid>
       <description>I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula.</description>
     </item>
     
     <item>
       <title>Bottomonium suppression as an open quantum system</title>
-      <link>https://tommago.com/posts/vpert/</link>
+      <link>http://localhost:1313/posts/vpert/</link>
       <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/vpert/</guid>
+      <guid>http://localhost:1313/posts/vpert/</guid>
       <description>We recently put out a paper on bottomonium suppression in the quark gluon plasma 2403.15545. This is a project I&amp;rsquo;ve been working on for some time now and I want to show real quick what we have been doing.
 Quarkonium suppression Heavy ion collisions are experiments where two heavy nuclei are collided. Such experiments are conducted e.g. at CERN. In these collisions a state of matter called the quark gluon plasma is created.</description>
     </item>
     
     <item>
       <title>GSoC 23 | Quantum Generative Adversarial Networks for HEP event generation the LHC</title>
-      <link>https://tommago.com/posts/gsoc23/</link>
+      <link>http://localhost:1313/posts/gsoc23/</link>
       <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/gsoc23/</guid>
+      <guid>http://localhost:1313/posts/gsoc23/</guid>
       <description>This is a summary of my 2023 GSoC project with the ML4SCI-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data. The full code for all my work can be found on Github. In the following post I will outline my work and describe some parts of the implementation and the results
 Event generation in HEP experiments In high energy physics experiements like they are conducted at CERN, an integral part of the analysis process is the comparison of measurements with results expected based on predictions from our theory of nature, the Standard Model of particle physics.</description>
     </item>
     
     <item>
       <title>Quantum GANs</title>
-      <link>https://tommago.com/posts/qgan/</link>
+      <link>http://localhost:1313/posts/qgan/</link>
       <pubDate>Sat, 29 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qgan/</guid>
+      <guid>http://localhost:1313/posts/qgan/</guid>
       <description>This year I&amp;rsquo;m participating in the Google Summer of Code again. Just like last year I&amp;rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
 GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&amp;#32;Pouget-Abadie &amp;amp; al.,&amp;#32;2014 Goodfellow,&amp;#32; I.,&amp;#32; Pouget-Abadie,&amp;#32; J.,&amp;#32; Mirza,&amp;#32; M.,&amp;#32; Xu,&amp;#32; B.,&amp;#32; Warde-Farley,&amp;#32; D.,&amp;#32; Ozair,&amp;#32; S.,&amp;#32; Courville,&amp;#32; A.&amp;#32;&amp;amp;&amp;#32;Bengio,&amp;#32; Y. &amp;#32; (2014). &amp;#32;Generative Adversarial Networks.</description>
     </item>
     
     <item>
       <title>NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane</title>
-      <link>https://tommago.com/posts/nersc/</link>
+      <link>http://localhost:1313/posts/nersc/</link>
       <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/nersc/</guid>
+      <guid>http://localhost:1313/posts/nersc/</guid>
       <description>The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.</description>
     </item>
     
     <item>
       <title>GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC</title>
-      <link>https://tommago.com/posts/gsoc/</link>
+      <link>http://localhost:1313/posts/gsoc/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/gsoc/</guid>
+      <guid>http://localhost:1313/posts/gsoc/</guid>
       <description>This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
 Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.</description>
     </item>
     
     <item>
       <title>Data re-uploading</title>
-      <link>https://tommago.com/posts/drc/</link>
+      <link>http://localhost:1313/posts/drc/</link>
       <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/drc/</guid>
+      <guid>http://localhost:1313/posts/drc/</guid>
       <description>An important motivation for deep learning was the Universal Approximation Theorem which shows, that neural networks can theoretically approximate any function. When it comes to quantum machine learning, a similar statement can be made. Surprisingly a single qubit is sufficient, to perform the classification of arbitrary data distributions.
 Universal Approximation Theorem The Universal Approximation Theorem (there are many versions with different constraints) states that the functions which can be expressed by a neural network with a single hidden layer and arbitrarily many units are dense in the space of continuous functions.</description>
     </item>
     
     <item>
       <title>Quantum Natural Gradient Descent</title>
-      <link>https://tommago.com/posts/qng/</link>
+      <link>http://localhost:1313/posts/qng/</link>
       <pubDate>Sat, 27 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qng/</guid>
+      <guid>http://localhost:1313/posts/qng/</guid>
       <description>When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).</description>
     </item>
     
     <item>
       <title>Quantum Autoencoder</title>
-      <link>https://tommago.com/posts/qae/</link>
+      <link>http://localhost:1313/posts/qae/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qae/</guid>
+      <guid>http://localhost:1313/posts/qae/</guid>
       <description>In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analog of a classical autoencoder equally aims to learn a smaller representation of data.
 A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.</description>
     </item>
     
     <item>
       <title>Hello World! | Hello GSoC!</title>
-      <link>https://tommago.com/posts/hello/</link>
+      <link>http://localhost:1313/posts/hello/</link>
       <pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/hello/</guid>
+      <guid>http://localhost:1313/posts/hello/</guid>
       <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka,&amp;#32;Nachman &amp;amp; al.,&amp;#32;2021 Kasieczka,&amp;#32; G.,&amp;#32; Nachman,&amp;#32; B.&amp;#32;&amp;amp;&amp;#32;al. &amp;#32; (2021). &amp;#32;The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics.</description>
     </item>
     
     <item>
       <title>Decanting the Universe</title>
-      <link>https://tommago.com/decanting/</link>
+      <link>http://localhost:1313/decanting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/decanting/</guid>
+      <guid>http://localhost:1313/decanting/</guid>
       <description>A record of our regular wine fuled update talks.
 09.11.24 Tom: Quarkonium Thermalization
 Mara: Bakteria Canniblism
@@ -122,19 +122,19 @@ Conclusion:</description>
     
     <item>
       <title>News</title>
-      <link>https://tommago.com/news/</link>
+      <link>http://localhost:1313/news/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/news/</guid>
+      <guid>http://localhost:1313/news/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quarkonium Suppression Poster</title>
-      <link>https://tommago.com/QuarkoniumSuppressionPoster/</link>
+      <link>http://localhost:1313/QuarkoniumSuppressionPoster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/QuarkoniumSuppressionPoster/</guid>
+      <guid>http://localhost:1313/QuarkoniumSuppressionPoster/</guid>
       <description>Hey! Looks like you checked out my poster.
 First and foremost here are some links to the relevant papers:
 Original derivation of the master equation from pNRQCD: 1711.04515, 1612.07248 Derivation of the Lindblad Equation at Next to Leading order in $E/(\pi T)$: 2205.10289 Phenomenological results: 2302.11826 2403.15545 Before going into more detail here are some simulation results for the evolution of the Bottomonium in the QGP for a time of $2$fm$/c$.</description>
@@ -143,10 +143,10 @@ Original derivation of the master equation from pNRQCD: 1711.04515, 1612.07248 D
     
     <item>
       <title>Talks</title>
-      <link>https://tommago.com/talks/</link>
+      <link>http://localhost:1313/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/talks/</guid>
+      <guid>http://localhost:1313/talks/</guid>
       <description>A selection of talks I gave</description>
     </item>
     
