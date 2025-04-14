@@ -16,6 +16,30 @@ First and foremost here are some links to the relevant papers:
 
 Before going into more detail here are some simulation results for the evolution of the Bottomonium in the QGP for a time of $2$fm$/c$.
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const gifs = Array.from(document.querySelectorAll(".full-container img"));
+    let loaded = 0;
+
+    gifs.forEach(img => {
+      const clone = new Image();
+      clone.onload = () => {
+        loaded++;
+        if (loaded === gifs.length) {
+          // Reset src to "restart" the gifs
+          gifs.forEach(g => {
+            const src = g.src;
+            g.src = "";         // Clear first
+            g.src = src + "?r=" + new Date().getTime(); // Add dummy query to force reload
+          });
+        }
+      };
+      clone.src = img.src;
+    });
+  });
+</script>
+
+
 <style>
   .top-row {
     display: flex;
@@ -124,7 +148,7 @@ The first plot shows the density matrix evolution of the relative radial coordin
 
 @media (max-width: 768px) {
   .math-responsive {
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
 }
 </style>
@@ -205,7 +229,7 @@ $$\vec{\sigma}\_\mathrm{exp}=F\cdot\vec{\sigma}\_\mathrm{direct}.$$
 </span>
 Including the feeddown we can calculate the Nuclar Modification Factor as 
 <span class="math-responsive">
-$$ R^i\_{AA} = \frac{(F\cdot S\cdot\vec{\sigma}\_\text{direct})^i}{\sigma^i\_\text{exp}}.$$
+$$R^i\_{AA} = \frac{(F\cdot S\cdot\vec{\sigma}\_\text{direct})^i}{\sigma^i\_\text{exp}}.$$
 </span>
 Here the $S$ is a matrix containing the survival probabilities $p_i$ for the different states on its diagonal. Note that here we take the survival probabilities at the time at which the QGP hadronizes.
 This equation amounts to 
