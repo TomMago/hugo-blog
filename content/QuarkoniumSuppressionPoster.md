@@ -216,7 +216,7 @@ This equation amounts to
 Note that in practice we calculate the direct production cross section from the experimental ones by
 <span class="math-responsive">
 $$\vec{\sigma}\_\mathrm{direct}=F^{-1}\cdot\vec{\sigma}\_\mathrm{exp}.$$
-<span> 
+</span> 
 In this way we can calculate the $R_{AA}$ for different states directly from the simulation results of the Lindblad equation for $\rho(t)$. 
 ![adsf](../RAA.png)
 In this plot we compare the Nuclear Modification Factor against experimental data. On the $x$-axis we have the number of participaing partons. They denote how much the colliding nuclei overlap during the collisions. The $R_{AA}$ depends on the $N_\mathrm{part}$ because if more partons participate the event will have a higher total energy and the plasma will be hotter. A hotter plasma consequently leads to more suppression. In our simulations we include this by solving the Lindblad equation for diferent temperature profiles, which were all obtained from hydrodynamics simulations for different $N_\mathrm{part}$.

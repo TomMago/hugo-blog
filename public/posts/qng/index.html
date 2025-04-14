@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,18 +9,18 @@
 <meta name="keywords" content="GSoC">
 <meta name="description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).">
 <meta name="author" content="Tom Magorsch">
-<link rel="canonical" href="http://localhost:1313/posts/qng/">
+<link rel="canonical" href="https://tommago.com/posts/qng/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.18c187d9a47d1bb26b9343ff3062c17d3ec3fafc4f83bd2fd8c235ccdb100f6d.css" integrity="sha256-GMGH2aR9G7Jrk0P/MGLBfT7D&#43;vxPg70v2MI1zNsQD20=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://tommago.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/qng/">
+<link rel="alternate" hreflang="en" href="https://tommago.com/posts/qng/">
 <noscript>
     <style>
         #theme-toggle,
@@ -68,7 +68,7 @@ onload="renderMathInElement(document.body,
 <meta property="og:title" content="Quantum Natural Gradient Descent" />
 <meta property="og:description" content="When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/qng/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://tommago.com/posts/qng/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-27T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2022-08-27T00:00:00&#43;00:00" />
 
@@ -86,13 +86,13 @@ onload="renderMathInElement(document.body,
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://tommago.com/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Quantum Natural Gradient Descent",
-      "item": "http://localhost:1313/posts/qng/"
+      "item": "https://tommago.com/posts/qng/"
     }
   ]
 }
@@ -118,14 +118,14 @@ onload="renderMathInElement(document.body,
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/qng/"
+    "@id": "https://tommago.com/posts/qng/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "TomMago",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://tommago.com/favicon.ico"
     }
   }
 }
@@ -143,7 +143,7 @@ onload="renderMathInElement(document.body,
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -176,12 +176,12 @@ onload="renderMathInElement(document.body,
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://tommago.com/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -192,7 +192,7 @@ onload="renderMathInElement(document.body,
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
     <h1 class="post-title">
       Quantum Natural Gradient Descent
     </h1>
@@ -703,14 +703,14 @@ However of course computing the metric tensor takes time, which makes the QNG es
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/gsoc/">GSoC</a></li>
+      <li><a href="https://tommago.com/tags/gsoc/">GSoC</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="http://localhost:1313/">TomMago</a></span>
+    <span>&copy; 2025 <a href="https://tommago.com/">TomMago</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
