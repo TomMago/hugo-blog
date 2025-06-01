@@ -2,7 +2,7 @@
 title: "Decanting the Universe"
 layout: "single"
 type: "page"
-robots: "noindex, nofollow"
+robotsNoIndex: true
 ---
 
 A record of our regular wine fuled update talks.
@@ -20,7 +20,7 @@ A record of our regular wine fuled update talks.
 
 **Conclusion:** We will stay with dry wines
 
-# 09.11.24
+# 06.01.25
 
 **Tom:** [Projects for 2025]()
 
@@ -28,4 +28,14 @@ A record of our regular wine fuled update talks.
 
 **Wine:** L'Arjolle Cabernet 2022, Languedoc, France
 
-**Conclusion:**
+**Conclusion:** This will be a busy year
+
+# 31.05.25
+
+**Tom:** [Differentiable quantum trajectory simulations of lindbladian dynamics for transport coefficient inference in the Quark-Gluon Plasma]()
+
+**Mara:** [Phenotypic Heterogeneity in starvation of E. coli]()
+
+**Wine:** Georg Fogt "Steinmeer" Scheurebe 2024, Rheinhessen, Deutschland 
+
+**Conclusion:** We need a new decanter :(
