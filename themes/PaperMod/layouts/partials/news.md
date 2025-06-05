@@ -1,3 +1,4 @@
+- **[06/2025]** I will be at [ML4Lattice](https://indico.cern.ch/event/1496341/) in Zurich.
 - **[04/2025]** I will be at [SimQuDyn](https://indico.physik.uni-muenchen.de/event/536/) in Munich and bring a [poster](https://www.tommago.com/QuarkoniumSuppressionPoster/).
 - **[12/2024]** We will be hosting an [INT program](https://www.int.washington.edu/current-program) _"Open Quantum Systems: dissipative dynamics from quarks to the cosmos"_ in 2025!
 - **[09/2024]** I will be at the workshop [QCD challenges from pp to AA collisions](https://indico.uni-muenster.de/event/2607/page/98-venue-and-travel-information)
