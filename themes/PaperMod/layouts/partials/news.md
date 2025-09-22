@@ -1,3 +1,7 @@
+- **[09/2025]** Im at the school on [EFTs and Lattice](https://indico.ph.tum.de/event/7886) in Benasque 
+- **[08/2025]** We will have an MITP program on Open Quantum Systems in 2026! [Registrations are open](https://indico.mitp.uni-mainz.de/event/436)
+- **[08/2025]** I am at the MIAPbP program [Build Big or Build Smart](https://www.munich-iapbp.de/activities/activities-2025/machine-learning)
+- **[08/2025]** New preprint on thermalization of Bottomonium in the QGP: [2508.11743](https://arxiv.org/abs/2508.11743)
 - **[06/2025]** I will be at [ML4Lattice](https://indico.cern.ch/event/1496341/) in Zurich.
 - **[04/2025]** I will be at [SimQuDyn](https://indico.physik.uni-muenchen.de/event/536/) in Munich and bring a [poster](https://www.tommago.com/QuarkoniumSuppressionPoster/).
 - **[12/2024]** We will be hosting an [INT program](https://www.int.washington.edu/current-program) _"Open Quantum Systems: dissipative dynamics from quarks to the cosmos"_ in 2025!
