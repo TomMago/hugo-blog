@@ -1,3 +1,5 @@
+- **[12/2025]** Im at the INT in seattle for our [Open Quantum System program](https://www.int.washington.edu/index.php/programs-and-workshops/25-3b) 
+- **[11/2025]** This week Im visiting CERN for the [17th QWG](https://indico.cern.ch/event/1539475)
 - **[09/2025]** Im at the school on [EFTs and Lattice](https://indico.ph.tum.de/event/7886) in Benasque 
 - **[08/2025]** We will have an MITP program on Open Quantum Systems in 2026! [Registrations are open](https://indico.mitp.uni-mainz.de/event/436)
 - **[08/2025]** I am at the MIAPbP program [Build Big or Build Smart](https://www.munich-iapbp.de/activities/activities-2025/machine-learning)
