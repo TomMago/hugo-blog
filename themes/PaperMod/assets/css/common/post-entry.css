@@ -17,7 +17,7 @@
     color: var(--secondary);
 }
 
-.news-list ul li:nth-of-type(1n+5){
+.news-list ul li:nth-of-type(1n+6){
   display: none;
 }
 

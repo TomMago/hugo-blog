@@ -2,154 +2,357 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>TomMago</title>
-    <link>https://tommago.com/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gradient estimator in Variational Monte Carlo</title>
-      <link>https://tommago.com/posts/vmcgrad/</link>
+      <link>http://localhost:1313/posts/vmcgrad/</link>
       <pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/vmcgrad/</guid>
-      <description>I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula.</description>
+      <guid>http://localhost:1313/posts/vmcgrad/</guid>
+      <description>&lt;p&gt;I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula. Since I found the full derivation non-trivial I will give it here in case anyone else out there is confused as well.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Bottomonium suppression as an open quantum system</title>
-      <link>https://tommago.com/posts/vpert/</link>
+      <link>http://localhost:1313/posts/vpert/</link>
       <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/vpert/</guid>
-      <description>We recently put out a paper on bottomonium suppression in the quark gluon plasma 2403.15545. This is a project I&amp;rsquo;ve been working on for some time now and I want to show real quick what we have been doing.
-Quarkonium suppression Heavy ion collisions are experiments where two heavy nuclei are collided. Such experiments are conducted e.g. at CERN. In these collisions a state of matter called the quark gluon plasma is created.</description>
+      <guid>http://localhost:1313/posts/vpert/</guid>
+      <description>&lt;p&gt;We recently put out a paper on bottomonium suppression in the quark gluon plasma &lt;a href=&#34;https://arxiv.org/abs/2403.15545&#34;&gt;2403.15545&lt;/a&gt;. This is a project I&amp;rsquo;ve been working on for some time now and I want to show real quick what we have been doing.&lt;/p&gt;
+&lt;h3 id=&#34;quarkonium-suppression&#34;&gt;Quarkonium suppression&lt;/h3&gt;
+&lt;p&gt;Heavy ion collisions are experiments where two heavy nuclei are collided. Such experiments are conducted e.g. at CERN. In these collisions a state of matter called the quark gluon plasma is created.
+The quark gluon plasma is a hot liquid like state of matter, where light quarks, the fundamental building blocks of matter do bind to composite particles. Such a condition is assumed to have existed in the early universe shortly after the big bang, where matter was condensed to a tight space.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>GSoC 23 | Quantum Generative Adversarial Networks for HEP event generation the LHC</title>
-      <link>https://tommago.com/posts/gsoc23/</link>
+      <link>http://localhost:1313/posts/gsoc23/</link>
       <pubDate>Thu, 12 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/gsoc23/</guid>
-      <description>This is a summary of my 2023 GSoC project with the ML4SCI-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data. The full code for all my work can be found on Github. In the following post I will outline my work and describe some parts of the implementation and the results
-Event generation in HEP experiments In high energy physics experiements like they are conducted at CERN, an integral part of the analysis process is the comparison of measurements with results expected based on predictions from our theory of nature, the Standard Model of particle physics.</description>
+      <guid>http://localhost:1313/posts/gsoc23/</guid>
+      <description>&lt;p&gt;This is a summary of my 2023 GSoC &lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2023/projects/ggoiGDQ5&#34;&gt;project&lt;/a&gt; with the &lt;a href=&#34;https://ml4sci.org&#34;&gt;ML4SCI&lt;/a&gt;-organization. In my project I designed and implemented a Quantum Generative Adversarial Network for the generation of HEP experiment data.
+The full code for all my work can be found on &lt;a href=&#34;https://github.com/ML4SCI/QMLHEP/tree/main/Quantum_GAN_for_HEP_Tom_Magorsch&#34;&gt;Github&lt;/a&gt;.
+In the following post I will outline my work and describe some parts of the implementation and the results&lt;/p&gt;
+&lt;h3 id=&#34;event-generation-in-hep-experiments&#34;&gt;Event generation in HEP experiments&lt;/h3&gt;
+&lt;p&gt;In high energy physics experiements like they are conducted at CERN, an integral part of the analysis process is the comparison of measurements with results expected based on predictions from our theory of nature, the Standard Model of particle physics.
+&lt;img loading=&#34;lazy&#34; src=&#34;../analysis_pipeline.png#center&#34; alt=&#34;HEP experiment pipeline&#34;  /&gt;
+
+Generating these predictions is usually done by Monte Carlo simulations. Since these simulations are very demaning, there has been a vast amount of work on generative machine learning models e.g. 
+
+
+
+
+&lt;span class=&#34;hugo-cite-intext&#34;
+        itemprop=&#34;citation&#34;&gt;(&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Oliveira2017` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Butter2019` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Hariri2021` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;)&lt;/span&gt;
+. The main incentive is to speed up the simulation process by training a generative model like a GAN, from which one can then cheaply sample from.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Quantum GANs</title>
-      <link>https://tommago.com/posts/qgan/</link>
+      <link>http://localhost:1313/posts/qgan/</link>
       <pubDate>Sat, 29 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qgan/</guid>
-      <description>This year I&amp;rsquo;m participating in the Google Summer of Code again. Just like last year I&amp;rsquo;m working with the ML4SCI organization. In this years project I am working on Quantum Generative Adversarial Networks.
-GANs Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in ( Citation: Goodfellow,&amp;#32;Pouget-Abadie &amp;amp; al.,&amp;#32;2014 Goodfellow,&amp;#32; I.,&amp;#32; Pouget-Abadie,&amp;#32; J.,&amp;#32; Mirza,&amp;#32; M.,&amp;#32; Xu,&amp;#32; B.,&amp;#32; Warde-Farley,&amp;#32; D.,&amp;#32; Ozair,&amp;#32; S.,&amp;#32; Courville,&amp;#32; A.&amp;#32;&amp;amp;&amp;#32;Bengio,&amp;#32; Y. &amp;#32; (2014). &amp;#32;Generative Adversarial Networks.</description>
+      <guid>http://localhost:1313/posts/qgan/</guid>
+      <description>&lt;p&gt;This year I&amp;rsquo;m participating in the Google Summer of Code again. Just like last year I&amp;rsquo;m working with the &lt;a href=&#34;https://ml4sci.org&#34;&gt;ML4SCI&lt;/a&gt; organization. In this years &lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2023/projects/ggoiGDQ5&#34;&gt;project&lt;/a&gt; I am working on Quantum Generative Adversarial Networks.&lt;/p&gt;
+&lt;h2 id=&#34;gans&#34;&gt;GANs&lt;/h2&gt;
+&lt;p&gt;Generative Adversarial Networks (GANs) are a class of unsupervised machine learning models proposed in 
+
+
+
+
+&lt;span class=&#34;hugo-cite-intext&#34;
+        itemprop=&#34;citation&#34;&gt;(&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Goodfellow2014` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;)&lt;/span&gt;
+. GANs aim to train a generator $G(z,\Theta_g)$ with a latent space $z$ and parameters $\Theta_g$ to replicate a reference probability distribution when sampling from the latent space $z$.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane</title>
-      <link>https://tommago.com/posts/nersc/</link>
+      <link>http://localhost:1313/posts/nersc/</link>
       <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/nersc/</guid>
-      <description>The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.</description>
+      <guid>http://localhost:1313/posts/nersc/</guid>
+      <description>&lt;p&gt;The past month I have been participating in the &lt;a href=&#34;https://www.openhackathons.org/s/siteevent/a0C5e000005UNW4EAO/se000137&#34;&gt;NERSC Open Hackathon&lt;/a&gt; hosted together with NVIDIA.
+Throughout the event we had access to the &lt;a href=&#34;https://perlmutter.carrd.co&#34;&gt;Perlmutter compute system&lt;/a&gt; and worked together with mentors on scaling our scientific software projects on GPUs.
+During the event I worked on scaling the training of VQCs in &lt;a href=&#34;https://pennylane.ai&#34;&gt;Pennylane&lt;/a&gt; to multiple GPUs.
+A word of thanks goes to the organizers and all the mentors who helped us throghout the event.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC</title>
-      <link>https://tommago.com/posts/gsoc/</link>
+      <link>http://localhost:1313/posts/gsoc/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/gsoc/</guid>
-      <description>This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
-Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.</description>
+      <guid>http://localhost:1313/posts/gsoc/</guid>
+      <description>&lt;p&gt;This is a summary of my 2022 GSoC project with &lt;a href=&#34;https://ml4sci.org&#34;&gt;ML4SCI&lt;/a&gt;.
+The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics.
+A big thank you to Sergei Gleyzer for the supervision and support.&lt;/p&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them.
+While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are &lt;a href=&#34;https://en.wikipedia.org/wiki/Standard_Model#Challenges&#34;&gt;multiple reasons&lt;/a&gt; to believe that it cannot be a complete description of nature.
+In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Data re-uploading</title>
-      <link>https://tommago.com/posts/drc/</link>
+      <link>http://localhost:1313/posts/drc/</link>
       <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/drc/</guid>
-      <description>An important motivation for deep learning was the Universal Approximation Theorem which shows, that neural networks can theoretically approximate any function. When it comes to quantum machine learning, a similar statement can be made. Surprisingly a single qubit is sufficient, to perform the classification of arbitrary data distributions.
-Universal Approximation Theorem The Universal Approximation Theorem (there are many versions with different constraints) states that the functions which can be expressed by a neural network with a single hidden layer and arbitrarily many units are dense in the space of continuous functions.</description>
+      <guid>http://localhost:1313/posts/drc/</guid>
+      <description>&lt;p&gt;An important motivation for deep learning was the Universal Approximation Theorem which shows, that neural networks can theoretically approximate any function. When it comes to quantum machine learning, a similar statement can be made. Surprisingly a single qubit is sufficient, to perform the classification of arbitrary data distributions.&lt;/p&gt;
+&lt;h1 id=&#34;universal-approximation-theorem&#34;&gt;Universal Approximation Theorem&lt;/h1&gt;
+&lt;p&gt;The Universal Approximation Theorem (there are many versions with different constraints) states that the functions which can be expressed by a neural network with a single hidden layer and arbitrarily many units are dense in the space of continuous functions.
+Considering a classification problem, we might have functions $f: I_m \to \Reals$, where $I_m = [0,1]^m$. The output of a neural network with a single hidden layer may be written as
+$$h(\vec{x}) = \sum^{N}_{i=1}\alpha_i\sigma(\vec{w}_i\vec{x} + b_i), \tag{1}$$
+where $\vec{w}_i$ and $b_i$ are the weights and biases of the hidden layer and $\alpha_i$ the weights of the output layer.
+The function $\sigma$ is the non-linear activation function.
+The function $h$ being dense in the continuous functions $f$ means, that for every $\epsilon$ we can choose the parameters in Eq. $(1)$ so that
+$$|h(\vec{x}) - f(\vec{x})| &amp;lt; \epsilon \ \ \text{for all} \ \ \vec{x}.$$
+This is a very powerful statement and enables neural networks to tackle very complex problems.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Quantum Natural Gradient Descent</title>
-      <link>https://tommago.com/posts/qng/</link>
+      <link>http://localhost:1313/posts/qng/</link>
       <pubDate>Sat, 27 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qng/</guid>
-      <description>When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning. Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning. However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).</description>
+      <guid>http://localhost:1313/posts/qng/</guid>
+      <description>&lt;p&gt;When training Variational Quantum Algorithms we aim to find a point in the parameter space that minimizes a particular cost function, just like in the case of classical deep learning.
+Using the parameter-shift rule, we are able to compute the gradient of a Parametrized Quantum Circuit (PQC) and can therefore use that gradient descent method proven in classical machine learning.
+However vanilla gradient descent can face difficulties in practical training which can be circumvented with Quantum Natural Gradient Descent (QNG).&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Quantum Autoencoder</title>
-      <link>https://tommago.com/posts/qae/</link>
+      <link>http://localhost:1313/posts/qae/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/qae/</guid>
-      <description>In my GSoC project, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analog of a classical autoencoder equally aims to learn a smaller representation of data.
-A naive Quantum Autoencoder My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.</description>
+      <guid>http://localhost:1313/posts/qae/</guid>
+      <description>&lt;p&gt;In my GSoC &lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2022/projects/ePnjKlJs&#34;&gt;project&lt;/a&gt;, I explore the use of Quantum Autoencoders for the analysis of LHC data. Autoencoders are an unsupervised learning technique, which learns a smaller latent representation of data. The quantum analog of a classical autoencoder equally aims to learn a smaller representation of data.&lt;/p&gt;
+&lt;h1 id=&#34;a-naive-quantum-autoencoder&#34;&gt;A naive Quantum Autoencoder&lt;/h1&gt;
+&lt;p&gt;My first idea for a Quantum circuit closely follows the architecture of a classical autoencoder. The structure of the circuit is conceptually sketched in the following figure.
+Here the Autoencoder has an input dimension of three and compresses the data to a single qbit.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Hello World! | Hello GSoC!</title>
-      <link>https://tommago.com/posts/hello/</link>
+      <link>http://localhost:1313/posts/hello/</link>
       <pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/hello/</guid>
-      <description>This year I&amp;rsquo;m participating in the Google Summer of Code with the ML4SCI organization. My project proposal deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data. Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way ( Citation: Kasieczka,&amp;#32;Nachman &amp;amp; al.,&amp;#32;2021 Kasieczka,&amp;#32; G.,&amp;#32; Nachman,&amp;#32; B.&amp;#32;&amp;amp;&amp;#32;al. &amp;#32; (2021). &amp;#32;The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics.</description>
+      <guid>http://localhost:1313/posts/hello/</guid>
+      <description>&lt;p&gt;This year I&amp;rsquo;m participating in the Google Summer of Code with the &lt;a href=&#34;https://ml4sci.org&#34;&gt;ML4SCI&lt;/a&gt; organization.
+My &lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2022/projects/ePnjKlJs&#34;&gt;project proposal&lt;/a&gt; deals with a quantum variational autoencoder (QVAE) for the anaysis of particle physics data.
+Such unsupervised learning paradigms can be used to search for new physics in a model-agnostic way 
+
+
+
+
+&lt;span class=&#34;hugo-cite-intext&#34;
+        itemprop=&#34;citation&#34;&gt;(&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Kasieczka2021` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;)&lt;/span&gt;
+.
+These models are thereby trained on Standard Model data and search for anomalous events that deviate from the known physics.
+With the rise of NISQ-devices 
+
+
+
+
+&lt;span class=&#34;hugo-cite-intext&#34;
+        itemprop=&#34;citation&#34;&gt;(&lt;span style=&#34;background-color: #f00; color: #fff;&#34;&gt;No matching key was found for `Preskill2018` in the references. Please make sure to provide an available ID in your `bib.json` file.&lt;/span&gt;)&lt;/span&gt;
+ the question comes up if quantum machine learning can enhance classical machine learning applications to hep problems.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Decanting the Universe</title>
-      <link>https://tommago.com/decanting/</link>
+      <link>http://localhost:1313/decanting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/decanting/</guid>
-      <description>A record of our regular wine fuled update talks.
-09.11.24 Tom: Quarkonium Thermalization
-Mara: Bakteria Canniblism
-Wine: Regional semi-dry red wine
-Conclusion: We will stay with dry wines
-06.01.25 Tom: Projects for 2025
-Mara: 2 steps
-Wine: L&amp;rsquo;Arjolle Cabernet 2022, Languedoc, France
-Conclusion: This will be a busy year
-31.05.25 Tom: Differentiable quantum trajectory simulations of lindbladian dynamics for transport coefficient inference in the Quark-Gluon Plasma
-Mara: Phenotypic Heterogeneity in starvation of E.</description>
+      <guid>http://localhost:1313/decanting/</guid>
+      <description>&lt;p&gt;A record of our regular wine fuled update talks.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+    &lt;img src=&#34;../decanting_logo.png&#34; alt=&#34;decanting logo&#34; width=&#34;300&#34;/&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;091124&#34;&gt;09.11.24&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Tom:&lt;/strong&gt; &lt;a href=&#34;../pdfs/DecantingTheUniverse-09.11.24_QuarkoniumThermalization.pdf&#34;&gt;Quarkonium Thermalization&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mara:&lt;/strong&gt; &lt;a href=&#34;&#34;&gt;Bakteria Canniblism&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wine:&lt;/strong&gt; Regional semi-dry red wine&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion:&lt;/strong&gt; We will stay with dry wines&lt;/p&gt;
+&lt;h1 id=&#34;060125&#34;&gt;06.01.25&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Tom:&lt;/strong&gt; &lt;a href=&#34;&#34;&gt;Projects for 2025&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mara:&lt;/strong&gt; &lt;a href=&#34;&#34;&gt;2 steps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wine:&lt;/strong&gt; L&amp;rsquo;Arjolle Cabernet 2022, Languedoc, France&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion:&lt;/strong&gt; This will be a busy year&lt;/p&gt;
+&lt;h1 id=&#34;310525&#34;&gt;31.05.25&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Tom:&lt;/strong&gt; &lt;a href=&#34;&#34;&gt;Differentiable quantum trajectory simulations of lindbladian dynamics for transport coefficient inference in the Quark-Gluon Plasma&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mara:&lt;/strong&gt; &lt;a href=&#34;&#34;&gt;Phenotypic Heterogeneity in starvation of E. coli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wine:&lt;/strong&gt; Georg Fogt &amp;ldquo;Steinmeer&amp;rdquo; Scheurebe 2024, Rheinhessen, Deutschland&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>News</title>
-      <link>https://tommago.com/news/</link>
+      <link>http://localhost:1313/news/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/news/</guid>
+      <guid>http://localhost:1313/news/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quarkonium Suppression Poster</title>
-      <link>https://tommago.com/QuarkoniumSuppressionPoster/</link>
+      <link>http://localhost:1313/QuarkoniumSuppressionPoster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/QuarkoniumSuppressionPoster/</guid>
-      <description>Hey! Looks like you checked out my poster.
-First and foremost here are some links to the relevant papers:
-Original derivation of the master equation from pNRQCD: 1711.04515, 1612.07248 Derivation of the Lindblad Equation at Next to Leading order in $E/(\pi T)$: 2205.10289 Phenomenological results: 2302.11826 2403.15545 Before going into more detail here are some simulation results for the evolution of the Bottomonium in the QGP for a time of $2$fm$/c$.</description>
+      <guid>http://localhost:1313/QuarkoniumSuppressionPoster/</guid>
+      <description>&lt;p&gt;Hey! Looks like you checked out my poster.&lt;/p&gt;
+&lt;p&gt;First and foremost here are some links to the relevant papers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Original derivation of the master equation from pNRQCD: &lt;a href=&#34;https://arxiv.org/pdf/1711.04515&#34;&gt;1711.04515&lt;/a&gt;, &lt;a href=&#34;https://arxiv.org/pdf/1612.07248&#34;&gt;1612.07248&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Derivation of the Lindblad Equation at Next to Leading order in $E/(\pi T)$: &lt;a href=&#34;https://arxiv.org/abs/2205.10289&#34;&gt;2205.10289&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Phenomenological results: &lt;a href=&#34;https://arxiv.org/abs/2302.11826&#34;&gt;2302.11826&lt;/a&gt; &lt;a href=&#34;https://arxiv.org/abs/2403.15545&#34;&gt;2403.15545&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before going into more detail here are some simulation results for the evolution of the Bottomonium in the QGP for a time of $2$fm$/c$.&lt;/p&gt;
+&lt;script&gt;
+  document.addEventListener(&#34;DOMContentLoaded&#34;, function () {
+    const gifs = Array.from(document.querySelectorAll(&#34;.full-container img&#34;));
+    let loaded = 0;
+
+    gifs.forEach(img =&gt; {
+      const clone = new Image();
+      clone.onload = () =&gt; {
+        loaded++;
+        if (loaded === gifs.length) {
+          // Reset src to &#34;restart&#34; the gifs
+          gifs.forEach(g =&gt; {
+            const src = g.src;
+            g.src = &#34;&#34;;         // Clear first
+            g.src = src + &#34;?r=&#34; + new Date().getTime(); // Add dummy query to force reload
+          });
+        }
+      };
+      clone.src = img.src;
+    });
+  });
+&lt;/script&gt;
+&lt;style&gt;
+  .top-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap; /* prevent wrapping */
+  }
+
+  .top-row img {
+    max-width: 100%;
+    height: auto;
+    flex-grow: 1; /* allow image to scale down to fit */
+    max-width: 100px; /* limit max width of image */
+  }
+
+  .top-label {
+    min-width: 50px;
+    text-align: center;
+    white-space: nowrap; /* prevent label from breaking */
+  }
+
+  .gif-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* allow bottom gifs to stack on small screens */
+    margin-top: 40px;
+  }
+
+  .gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 200px;
+    height: 200px;
+  }
+
+  .gif-row img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .full-container{
+    text-align: center; 
+    height:450px;
+  }
+
+  @media (max-width: 500px) {
+    .top-row {
+      gap: 5px;
+    }
+    .top-label {
+      font-size: 14px;
+    }
+    .top-row img {
+      max-width: 40%; /* let image scale down further */
+    }
+    .topimg{
+        width: 40%;
+    }
+    .gif-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 1 300px;
+        height: 300px;
+        margin-bottom:50px;
+    }
+    .full-container{
+        text-align: center; 
+        height:850px;
+    }     
+
+  }
+&lt;/style&gt;
+&lt;div class=&#34;full-container&#34;&gt;
+  &lt;!-- Top: labels + gif (stay in one line even on mobile) --&gt;
+  &lt;div class=&#34;top-row&#34;&gt;
+    &lt;div class=&#34;top-label&#34;&gt;$t=0$ fm$/c$&lt;/div&gt;
+    &lt;img src=&#34;../time_progress.gif&#34; alt=&#34;Time Progress&#34; style=&#34;max-width: 300px;&#34; class=&#34;topimg&#34;&gt;
+    &lt;div class=&#34;top-label&#34;&gt;$t=2$ fm$/c$&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Bottom: two gifs that wrap on mobile --&gt;
+  &lt;div class=&#34;gif-row&#34;&gt;
+    &lt;div class=&#34;gif-container&#34;&gt;
+      &lt;img src=&#34;../position_space.gif&#34; alt=&#34;Position Space&#34;&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;gif-container&#34;&gt;
+      &lt;img src=&#34;../angular_momentum.gif&#34; alt=&#34;Angular Momentum&#34;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The first plot shows the density matrix evolution of the relative radial coordinate of the quarkonium. Here we pick as an initial state a very  localized gaussian, since the production of the bottomonium is very local. The second plot shows the evolution of the angular momentum distribution. We start with an $S$-wave bottomonium ($l=0$), and see that over time the average angular momentum increases and the probability of $S$-wave state decreases. This is exactly the dissociation of the quarkonium.&lt;/p&gt;</description>
     </item>
     
     
     <item>
       <title>Talks</title>
-      <link>https://tommago.com/talks/</link>
+      <link>http://localhost:1313/talks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/talks/</guid>
-      <description>A selection of talks I gave</description>
+      <guid>http://localhost:1313/talks/</guid>
+      <description>&lt;p&gt;A selection of talks I gave&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;[19.12.25]&lt;/strong&gt; &lt;a href=&#34;https://ithems.riken.jp/en/events/neural-network-quantum-states-for-quarkonium-in-medium-real-time-open-quantum-system-dynamics&#34;&gt;DEEPIN&lt;/a&gt; RIKEN: &lt;a href=&#34;../pdfs/RIKEN_19_12_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[03.12.25]&lt;/strong&gt; &lt;a href=&#34;https://www.int.washington.edu/index.php/programs-and-workshops/25-3b/&#34;&gt;OQS@INT&lt;/a&gt; Seattle: &lt;a href=&#34;../pdfs/INT_03_12_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[21.11.25]&lt;/strong&gt; &lt;a href=&#34;https://indico.cern.ch/event/1539475/&#34;&gt;QWG17&lt;/a&gt; CERN: &lt;a href=&#34;../pdfs/QWG_21_11_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[28.08.25]&lt;/strong&gt; &lt;a href=&#34;https://www.munich-iapbp.de/activities/activities-2025/machine-learning/&#34;&gt;MIAPbP&lt;/a&gt; Munich: &lt;a href=&#34;../pdfs/MIAPbP_28_08_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[10.06.25]&lt;/strong&gt; &lt;a href=&#34;https://indico.cern.ch/event/1496341/&#34;&gt;ML4Lattice&lt;/a&gt; Zurich: &lt;a href=&#34;../pdfs/ML4Lattice_10_06_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[23.01.25]&lt;/strong&gt; MIT Seminar Boston: &lt;a href=&#34;../pdfs/MIT_23_01_2025.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[03.09.24]&lt;/strong&gt; &lt;a href=&#34;https://indico.uni-muenster.de/event/2607/&#34;&gt;QCD challenges&lt;/a&gt; Münster: &lt;a href=&#34;../pdfs/QCDchallenges_03_09_2024.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[28.08.24]&lt;/strong&gt; &lt;a href=&#34;https://indico.physik.uni-bielefeld.de/event/100/&#34;&gt;SEWM&lt;/a&gt; Frankfurt: &lt;a href=&#34;../pdfs/SEWM_28_08_2024.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[23.04.24]&lt;/strong&gt; &lt;a href=&#34;https://indico.cern.ch/event/1386908/&#34;&gt;CharmInDor&lt;/a&gt; Dortmund: &lt;a href=&#34;../pdfs/CharmInDor_23_04_2024.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[28.02.24]&lt;/strong&gt; &lt;a href=&#34;https://indico.global/event/8261/&#34;&gt;QWG16&lt;/a&gt; IISER Mohali: &lt;a href=&#34;../pdfs/QWG_28_02_2024.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[15.01.24]&lt;/strong&gt; &lt;a href=&#34;https://indico.gsi.de/event/18061/overview&#34;&gt;Hirschegg&lt;/a&gt; Hirschegg: &lt;a href=&#34;../pdfs/Hirschegg_15_01_2024.pdf&#34;&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC | TomMago</title>
 <meta name="keywords" content="GSoC">
-<meta name="description" content="This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
-Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.">
+<meta name="description" content="This is a summary of my 2022 GSoC project with ML4SCI.
+The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics.
+A big thank you to Sergei Gleyzer for the supervision and support.
+Abstract
+The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them.
+While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.
+In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses.">
 <meta name="author" content="Tom Magorsch">
-<link rel="canonical" href="https://tommago.com/posts/gsoc/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.18c187d9a47d1bb26b9343ff3062c17d3ec3fafc4f83bd2fd8c235ccdb100f6d.css" integrity="sha256-GMGH2aR9G7Jrk0P/MGLBfT7D&#43;vxPg70v2MI1zNsQD20=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="http://localhost:1313/posts/gsoc/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2215a03600b60f1af3cfb8faa798da315a17443436f4572cbbbec618c5735bd8.css" integrity="sha256-IhWgNgC2Dxrzz7j6p5jaMVoXRDQ29Fcsu77GGMVzW9g=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://tommago.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://tommago.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://tommago.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://tommago.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://tommago.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://tommago.com/posts/gsoc/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/gsoc/">
 <noscript>
     <style>
         #theme-toggle,
@@ -47,8 +52,6 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
       <script>
         var doNotTrack = false;
@@ -62,22 +65,28 @@ onload="renderMathInElement(document.body,
           gtag('js', new Date());
           gtag('config', 'G-9MSJDZKGWH');
         }
-      </script>
-    
-  
-
-<meta property="og:title" content="GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC" />
-<meta property="og:description" content="This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
-Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature." />
+      </script><meta property="og:title" content="GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC" />
+<meta property="og:description" content="This is a summary of my 2022 GSoC project with ML4SCI.
+The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics.
+A big thank you to Sergei Gleyzer for the supervision and support.
+Abstract
+The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them.
+While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.
+In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tommago.com/posts/gsoc/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/gsoc/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-21T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2022-09-21T00:00:00&#43;00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC"/>
-<meta name="twitter:description" content="This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.
-Abstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature."/>
+<meta name="twitter:description" content="This is a summary of my 2022 GSoC project with ML4SCI.
+The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics.
+A big thank you to Sergei Gleyzer for the supervision and support.
+Abstract
+The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them.
+While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.
+In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses."/>
 
 
 <script type="application/ld+json">
@@ -89,13 +98,13 @@ Abstract The Standard Model of particle physics is a theory that describes the f
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://tommago.com/posts/"
+      "item": "http://localhost:1313/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC",
-      "item": "https://tommago.com/posts/gsoc/"
+      "item": "http://localhost:1313/posts/gsoc/"
     }
   ]
 }
@@ -106,12 +115,12 @@ Abstract The Standard Model of particle physics is a theory that describes the f
   "@type": "BlogPosting",
   "headline": "GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC",
   "name": "GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC",
-  "description": "This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.\nAbstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature.",
+  "description": "This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.\nAbstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature. In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses.\n",
   "keywords": [
     "GSoC"
   ],
-  "articleBody": "This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.\nAbstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature. In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses.\nThe project In order to apply to GSoC with ML4SCI you have to complete some preliminary screening tasks, and write a proposal for your project. Solving the tasks took some time, but they were very interesting and already prepared well for the upcoming project. You can see my proposal here, if you are interested. Of course, the project deviated a bit from the initial plan, but all in all, I followed the plan outlined in the proposal.\nAnomaly tagging With the large amounts of data produced by the LHC and potentially produced in the future by the HL-LHC, new analysis techniques pose interesting tools to detect new physics. I think the BSM physics is certainly hiding somewhere in the data, uncovering it is just a question of finding the needle in a haystack, due to its elusive nature. I especially like the idea of unsupervised techniques, since it is a way to conduct a model-independent search. Since there are many different BSM models I think model-independent searches make a lot of sense. There has previously been a good amount of research on the application of unsupervised methods to new physics searches, e.g. ( Citation: Kasieczka, Nachman \u0026 al., 2021 Kasieczka, G., Nachman, B. \u0026 al. (2021). The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics. https://doi.org/10.1088/1361-6633/ac36b9 ; Citation: Fraser, Homiller \u0026 al., 2021 Fraser, K., Homiller, S., Mishra, R., Ostdiek, B. \u0026 Schwartz, M. (2021). Challenges for Unsupervised Anomaly Detection in Particle Physics. https://doi.org/10.1007/JHEP03(2022)066 ) . Many studies apply anomaly detection to detector images. Since Autoencoders are one of the most prominent deep anomaly detection models, they have been applied to these anomaly studies as well. I specifically want to highlight ( Citation: Finke, Krämer \u0026 al., 2021 Finke, T., Krämer, M., Morandini, A., Mück, A. \u0026 Oleksiyuk, I. (2021). Autoencoders for unsupervised anomaly detection in high energy physics. JHEP 06 (2021) 161. https://doi.org/10.1007/JHEP06(2021)161 ) . In their study, the authors use a convolutional autoencoder to tag top quark-initiated jets as anomalous, in samples of QCD-initiated jets. In particular, they highlight, that there is a complexity bias between the QCD and top samples. This refers to the fact, that a convolutional Autoencoder trained on top jets can not tag QCD jets, since the top jets have a higher intrinsic dimensionality, which enables the Autoencoder to work on the “easier to reconstruct” QCD samples. I think this can definitely be a problem as it sets constraints on the type of new physics we are able to uncover and thus it’s an interesting matter to investigate when working on this type of anomaly detection.\nDatasets In the project, I used different datasets, e.g. MNIST for validating ideas and code samples or ECAL images of electrons and photons. However, my main focus was on a dataset of detector images of quark and gluon-initiated jets, which is described in ( Citation: Andrews, Alison \u0026 al., 2019 Andrews, M., Alison, J., An, S., Bryant, P., Burkle, B., Gleyzer, S., Narain, M., Paulini, M., Poczos, B. \u0026 Usai, E. (2019). End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data. Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020). https://doi.org/10.1016/j.nima.2020.164304 ) . The dataset only contains jets of light quarks ($u$, $d$, $s$). The original dataset contains 125x125 images of the electromagnetic calorimeter, hadronic calorimeter and the tracks for every event respectively. Below I show the average images of the three channels for quarks and gluons respectively. Note that I normalized the images by dividing them by the value on the largest pixel respectively. Now I’m not completely sure if this is the best way to do it, but since I need the pixel values to be properly distributed in $[0,1]$ this was the most obvious way for me. The HCAL channel was generated at a lower resolution and upscaled to 125x125 resulting in a coarser pixeling than the other channels.\nWe can see, that the gluon-initiated jets show a slightly wider cone, however, the differences are quite small, which makes the differentiation of these jets a very hard task. It becomes even harder if you take a look at the images of individual example events.\nApparently, the images are very sparse, which means only a couple of pixels are activated. In addition, considering the logarithmic scale, most pixels are activated only very weakly, meaning that the majority of the energy in the calorimeters is deposited only in a hand full of pixels, which gives small room for distinctive features. In addition, convolutional networks can struggle with very sparse structures, which can pose difficulties when building robust Autoencoders. Since the quantum circuit simulations are very demanding and my hardware access was limited, I mainly focus on a very reduces version of the dataset. I produced it by center cropping the ECAL images to about 80% and then rescaling it to 12x12. The code for this preprocessing can be found here.\nClassical methods As a very simple benchmark model, I consider a convolutional autoencoder. To get a feeling for the model and training, I first tried an Autoencoder on the 40x40 ECAL dataset. I build the model similar to the one proposed in ( Citation: Finke, Krämer \u0026 al., 2021 Finke, T., Krämer, M., Morandini, A., Mück, A. \u0026 Oleksiyuk, I. (2021). Autoencoders for unsupervised anomaly detection in high energy physics. JHEP 06 (2021) 161. https://doi.org/10.1007/JHEP06(2021)161 ) , which resulted in about 900k parameters. I Trained the Autoencoder on the quark jet images using AdamW, minimizing the binary cross-entropy. In general, I found the training to be not as straightforward as with other image datasets. The usage of PReLU activation and AdamW seemed to help stabilize the training. As latent space size, I found everything between 25-35 to be suitable. Below are given some quark jet examples from the test set to demonstrate the reconstruction.\nWe can now use the loss (binary cross-entropy) as a discriminating variable to tag gluon jets in the test set. Since the AE was trained on the quark jets, the average loss of a gluon jet image is expected to be higher, which labels it as an anomaly. We can therefore compute the ROC curve of the anomaly tagging. Here I obtained an AUC of about $71$%. Considering that ( Citation: Andrews, Alison \u0026 al., 2019 Andrews, M., Alison, J., An, S., Bryant, P., Burkle, B., Gleyzer, S., Narain, M., Paulini, M., Poczos, B. \u0026 Usai, E. (2019). End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data. Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020). https://doi.org/10.1016/j.nima.2020.164304 ) achieved an AUC of $76$% when training on the full 125x125 ECAL images in a supervised manner, this performance seems reasonably good. However, if we train the Autoencoder on the Gluon jets instead and try to tag quark jets as anomalies, I only obtain an AUC of $29$%. This reflects the complexity bias mentioned before.\nTo have a realistic comparison with the quantum models, I also trained an Autoencoder on the 12x12 dataset. In this case, I also only used 10k images for training and especially constrained the Autoencoder to 3k parameters. Training this Autoencoder until convergence took a couple of hundret epochs and resulted in an AUC of $60$%. In the process of optimizing the models, I used the EMD from ( Citation: Komiske, Metodiev \u0026 al., 2019 Komiske, P., Metodiev, E. \u0026 Thaler, J. (2019). The Metric Space of Collider Events. Phys. Rev. Lett. 123, 041801 (2019). https://doi.org/10.1103/PhysRevLett.123.041801 ) to judge the reconstruction performance as it seems to capture it a little better than just the loss. Using the EMD as a loss does not seem possible as the implementation as a loss is not differentiable for TensorFlow.\nModels I implemented different models, mainly focusing on a fully quantum model, only consisting of a single parametrized quantum circuit (PQC) and Hybrid models with several classical and quantum layers.\nFully quantum autoencoder My implementaion of the fully quantum autoencoder is based on ( Citation: Ngairangbam, Spannowsky \u0026 al., 2021 Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 ) and ( Citation: Romero, Olson \u0026 al., 2016 Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ) . The architecture consists of some data encoding and trainable PQC which acts as an encoder, followed by a swap test, which fixes the non-latent qubits to the value of some reference bits. This compresses the quantum state to the latent space. A detailed description of the functionality of the Quantum Autoencoder can be found in my post about it.\nOf course, the main question is, how to upload the data and what structure of circuit to use as a trainable layer. I started with a basic angle embedding, where one feature is encoded per qubit. In this encoding the $j$th feature is embedded, by rotating the $j$th qubit with $e^{-i x_j\\sigma_x/2}\\ket{0}$. While this encoding is simple, it only allows a single feature per qubit, which limits the method to datasets with a small number of features or makes it necessary to apply other dimensionality reduction techniques first. Another alternative would be Amplitude Encoding, however, this requires very deep circuits and in prototype implementations I found its performance in the Autoencoder to be very limited. Therefore I drew inspiration from the data re-uploading technique proposed in ( Citation: Pérez-Salinas, Cervera-Lierta \u0026 al., 2019 Pérez-Salinas, A., Cervera-Lierta, A., Gil-Fuster, E. \u0026 Latorre, J. (2019). Data re-uploading for a universal quantum classifier. Quantum 4, 226 (2020). https://doi.org/10.22331/q-2020-02-06-226 ) . I discuss the idea in detail in my data re-uploading post, however, in a nutshell, arbitrary dimensional data is uploaded to a single qubit multiple times to mimic a deep neural network with a hidden layer. In order to upload a whole image to a couple of qubits, I chose to upload the image in patches.\nA patch is uploaded to a single qubit, where the pixels $x_i$ of the patch are uploaded with a parametrized unitarity $U(b_i + w_i + x_i)$ with weights and biases as introduced in the data re-uploading. So a 12x12 image can e.g. be divided into $3\\times 3=9$ patches of the size 4x4. In this case, we would upload 16-pixel values on 9 qubits respectively. In the data reuploading spirit, this circuit can be entangled and repeated multiple times to add parameters and build a deeper circuit.\nI trained the model with Adam, maximizing the fidelity of the swap test. Currently, the maximum AUC I achieved is $56.5$%. This result uses 5 data re-uploads which leads to 1440 parameters. I would expect this to improve with more parameters. One question I’m still investigating is the best choice of reference states. In the derivation of the Autoencoder, the specific choice of reference states does not matter. However together with the data reuploading as an encoder I think one needs to be careful, because if the reference states are initialized as $\\ket{0}$ the fidelity is maximized if all parameters are zero, creating a pseudo solution.\nHybrid model The hybrid models I build are basically classical layers reducing the dimension of the data and feeding it into a PQC. The qubits get measured to obtain a classical latent space, which is reconstructed into an image by classical layers. Similar models have been proposed before, e.g. in ( Citation: Rivas, Zhao \u0026 al., 2021 Rivas, P., Zhao, L. \u0026 Orduz, J. (2021). Hybrid Quantum Variational Autoencoders for Representation Learning. https://doi.org/10.1109/CSCI54926.2021.00085 ) .\nIn order to make use of the PQC, I think it makes sense to use the same encoder as the fully quantum autoencoder. This way we can upload a larger image to the PQC and reduce the dimension down to the number of qubits. For a first implementation, I e.g. reduce the dimension of the image with convolutional layers down to 9x9. I then upload the image in patches like in the fully quantum case. However this time I use a kernel size of 3 and a stride of 2 to upload the data in 16 patches. This way I can measure all 16 qubits to obtain the latent space. A smaller latent space would be too small to fully reconstruct the image.\nUnfortunately training this model took very long and I was not able to train it until convergence. However, I achieved an AUC of $57$% without the model converging.\nImplementation details When I started the project I implemented the fully quantum autoencoder in TensorFlow-quantum together with cirq. However, I soon moved to pennylane due to the flexibility when building quantum models and their great plugin system. When you write your code in pennylane you specify a device on which to run your quantum circuits. When simulating the circuits you can e.g. use the lightning simulator, which is a fast simulation framework.\ndev = qml.device('lightning.qubit', wires=TOTAL_QBITS) The wires thereby specifies the number of qubits to simulate. When the code is developed in pennylane you can always switch the backend for the simulations without making any changes to the code. In principle, you can also use a real quantum computer e.g. with the pennylane qiskit plugin. One plugin that is especially useful is the lightning.gpu. It enables the simulation of the circuits on GPUs using NVIDIAs cuQuantum framework, which can considerably speed up the simulation when using a larger amount of qubits.\nIn pennylane a circuit is built by successively applying gates to different wires, e.g. the function building the circuit for the fully quantum autoencoder:\ndef circuit(self, params, data): encoder(params, data) qml.Hadamard(wires=total_qbits-1) for i in range(trash_qbits): qml.CSWAP(wires=[total_qbits - 1, latent_qbits + i, data_qbits + i]) qml.Hadamard(wires=total_qbits-1) return qml.expval(qml.PauliZ(total_qbits-1)) This function takes parameters, which are trainable, and data, which is not trainable as arguments. In the encoder function, more gates are applied to upload the data with trainable weights using e.g. Pauli X rotations qml.RX. Thereby total_qubits denotes the total number of qubits the circuit contains, data_qubits the number of qubits the encoder uses, latent_qbits the size of the latent and trash_qubits the number of non-latent space and there also the number of reference qubits. The circuit function can be turned into a Qnode, which is a pennylane object associated with a function that returns an expectation value. Here we measure the qubit containing the result of the swap test in the $\\sigma_z$ basis as described in the QAE post. When a Qnode is created you specify the differentiation method for it.\ncircuit_node = qml.QNode(circuit, dev, diff_method=\"adjoint\") The differentiation method describes how the gradients of the parameters are calculated. On a quantum computer, the gradients of a circuit can e.g. be obtained with the parameter shift rule. When simulating however I would usually use the adjoint differentiation, as it is a very fast method.\nYou can combine the circuit simulation and differentiation of pennylane with your machine learning framework of choice, e.g. TensorFlow, Pytorch, or Jax. When using Keras e.g. pennylane already provides a class for turning a Qnode into a Keras layer with\nweight_shapes = {\"weights\": (num_params,)} qlayer = qml.qnn.KerasLayer(circuit_node, weight_shapes, output_dim=num_outputs) Note that to my knowledge, this currently only works if the data passed to the qlayer is onedimensional.\nOutlook The next step is to scale the quantum models to more parameters and longer training on more sophisticated hardware. The development and first experiments were performed on retail hardware which is not suitable for larger simulations. I am curious to see if the quantum models can achieve the same or even a better AUC when simulating the quantum models with the same number of parameters and training for the same amount of epochs as the classical reference model. Furthermore, we should try to train the models on larger images as there is of course a large loss of information when scaling the images down to 12x12.\nApart from the computational bottleneck, there are still a couple of questions that are not fully answered yet. I mainly want to investigate the effects of different initializations of the reference qubits and of different latent space sizes. Furthermore one could also try other entangling schemes than the simple circular entangling topology.\nSince we have tried vision transformer-based architectures for supervised tasks on jet images I also implemented a quantum vision transformer. To do so I replaced the self-attention layer in a simple ViT with the quantum self-attention proposed in ( Citation: Li, Zhao \u0026 al., 2022 Li, G., Zhao, X. \u0026 Wang, X. (2022). Quantum Self-Attention Neural Networks for Text Classification. Retrieved from http://arxiv.org/abs/2205.05625 ) . By now I was not able to train the model, again, due to a lack of resources, however, I hope to be able to run it in the future.\nAll in all, it was a fun experience and I’m looking forward to seeing what QML will be able to achieve in HEP in the future.\nReferences Rivas, Zhao \u0026 Orduz (2021) Rivas, P., Zhao, L. \u0026 Orduz, J. (2021). Hybrid Quantum Variational Autoencoders for Representation Learning. https://doi.org/10.1109/CSCI54926.2021.00085 Andrews, Alison, An, Bryant, Burkle, Gleyzer, Narain, Paulini, Poczos \u0026 Usai (2019) Andrews, M., Alison, J., An, S., Bryant, P., Burkle, B., Gleyzer, S., Narain, M., Paulini, M., Poczos, B. \u0026 Usai, E. (2019). End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data. Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020). https://doi.org/10.1016/j.nima.2020.164304 Finke, Krämer, Morandini, Mück \u0026 Oleksiyuk (2021) Finke, T., Krämer, M., Morandini, A., Mück, A. \u0026 Oleksiyuk, I. (2021). Autoencoders for unsupervised anomaly detection in high energy physics. JHEP 06 (2021) 161. https://doi.org/10.1007/JHEP06(2021)161 Fraser, Homiller, Mishra, Ostdiek \u0026 Schwartz (2021) Fraser, K., Homiller, S., Mishra, R., Ostdiek, B. \u0026 Schwartz, M. (2021). Challenges for Unsupervised Anomaly Detection in Particle Physics. https://doi.org/10.1007/JHEP03(2022)066 Kasieczka, Nachman \u0026 al. (2021) Kasieczka, G., Nachman, B. \u0026 al. (2021). The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics. https://doi.org/10.1088/1361-6633/ac36b9 Komiske, Metodiev \u0026 Thaler (2019) Komiske, P., Metodiev, E. \u0026 Thaler, J. (2019). The Metric Space of Collider Events. Phys. Rev. Lett. 123, 041801 (2019). https://doi.org/10.1103/PhysRevLett.123.041801 Li, Zhao \u0026 Wang (2022) Li, G., Zhao, X. \u0026 Wang, X. (2022). Quantum Self-Attention Neural Networks for Text Classification. Retrieved from http://arxiv.org/abs/2205.05625 Ngairangbam, Spannowsky \u0026 Takeuchi (2021) Ngairangbam, V., Spannowsky, M. \u0026 Takeuchi, M. (2021). Anomaly detection in high-energy physics using a quantum autoencoder. Phys. Rev. D 105, 095004, 2022. https://doi.org/10.1103/PhysRevD.105.095004 Pérez-Salinas, Cervera-Lierta, Gil-Fuster \u0026 Latorre (2019) Pérez-Salinas, A., Cervera-Lierta, A., Gil-Fuster, E. \u0026 Latorre, J. (2019). Data re-uploading for a universal quantum classifier. Quantum 4, 226 (2020). https://doi.org/10.22331/q-2020-02-06-226 Romero, Olson \u0026 Aspuru-Guzik (2016) Romero, J., Olson, J. \u0026 Aspuru-Guzik, A. (2016). Quantum autoencoders for efficient compression of quantum data. Now published in 2017 Quantum Sci. Technol. 2 045001. https://doi.org/10.1088/2058-9565/aa8072 ",
-  "wordCount" : "3269",
+  "articleBody": "This is a summary of my 2022 GSoC project with ML4SCI. The ML4SCI organization accustoms different projects of machine learning applied to scientific problems, many connected to high-energy physics. A big thank you to Sergei Gleyzer for the supervision and support.\nAbstract The Standard Model of particle physics is a theory that describes the fundamental particles and the interactions between them. While it has extensively been tested and was able to correctly predict experiments to an impressive degree, there are multiple reasons to believe that it cannot be a complete description of nature. In the search for physics beyond the Standard Model (BSM), even though the large hadron collider (LHC) produced a large amount of data, no conclusive evidence of new physics could be found yet. A promising method to uncover new physics in the large amount of data is the use of anomaly detection techniques, which can be used to tag anomalous events. A well-known method of deep anomaly detection is the use of autoencoders, which have been applied to the task of anomaly tagging in HEP data before. In my project study the use of quantum machine learning models for the task of anomaly tagging, to investigate if quantum computers can enhance these analyses.\nThe project In order to apply to GSoC with ML4SCI you have to complete some preliminary screening tasks, and write a proposal for your project. Solving the tasks took some time, but they were very interesting and already prepared well for the upcoming project. You can see my proposal here, if you are interested. Of course, the project deviated a bit from the initial plan, but all in all, I followed the plan outlined in the proposal.\nAnomaly tagging With the large amounts of data produced by the LHC and potentially produced in the future by the HL-LHC, new analysis techniques pose interesting tools to detect new physics. I think the BSM physics is certainly hiding somewhere in the data, uncovering it is just a question of finding the needle in a haystack, due to its elusive nature. I especially like the idea of unsupervised techniques, since it is a way to conduct a model-independent search. Since there are many different BSM models I think model-independent searches make a lot of sense. There has previously been a good amount of research on the application of unsupervised methods to new physics searches, e.g. (No matching key was found for `Kasieczka2021` in the references. Please make sure to provide an available ID in your `bib.json` file.No matching key was found for `Fraser2021` in the references. Please make sure to provide an available ID in your `bib.json` file.) . Many studies apply anomaly detection to detector images. Since Autoencoders are one of the most prominent deep anomaly detection models, they have been applied to these anomaly studies as well. I specifically want to highlight (No matching key was found for `Finke2021` in the references. Please make sure to provide an available ID in your `bib.json` file.) . In their study, the authors use a convolutional autoencoder to tag top quark-initiated jets as anomalous, in samples of QCD-initiated jets. In particular, they highlight, that there is a complexity bias between the QCD and top samples. This refers to the fact, that a convolutional Autoencoder trained on top jets can not tag QCD jets, since the top jets have a higher intrinsic dimensionality, which enables the Autoencoder to work on the “easier to reconstruct” QCD samples. I think this can definitely be a problem as it sets constraints on the type of new physics we are able to uncover and thus it’s an interesting matter to investigate when working on this type of anomaly detection.\nDatasets In the project, I used different datasets, e.g. MNIST for validating ideas and code samples or ECAL images of electrons and photons. However, my main focus was on a dataset of detector images of quark and gluon-initiated jets, which is described in (No matching key was found for `Andrews2019` in the references. Please make sure to provide an available ID in your `bib.json` file.) . The dataset only contains jets of light quarks ($u$, $d$, $s$). The original dataset contains 125x125 images of the electromagnetic calorimeter, hadronic calorimeter and the tracks for every event respectively. Below I show the average images of the three channels for quarks and gluons respectively. Note that I normalized the images by dividing them by the value on the largest pixel respectively. Now I’m not completely sure if this is the best way to do it, but since I need the pixel values to be properly distributed in $[0,1]$ this was the most obvious way for me. The HCAL channel was generated at a lower resolution and upscaled to 125x125 resulting in a coarser pixeling than the other channels.\nWe can see, that the gluon-initiated jets show a slightly wider cone, however, the differences are quite small, which makes the differentiation of these jets a very hard task. It becomes even harder if you take a look at the images of individual example events.\nApparently, the images are very sparse, which means only a couple of pixels are activated. In addition, considering the logarithmic scale, most pixels are activated only very weakly, meaning that the majority of the energy in the calorimeters is deposited only in a hand full of pixels, which gives small room for distinctive features. In addition, convolutional networks can struggle with very sparse structures, which can pose difficulties when building robust Autoencoders. Since the quantum circuit simulations are very demanding and my hardware access was limited, I mainly focus on a very reduces version of the dataset. I produced it by center cropping the ECAL images to about 80% and then rescaling it to 12x12. The code for this preprocessing can be found here.\nClassical methods As a very simple benchmark model, I consider a convolutional autoencoder. To get a feeling for the model and training, I first tried an Autoencoder on the 40x40 ECAL dataset. I build the model similar to the one proposed in (No matching key was found for `Finke2021` in the references. Please make sure to provide an available ID in your `bib.json` file.) , which resulted in about 900k parameters. I Trained the Autoencoder on the quark jet images using AdamW, minimizing the binary cross-entropy. In general, I found the training to be not as straightforward as with other image datasets. The usage of PReLU activation and AdamW seemed to help stabilize the training. As latent space size, I found everything between 25-35 to be suitable. Below are given some quark jet examples from the test set to demonstrate the reconstruction.\nWe can now use the loss (binary cross-entropy) as a discriminating variable to tag gluon jets in the test set. Since the AE was trained on the quark jets, the average loss of a gluon jet image is expected to be higher, which labels it as an anomaly. We can therefore compute the ROC curve of the anomaly tagging. Here I obtained an AUC of about $71$%. Considering that (No matching key was found for `Andrews2019` in the references. Please make sure to provide an available ID in your `bib.json` file.) achieved an AUC of $76$% when training on the full 125x125 ECAL images in a supervised manner, this performance seems reasonably good. However, if we train the Autoencoder on the Gluon jets instead and try to tag quark jets as anomalies, I only obtain an AUC of $29$%. This reflects the complexity bias mentioned before.\nTo have a realistic comparison with the quantum models, I also trained an Autoencoder on the 12x12 dataset. In this case, I also only used 10k images for training and especially constrained the Autoencoder to 3k parameters. Training this Autoencoder until convergence took a couple of hundret epochs and resulted in an AUC of $60$%. In the process of optimizing the models, I used the EMD from (No matching key was found for `Komiske2019` in the references. Please make sure to provide an available ID in your `bib.json` file.) to judge the reconstruction performance as it seems to capture it a little better than just the loss. Using the EMD as a loss does not seem possible as the implementation as a loss is not differentiable for TensorFlow.\nModels I implemented different models, mainly focusing on a fully quantum model, only consisting of a single parametrized quantum circuit (PQC) and Hybrid models with several classical and quantum layers.\nFully quantum autoencoder My implementaion of the fully quantum autoencoder is based on (No matching key was found for `Ngairangbam2021` in the references. Please make sure to provide an available ID in your `bib.json` file.) and (No matching key was found for `Romero2016` in the references. Please make sure to provide an available ID in your `bib.json` file.) . The architecture consists of some data encoding and trainable PQC which acts as an encoder, followed by a swap test, which fixes the non-latent qubits to the value of some reference bits. This compresses the quantum state to the latent space. A detailed description of the functionality of the Quantum Autoencoder can be found in my post about it.\nOf course, the main question is, how to upload the data and what structure of circuit to use as a trainable layer. I started with a basic angle embedding, where one feature is encoded per qubit. In this encoding the $j$th feature is embedded, by rotating the $j$th qubit with $e^{-i x_j\\sigma_x/2}\\ket{0}$. While this encoding is simple, it only allows a single feature per qubit, which limits the method to datasets with a small number of features or makes it necessary to apply other dimensionality reduction techniques first. Another alternative would be Amplitude Encoding, however, this requires very deep circuits and in prototype implementations I found its performance in the Autoencoder to be very limited. Therefore I drew inspiration from the data re-uploading technique proposed in (No matching key was found for `PerezSalinas2019` in the references. Please make sure to provide an available ID in your `bib.json` file.) . I discuss the idea in detail in my data re-uploading post, however, in a nutshell, arbitrary dimensional data is uploaded to a single qubit multiple times to mimic a deep neural network with a hidden layer. In order to upload a whole image to a couple of qubits, I chose to upload the image in patches.\nA patch is uploaded to a single qubit, where the pixels $x_i$ of the patch are uploaded with a parametrized unitarity $U(b_i + w_i + x_i)$ with weights and biases as introduced in the data re-uploading. So a 12x12 image can e.g. be divided into $3\\times 3=9$ patches of the size 4x4. In this case, we would upload 16-pixel values on 9 qubits respectively. In the data reuploading spirit, this circuit can be entangled and repeated multiple times to add parameters and build a deeper circuit.\nI trained the model with Adam, maximizing the fidelity of the swap test. Currently, the maximum AUC I achieved is $56.5$%. This result uses 5 data re-uploads which leads to 1440 parameters. I would expect this to improve with more parameters. One question I’m still investigating is the best choice of reference states. In the derivation of the Autoencoder, the specific choice of reference states does not matter. However together with the data reuploading as an encoder I think one needs to be careful, because if the reference states are initialized as $\\ket{0}$ the fidelity is maximized if all parameters are zero, creating a pseudo solution.\nHybrid model The hybrid models I build are basically classical layers reducing the dimension of the data and feeding it into a PQC. The qubits get measured to obtain a classical latent space, which is reconstructed into an image by classical layers. Similar models have been proposed before, e.g. in (No matching key was found for `9799154` in the references. Please make sure to provide an available ID in your `bib.json` file.) .\nIn order to make use of the PQC, I think it makes sense to use the same encoder as the fully quantum autoencoder. This way we can upload a larger image to the PQC and reduce the dimension down to the number of qubits. For a first implementation, I e.g. reduce the dimension of the image with convolutional layers down to 9x9. I then upload the image in patches like in the fully quantum case. However this time I use a kernel size of 3 and a stride of 2 to upload the data in 16 patches. This way I can measure all 16 qubits to obtain the latent space. A smaller latent space would be too small to fully reconstruct the image.\nUnfortunately training this model took very long and I was not able to train it until convergence. However, I achieved an AUC of $57$% without the model converging.\nImplementation details When I started the project I implemented the fully quantum autoencoder in TensorFlow-quantum together with cirq. However, I soon moved to pennylane due to the flexibility when building quantum models and their great plugin system. When you write your code in pennylane you specify a device on which to run your quantum circuits. When simulating the circuits you can e.g. use the lightning simulator, which is a fast simulation framework.\ndev = qml.device('lightning.qubit', wires=TOTAL_QBITS) The wires thereby specifies the number of qubits to simulate. When the code is developed in pennylane you can always switch the backend for the simulations without making any changes to the code. In principle, you can also use a real quantum computer e.g. with the pennylane qiskit plugin. One plugin that is especially useful is the lightning.gpu. It enables the simulation of the circuits on GPUs using NVIDIAs cuQuantum framework, which can considerably speed up the simulation when using a larger amount of qubits.\nIn pennylane a circuit is built by successively applying gates to different wires, e.g. the function building the circuit for the fully quantum autoencoder:\ndef circuit(self, params, data): encoder(params, data) qml.Hadamard(wires=total_qbits-1) for i in range(trash_qbits): qml.CSWAP(wires=[total_qbits - 1, latent_qbits + i, data_qbits + i]) qml.Hadamard(wires=total_qbits-1) return qml.expval(qml.PauliZ(total_qbits-1)) This function takes parameters, which are trainable, and data, which is not trainable as arguments. In the encoder function, more gates are applied to upload the data with trainable weights using e.g. Pauli X rotations qml.RX. Thereby total_qubits denotes the total number of qubits the circuit contains, data_qubits the number of qubits the encoder uses, latent_qbits the size of the latent and trash_qubits the number of non-latent space and there also the number of reference qubits. The circuit function can be turned into a Qnode, which is a pennylane object associated with a function that returns an expectation value. Here we measure the qubit containing the result of the swap test in the $\\sigma_z$ basis as described in the QAE post. When a Qnode is created you specify the differentiation method for it.\ncircuit_node = qml.QNode(circuit, dev, diff_method=\"adjoint\") The differentiation method describes how the gradients of the parameters are calculated. On a quantum computer, the gradients of a circuit can e.g. be obtained with the parameter shift rule. When simulating however I would usually use the adjoint differentiation, as it is a very fast method.\nYou can combine the circuit simulation and differentiation of pennylane with your machine learning framework of choice, e.g. TensorFlow, Pytorch, or Jax. When using Keras e.g. pennylane already provides a class for turning a Qnode into a Keras layer with\nweight_shapes = {\"weights\": (num_params,)} qlayer = qml.qnn.KerasLayer(circuit_node, weight_shapes, output_dim=num_outputs) Note that to my knowledge, this currently only works if the data passed to the qlayer is onedimensional.\nOutlook The next step is to scale the quantum models to more parameters and longer training on more sophisticated hardware. The development and first experiments were performed on retail hardware which is not suitable for larger simulations. I am curious to see if the quantum models can achieve the same or even a better AUC when simulating the quantum models with the same number of parameters and training for the same amount of epochs as the classical reference model. Furthermore, we should try to train the models on larger images as there is of course a large loss of information when scaling the images down to 12x12.\nApart from the computational bottleneck, there are still a couple of questions that are not fully answered yet. I mainly want to investigate the effects of different initializations of the reference qubits and of different latent space sizes. Furthermore one could also try other entangling schemes than the simple circular entangling topology.\nSince we have tried vision transformer-based architectures for supervised tasks on jet images I also implemented a quantum vision transformer. To do so I replaced the self-attention layer in a simple ViT with the quantum self-attention proposed in (No matching key was found for `Li2022` in the references. Please make sure to provide an available ID in your `bib.json` file.) . By now I was not able to train the model, again, due to a lack of resources, however, I hope to be able to run it in the future.\nAll in all, it was a fun experience and I’m looking forward to seeing what QML will be able to achieve in HEP in the future.\nReferences Bibliography called, but no references ",
+  "wordCount" : "2896",
   "inLanguage": "en",
   "datePublished": "2022-09-21T00:00:00Z",
   "dateModified": "2022-09-21T00:00:00Z",
@@ -121,14 +130,14 @@ Abstract The Standard Model of particle physics is a theory that describes the f
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://tommago.com/posts/gsoc/"
+    "@id": "http://localhost:1313/posts/gsoc/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "TomMago",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://tommago.com/favicon.ico"
+      "url": "http://localhost:1313/favicon.ico"
     }
   }
 }
@@ -146,7 +155,7 @@ Abstract The Standard Model of particle physics is a theory that describes the f
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://tommago.com/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
+            <a href="http://localhost:1313/" accesskey="h" title="TomMago (Alt + H)">TomMago</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -174,17 +183,22 @@ Abstract The Standard Model of particle physics is a theory that describes the f
         </div>
         <ul id="menu">
             <li>
+                <a href="http://localhost:1313/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
                 <a href="https://notes.tommago.com" title="Notes">
                     <span>Notes</span>
                 </a>
             </li>
             <li>
-                <a href="https://tommago.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://tommago.com/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -195,11 +209,11 @@ Abstract The Standard Model of particle physics is a theory that describes the f
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://tommago.com/">Home</a>&nbsp;»&nbsp;<a href="https://tommago.com/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title">
       GSoC 22 | Quantum Autoencoders for HEP Analysis at the LHC
     </h1>
-    <div class="post-meta"><span title='2022-09-21 00:00:00 +0000 UTC'>September 21, 2022</span>&nbsp;·&nbsp;16 min&nbsp;·&nbsp;Tom Magorsch
+    <div class="post-meta"><span title='2022-09-21 00:00:00 +0000 UTC'>September 21, 2022</span>&nbsp;·&nbsp;14 min&nbsp;·&nbsp;Tom Magorsch
 
 </div>
   </header> <div class="toc">
@@ -258,79 +272,7 @@ Solving the tasks took some time, but they were very interesting and already pre
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#kasieczka2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Gregor"><span itemprop="familyName">Kasieczka</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Benjamin"><span itemprop="familyName">Nachman</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Kasieczka</span>,&#32;
-    <meta itemprop="givenName" content="Gregor" />
-    G.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Nachman</span>,&#32;
-    <meta itemprop="givenName" content="Benjamin" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">al.</span></span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics</span>.
-  <a href="https://doi.org/10.1088/1361-6633/ac36b9"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1088/1361-6633/ac36b9</a></span>
-
-
-
-
-</span></span>;&#32;<span class="hugo-cite-group">
-
-          <a href="#fraser2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Katherine"><span itemprop="familyName">Fraser</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Samuel"><span itemprop="familyName">Homiller</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Fraser</span>,&#32;
-    <meta itemprop="givenName" content="Katherine" />
-    K.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Homiller</span>,&#32;
-    <meta itemprop="givenName" content="Samuel" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mishra</span>,&#32;
-    <meta itemprop="givenName" content="Rashmish K." />
-    R.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ostdiek</span>,&#32;
-    <meta itemprop="givenName" content="Bryan" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Schwartz</span>,&#32;
-    <meta itemprop="givenName" content="Matthew D." />
-    M.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Challenges for Unsupervised Anomaly Detection in Particle Physics</span>.
-  <a href="https://doi.org/10.1007/JHEP03%282022%29066"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1007/JHEP03(2022)066</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Kasieczka2021` in the references. Please make sure to provide an available ID in your `bib.json` file.</span><span style="background-color: #f00; color: #fff;">No matching key was found for `Fraser2021` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 .
 Many studies apply anomaly detection to detector images. Since Autoencoders are one of the most prominent deep anomaly detection models, they have been applied to these anomaly studies as well. I specifically want to highlight 
 
@@ -338,48 +280,7 @@ Many studies apply anomaly detection to detector images. Since Autoencoders are 
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#finke2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Thorben"><span itemprop="familyName">Finke</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Krämer</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Finke</span>,&#32;
-    <meta itemprop="givenName" content="Thorben" />
-    T.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Krämer</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Morandini</span>,&#32;
-    <meta itemprop="givenName" content="Alessandro" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mück</span>,&#32;
-    <meta itemprop="givenName" content="Alexander" />
-    A.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Oleksiyuk</span>,&#32;
-    <meta itemprop="givenName" content="Ivan" />
-    I.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Autoencoders for unsupervised anomaly detection in high energy physics</span>.<i>
-    <span itemprop="about">JHEP 06 (2021) 161</span></i>.
-  <a href="https://doi.org/10.1007/JHEP06%282021%29161"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1007/JHEP06(2021)161</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Finke2021` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 . In their study, the authors use a convolutional autoencoder to tag top quark-initiated jets as anomalous, in samples of QCD-initiated jets. In particular, they highlight, that there is a complexity bias between the QCD and top samples. This refers to the fact, that a convolutional Autoencoder trained on top jets can not tag QCD jets, since the top jets have a higher intrinsic dimensionality, which enables the Autoencoder to work on the &ldquo;easier to reconstruct&rdquo; QCD samples. I think this can definitely be a problem as it sets constraints on the type of new physics we are able to uncover and thus it&rsquo;s an interesting matter to investigate when working on this type of anomaly detection.</p>
 <h2 id="datasets">Datasets<a hidden class="anchor" aria-hidden="true" href="#datasets">#</a></h2>
 <p>In the project, I used different datasets, e.g. MNIST for validating ideas and code samples or ECAL images of electrons and photons.
@@ -389,63 +290,7 @@ However, my main focus was on a dataset of detector images of quark and gluon-in
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#andrews2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Andrews</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="John"><span itemprop="familyName">Alison</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Andrews</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Alison</span>,&#32;
-    <meta itemprop="givenName" content="John" />
-    J.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">An</span>,&#32;
-    <meta itemprop="givenName" content="Sitong" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Bryant</span>,&#32;
-    <meta itemprop="givenName" content="Patrick" />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Burkle</span>,&#32;
-    <meta itemprop="givenName" content="Bjorn" />
-    B.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gleyzer</span>,&#32;
-    <meta itemprop="givenName" content="Sergei" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Narain</span>,&#32;
-    <meta itemprop="givenName" content="Meenakshi" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Paulini</span>,&#32;
-    <meta itemprop="givenName" content="Manfred" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Poczos</span>,&#32;
-    <meta itemprop="givenName" content="Barnabas" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Usai</span>,&#32;
-    <meta itemprop="givenName" content="Emanuele" />
-    E.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data</span>.<i>
-    <span itemprop="about">Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020)</span></i>.
-  <a href="https://doi.org/10.1016/j.nima.2020.164304"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1016/j.nima.2020.164304</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Andrews2019` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 . The dataset only contains jets of light quarks ($u$, $d$, $s$). The original dataset contains 125x125 images of the electromagnetic calorimeter, hadronic calorimeter and the tracks for every event respectively. Below I show the average images of the three channels for quarks and gluons respectively. Note that I normalized the images by dividing them by the value on the largest pixel respectively. Now I&rsquo;m not completely sure if this is the best way to do it, but since I need the pixel values to be properly distributed in $[0,1]$ this was the most obvious way for me.
 The HCAL channel was generated at a lower resolution and upscaled to 125x125 resulting in a coarser pixeling than the other channels.</p>
 <p><img loading="lazy" src="../jet_samples.png#center" alt="Averages of jets"  />
@@ -461,48 +306,7 @@ The HCAL channel was generated at a lower resolution and upscaled to 125x125 res
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#finke2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Thorben"><span itemprop="familyName">Finke</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Krämer</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Finke</span>,&#32;
-    <meta itemprop="givenName" content="Thorben" />
-    T.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Krämer</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Morandini</span>,&#32;
-    <meta itemprop="givenName" content="Alessandro" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mück</span>,&#32;
-    <meta itemprop="givenName" content="Alexander" />
-    A.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Oleksiyuk</span>,&#32;
-    <meta itemprop="givenName" content="Ivan" />
-    I.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Autoencoders for unsupervised anomaly detection in high energy physics</span>.<i>
-    <span itemprop="about">JHEP 06 (2021) 161</span></i>.
-  <a href="https://doi.org/10.1007/JHEP06%282021%29161"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1007/JHEP06(2021)161</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Finke2021` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 , which resulted in about 900k parameters. I Trained the Autoencoder on the quark jet images using <a href="https://www.tensorflow.org/addons/api_docs/python/tfa/optimizers/AdamW">AdamW</a>, minimizing the binary cross-entropy. In general, I found the training to be not as straightforward as with other image datasets. The usage of PReLU activation and AdamW seemed to help stabilize the training. As latent space size, I found everything between 25-35 to be suitable.
 Below are given some quark jet examples from the test set to demonstrate the reconstruction.</p>
 <p><img loading="lazy" src="../4040res.png#center" alt="Example of autoencoder reconstruction"  />
@@ -516,63 +320,7 @@ Considering that
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#andrews2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Andrews</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="John"><span itemprop="familyName">Alison</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Andrews</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Alison</span>,&#32;
-    <meta itemprop="givenName" content="John" />
-    J.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">An</span>,&#32;
-    <meta itemprop="givenName" content="Sitong" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Bryant</span>,&#32;
-    <meta itemprop="givenName" content="Patrick" />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Burkle</span>,&#32;
-    <meta itemprop="givenName" content="Bjorn" />
-    B.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gleyzer</span>,&#32;
-    <meta itemprop="givenName" content="Sergei" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Narain</span>,&#32;
-    <meta itemprop="givenName" content="Meenakshi" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Paulini</span>,&#32;
-    <meta itemprop="givenName" content="Manfred" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Poczos</span>,&#32;
-    <meta itemprop="givenName" content="Barnabas" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Usai</span>,&#32;
-    <meta itemprop="givenName" content="Emanuele" />
-    E.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data</span>.<i>
-    <span itemprop="about">Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020)</span></i>.
-  <a href="https://doi.org/10.1016/j.nima.2020.164304"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1016/j.nima.2020.164304</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Andrews2019` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
  achieved an AUC of $76$% when training on the full 125x125 ECAL images in a supervised manner, this performance seems reasonably good.
 However, if we train the Autoencoder on the Gluon jets instead and try to tag quark jets as anomalies, I only obtain an AUC of $29$%.
 This reflects the complexity bias mentioned before.</p>
@@ -584,42 +332,7 @@ This reflects the complexity bias mentioned before.</p>
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#komiske2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Patrick T."><span itemprop="familyName">Komiske</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Eric M."><span itemprop="familyName">Metodiev</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Komiske</span>,&#32;
-    <meta itemprop="givenName" content="Patrick T." />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Metodiev</span>,&#32;
-    <meta itemprop="givenName" content="Eric M." />
-    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Thaler</span>,&#32;
-    <meta itemprop="givenName" content="Jesse" />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">The Metric Space of Collider Events</span>.<i>
-    <span itemprop="about">Phys. Rev. Lett. 123, 041801 (2019)</span></i>.
-  <a href="https://doi.org/10.1103/PhysRevLett.123.041801"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.123.041801</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Komiske2019` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
  to judge the reconstruction performance as it seems to capture it a little better than just the loss. Using the EMD as a loss does not seem possible as the implementation as a loss is not differentiable for TensorFlow.</p>
 <h1 id="models">Models<a hidden class="anchor" aria-hidden="true" href="#models">#</a></h1>
 <p>I implemented different models, mainly focusing on a fully quantum model, only consisting of a single parametrized quantum circuit (PQC) and Hybrid models with several classical and quantum layers.</p>
@@ -630,84 +343,14 @@ This reflects the complexity bias mentioned before.</p>
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#ngairangbam2021"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Vishal S."><span itemprop="familyName">Ngairangbam</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Michael"><span itemprop="familyName">Spannowsky</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ngairangbam</span>,&#32;
-    <meta itemprop="givenName" content="Vishal S." />
-    V.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Spannowsky</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Takeuchi</span>,&#32;
-    <meta itemprop="givenName" content="Michihisa" />
-    M.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Anomaly detection in high-energy physics using a quantum autoencoder</span>.<i>
-    <span itemprop="about">Phys. Rev. D 105, 095004, 2022</span></i>.
-  <a href="https://doi.org/10.1103/PhysRevD.105.095004"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevD.105.095004</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Ngairangbam2021` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
  and 
 
 
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#romero2016"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan"><span itemprop="familyName">Romero</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jonathan P."><span itemprop="familyName">Olson</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2016</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
-    <meta itemprop="givenName" content="Jonathan" />
-    J.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Olson</span>,&#32;
-    <meta itemprop="givenName" content="Jonathan P." />
-    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
-    <meta itemprop="givenName" content="Alan" />
-    A.</span>
-  &#32;
-    (<span itemprop="datePublished">2016</span>).
-  &#32;<span itemprop="name">Quantum autoencoders for efficient compression of quantum data</span>.<i>
-    <span itemprop="about">Now published in 2017 Quantum Sci. Technol. 2 045001</span></i>.
-  <a href="https://doi.org/10.1088/2058-9565/aa8072"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1088/2058-9565/aa8072</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Romero2016` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 .
 The architecture consists of some data encoding and trainable PQC which acts as an encoder, followed by a swap test, which fixes the non-latent qubits to the value of some reference bits. This compresses the quantum state to the latent space.
 A detailed description of the functionality of the Quantum Autoencoder can be found in my <a href="https://www.tommago.com/posts/qae/">post about it</a>.</p>
@@ -720,45 +363,7 @@ Therefore I drew inspiration from the data re-uploading technique proposed in </
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#perezsalinas2019"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Adrián"><span itemprop="familyName">Pérez-Salinas</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Alba"><span itemprop="familyName">Cervera-Lierta</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2019</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pérez-Salinas</span>,&#32;
-    <meta itemprop="givenName" content="Adrián" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Cervera-Lierta</span>,&#32;
-    <meta itemprop="givenName" content="Alba" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gil-Fuster</span>,&#32;
-    <meta itemprop="givenName" content="Elies" />
-    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latorre</span>,&#32;
-    <meta itemprop="givenName" content="José I." />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">Data re-uploading for a universal quantum classifier</span>.<i>
-    <span itemprop="about">Quantum 4, 226 (2020)</span></i>.
-  <a href="https://doi.org/10.22331/q-2020-02-06-226"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-02-06-226</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `PerezSalinas2019` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 . I discuss the idea in detail in my <a href="https://www.tommago.com/posts/drc/">data re-uploading post</a>, however, in a nutshell, arbitrary dimensional data is uploaded to a single qubit multiple times to mimic a deep neural network with a hidden layer.
 In order to upload a whole image to a couple of qubits, I chose to upload the image in patches.</p>
 <p><img loading="lazy" src="../drcupload.png#center" alt="upload of image in patches"  />
@@ -772,40 +377,7 @@ In order to upload a whole image to a couple of qubits, I chose to upload the im
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#9799154"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Pablo"><span itemprop="familyName">Rivas</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Liang"><span itemprop="familyName">Zhao</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2021</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/CreativeWork"
-      data-type="paper-conference"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Rivas</span>,&#32;
-    <meta itemprop="givenName" content="Pablo" />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
-    <meta itemprop="givenName" content="Liang" />
-    L.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Orduz</span>,&#32;
-    <meta itemprop="givenName" content="Javier" />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">
-    <i>Hybrid Quantum Variational Autoencoders for Representation Learning</i></span>.
-  
-  <a href="https://doi.org/10.1109/CSCI54926.2021.00085"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1109/CSCI54926.2021.00085</a></span>
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `9799154` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 .</p>
 <p><img loading="lazy" src="../hae3.png#center" alt="upload of image in patches"  />
 </p>
@@ -844,41 +416,7 @@ Furthermore, we should try to train the models on larger images as there is of c
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span class="hugo-cite-group">
-
-          <a href="#li2022"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Guangxi"><span itemprop="familyName">Li</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Xuanqiang"><span itemprop="familyName">Zhao</span></span>
-                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2022</span></a><span class="hugo-cite-citation"> 
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Li</span>,&#32;
-    <meta itemprop="givenName" content="Guangxi" />
-    G.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
-    <meta itemprop="givenName" content="Xuanqiang" />
-    X.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wang</span>,&#32;
-    <meta itemprop="givenName" content="Xin" />
-    X.</span>
-  &#32;
-    (<span itemprop="datePublished">2022</span>).
-  &#32;<span itemprop="name">Quantum Self-Attention Neural Networks for Text Classification</span>.&#32;Retrieved from&#32;
-  <a href="http://arxiv.org/abs/2205.05625"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">http://arxiv.org/abs/2205.05625</a></span>
-
-
-
-
-</span></span>)</span>
+        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `Li2022` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
 .
 By now I was not able to train the model, again, due to a lack of resources, however, I hope to be able to run it in the future.</p>
 <p>All in all, it was a fun experience and I&rsquo;m looking forward to seeing what QML will be able to achieve in HEP in the future.</p>
@@ -897,502 +435,7 @@ By now I was not able to train the model, again, due to a lack of resources, how
 
 
 
-<section class="hugo-cite-bibliography">
-  <dl>
-    
-
-      <div id="9799154">
-        <dt>
-          Rivas,&#32;
-          Zhao&#32;&amp;&#32;Orduz
-
-          
-          (2021)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/CreativeWork"
-      data-type="paper-conference"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Rivas</span>,&#32;
-    <meta itemprop="givenName" content="Pablo" />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
-    <meta itemprop="givenName" content="Liang" />
-    L.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Orduz</span>,&#32;
-    <meta itemprop="givenName" content="Javier" />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">
-    <i>Hybrid Quantum Variational Autoencoders for Representation Learning</i></span>.
-  
-  <a href="https://doi.org/10.1109/CSCI54926.2021.00085"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1109/CSCI54926.2021.00085</a></span>
-
-</dd>
-
-      </div>
-
-      <div id="andrews2019">
-        <dt>
-          Andrews,&#32;
-          Alison,&#32;
-          An,&#32;
-          Bryant,&#32;
-          Burkle,&#32;
-          Gleyzer,&#32;
-          Narain,&#32;
-          Paulini,&#32;
-          Poczos&#32;&amp;&#32;Usai
-
-          
-          (2019)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Andrews</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Alison</span>,&#32;
-    <meta itemprop="givenName" content="John" />
-    J.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">An</span>,&#32;
-    <meta itemprop="givenName" content="Sitong" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Bryant</span>,&#32;
-    <meta itemprop="givenName" content="Patrick" />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Burkle</span>,&#32;
-    <meta itemprop="givenName" content="Bjorn" />
-    B.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gleyzer</span>,&#32;
-    <meta itemprop="givenName" content="Sergei" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Narain</span>,&#32;
-    <meta itemprop="givenName" content="Meenakshi" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Paulini</span>,&#32;
-    <meta itemprop="givenName" content="Manfred" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Poczos</span>,&#32;
-    <meta itemprop="givenName" content="Barnabas" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Usai</span>,&#32;
-    <meta itemprop="givenName" content="Emanuele" />
-    E.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">End-to-End Jet Classification of Quarks and Gluons with the CMS Open Data</span>.<i>
-    <span itemprop="about">Nucl. Instrum. Methods Phys. Res. A 977, 164304 (2020)</span></i>.
-  <a href="https://doi.org/10.1016/j.nima.2020.164304"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1016/j.nima.2020.164304</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="finke2021">
-        <dt>
-          Finke,&#32;
-          Krämer,&#32;
-          Morandini,&#32;
-          Mück&#32;&amp;&#32;Oleksiyuk
-
-          
-          (2021)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Finke</span>,&#32;
-    <meta itemprop="givenName" content="Thorben" />
-    T.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Krämer</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Morandini</span>,&#32;
-    <meta itemprop="givenName" content="Alessandro" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mück</span>,&#32;
-    <meta itemprop="givenName" content="Alexander" />
-    A.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Oleksiyuk</span>,&#32;
-    <meta itemprop="givenName" content="Ivan" />
-    I.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Autoencoders for unsupervised anomaly detection in high energy physics</span>.<i>
-    <span itemprop="about">JHEP 06 (2021) 161</span></i>.
-  <a href="https://doi.org/10.1007/JHEP06%282021%29161"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1007/JHEP06(2021)161</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="fraser2021">
-        <dt>
-          Fraser,&#32;
-          Homiller,&#32;
-          Mishra,&#32;
-          Ostdiek&#32;&amp;&#32;Schwartz
-
-          
-          (2021)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Fraser</span>,&#32;
-    <meta itemprop="givenName" content="Katherine" />
-    K.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Homiller</span>,&#32;
-    <meta itemprop="givenName" content="Samuel" />
-    S.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mishra</span>,&#32;
-    <meta itemprop="givenName" content="Rashmish K." />
-    R.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ostdiek</span>,&#32;
-    <meta itemprop="givenName" content="Bryan" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Schwartz</span>,&#32;
-    <meta itemprop="givenName" content="Matthew D." />
-    M.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Challenges for Unsupervised Anomaly Detection in Particle Physics</span>.
-  <a href="https://doi.org/10.1007/JHEP03%282022%29066"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1007/JHEP03(2022)066</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="kasieczka2021">
-        <dt>
-          Kasieczka,&#32;
-          Nachman&#32;&amp;&#32;al.
-
-          
-          (2021)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Kasieczka</span>,&#32;
-    <meta itemprop="givenName" content="Gregor" />
-    G.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Nachman</span>,&#32;
-    <meta itemprop="givenName" content="Benjamin" />
-    B.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">al.</span></span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">The LHC Olympics 2020: A Community Challenge for Anomaly Detection in High Energy Physics</span>.
-  <a href="https://doi.org/10.1088/1361-6633/ac36b9"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1088/1361-6633/ac36b9</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="komiske2019">
-        <dt>
-          Komiske,&#32;
-          Metodiev&#32;&amp;&#32;Thaler
-
-          
-          (2019)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Komiske</span>,&#32;
-    <meta itemprop="givenName" content="Patrick T." />
-    P.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Metodiev</span>,&#32;
-    <meta itemprop="givenName" content="Eric M." />
-    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Thaler</span>,&#32;
-    <meta itemprop="givenName" content="Jesse" />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">The Metric Space of Collider Events</span>.<i>
-    <span itemprop="about">Phys. Rev. Lett. 123, 041801 (2019)</span></i>.
-  <a href="https://doi.org/10.1103/PhysRevLett.123.041801"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevLett.123.041801</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="li2022">
-        <dt>
-          Li,&#32;
-          Zhao&#32;&amp;&#32;Wang
-
-          
-          (2022)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Li</span>,&#32;
-    <meta itemprop="givenName" content="Guangxi" />
-    G.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhao</span>,&#32;
-    <meta itemprop="givenName" content="Xuanqiang" />
-    X.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wang</span>,&#32;
-    <meta itemprop="givenName" content="Xin" />
-    X.</span>
-  &#32;
-    (<span itemprop="datePublished">2022</span>).
-  &#32;<span itemprop="name">Quantum Self-Attention Neural Networks for Text Classification</span>.&#32;Retrieved from&#32;
-  <a href="http://arxiv.org/abs/2205.05625"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">http://arxiv.org/abs/2205.05625</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="ngairangbam2021">
-        <dt>
-          Ngairangbam,&#32;
-          Spannowsky&#32;&amp;&#32;Takeuchi
-
-          
-          (2021)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ngairangbam</span>,&#32;
-    <meta itemprop="givenName" content="Vishal S." />
-    V.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Spannowsky</span>,&#32;
-    <meta itemprop="givenName" content="Michael" />
-    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Takeuchi</span>,&#32;
-    <meta itemprop="givenName" content="Michihisa" />
-    M.</span>
-  &#32;
-    (<span itemprop="datePublished">2021</span>).
-  &#32;<span itemprop="name">Anomaly detection in high-energy physics using a quantum autoencoder</span>.<i>
-    <span itemprop="about">Phys. Rev. D 105, 095004, 2022</span></i>.
-  <a href="https://doi.org/10.1103/PhysRevD.105.095004"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1103/PhysRevD.105.095004</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="perezsalinas2019">
-        <dt>
-          Pérez-Salinas,&#32;
-          Cervera-Lierta,&#32;
-          Gil-Fuster&#32;&amp;&#32;Latorre
-
-          
-          (2019)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Pérez-Salinas</span>,&#32;
-    <meta itemprop="givenName" content="Adrián" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Cervera-Lierta</span>,&#32;
-    <meta itemprop="givenName" content="Alba" />
-    A.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Gil-Fuster</span>,&#32;
-    <meta itemprop="givenName" content="Elies" />
-    E.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latorre</span>,&#32;
-    <meta itemprop="givenName" content="José I." />
-    J.</span>
-  &#32;
-    (<span itemprop="datePublished">2019</span>).
-  &#32;<span itemprop="name">Data re-uploading for a universal quantum classifier</span>.<i>
-    <span itemprop="about">Quantum 4, 226 (2020)</span></i>.
-  <a href="https://doi.org/10.22331/q-2020-02-06-226"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.22331/q-2020-02-06-226</a></span>
-
-
-
-
-</dd>
-
-      </div>
-
-      <div id="romero2016">
-        <dt>
-          Romero,&#32;
-          Olson&#32;&amp;&#32;Aspuru-Guzik
-
-          
-          (2016)</dt>
-
-        <dd>
-          
-
-
-
-
-
-
-
-
-
-
-<span itemscope
-      itemtype="https://schema.org/Article"
-      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Romero</span>,&#32;
-    <meta itemprop="givenName" content="Jonathan" />
-    J.</span>,&#32;
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Olson</span>,&#32;
-    <meta itemprop="givenName" content="Jonathan P." />
-    J.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aspuru-Guzik</span>,&#32;
-    <meta itemprop="givenName" content="Alan" />
-    A.</span>
-  &#32;
-    (<span itemprop="datePublished">2016</span>).
-  &#32;<span itemprop="name">Quantum autoencoders for efficient compression of quantum data</span>.<i>
-    <span itemprop="about">Now published in 2017 Quantum Sci. Technol. 2 045001</span></i>.
-  <a href="https://doi.org/10.1088/2058-9565/aa8072"
-     itemprop="identifier"
-     itemtype="https://schema.org/URL">https://doi.org/10.1088/2058-9565/aa8072</a></span>
-
-
-
-
-</dd>
-
-      </div>
-  </dl>
-</section>
+Bibliography called, but no references
 
 
 
@@ -1402,14 +445,14 @@ By now I was not able to train the model, again, due to a lack of resources, how
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://tommago.com/tags/gsoc/">GSoC</a></li>
+      <li><a href="http://localhost:1313/tags/gsoc/">GSoC</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="https://tommago.com/">TomMago</a></span>
+    <span>&copy; 2025 <a href="http://localhost:1313/">TomMago</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

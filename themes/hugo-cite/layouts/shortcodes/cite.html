@@ -96,7 +96,16 @@
 {{- end }}
 
 {{- if gt (len $bibliographyPath) 0 -}}{{/* Begin Bibliography Loop */}}
-{{- $bibliography := getJSON $bibliographyPath -}}
+{{- $bibliography := dict -}}
+{{- if or (hasPrefix $bibliographyPath "http://") (hasPrefix $bibliographyPath "https://") -}}
+  {{- with resources.GetRemote $bibliographyPath -}}
+    {{- $bibliography = . | transform.Unmarshal -}}
+  {{- end -}}
+{{- else -}}
+  {{- with resources.Get $bibliographyPath -}}
+    {{- $bibliography = . | transform.Unmarshal -}}
+  {{- end -}}
+{{- end -}}
 {{- /* -------------------- END Bibliography path -------------------- */ -}}
 
   <span class="hugo-cite-intext"

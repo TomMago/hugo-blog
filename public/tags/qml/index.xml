@@ -2,18 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>QML on TomMago</title>
-    <link>https://tommago.com/tags/qml/</link>
+    <link>http://localhost:1313/tags/qml/</link>
     <description>Recent content in QML on TomMago</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://tommago.com/tags/qml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/qml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NERSC Open Hackathon 2022 | Multi-GPU quantum circuit simulation in Pennylane</title>
-      <link>https://tommago.com/posts/nersc/</link>
+      <link>http://localhost:1313/posts/nersc/</link>
       <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://tommago.com/posts/nersc/</guid>
-      <description>The past month I have been participating in the NERSC Open Hackathon hosted together with NVIDIA. Throughout the event we had access to the Perlmutter compute system and worked together with mentors on scaling our scientific software projects on GPUs. During the event I worked on scaling the training of VQCs in Pennylane to multiple GPUs. A word of thanks goes to the organizers and all the mentors who helped us throghout the event.</description>
+      <guid>http://localhost:1313/posts/nersc/</guid>
+      <description>&lt;p&gt;The past month I have been participating in the &lt;a href=&#34;https://www.openhackathons.org/s/siteevent/a0C5e000005UNW4EAO/se000137&#34;&gt;NERSC Open Hackathon&lt;/a&gt; hosted together with NVIDIA.
+Throughout the event we had access to the &lt;a href=&#34;https://perlmutter.carrd.co&#34;&gt;Perlmutter compute system&lt;/a&gt; and worked together with mentors on scaling our scientific software projects on GPUs.
+During the event I worked on scaling the training of VQCs in &lt;a href=&#34;https://pennylane.ai&#34;&gt;Pennylane&lt;/a&gt; to multiple GPUs.
+A word of thanks goes to the organizers and all the mentors who helped us throghout the event.&lt;/p&gt;</description>
     </item>
     
   </channel>

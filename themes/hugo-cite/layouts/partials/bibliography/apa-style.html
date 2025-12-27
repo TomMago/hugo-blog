@@ -121,8 +121,8 @@
 {{- define "ArchivalID" }}
   {{ if isset . "archive" -}}&#32;{{ i18n "archive_available_from" | default "Available from" }}
     <meta itemprop="Organization" itemtype="http://schema.org/Organization" itemscope>
-    <span itemprop="name">{{- echoParam . "archive" -}}</span>.
-    {{- if isset . "archive_location" -}}&#32; ({{- echoParam . "archive_location" -}}){{- end }}.
+    <span itemprop="name">{{- index . "archive" -}}</span>.
+    {{- if isset . "archive_location" -}}&#32; ({{- index . "archive_location" -}}){{- end }}.
   {{- end }}
 {{- end -}}
 {{- /* END ArchivalID */ -}}
@@ -160,7 +160,7 @@
   ){{- end -}}.
   {{ if isset . "publisher-place" -}}
   <meta itemprop="contentLocation"
-        value="{{- echoParam . "publisher-place" -}}">
+        value="{{- index . "publisher-place" -}}">
   {{- end -}}
   {{- with .publisher -}}&#32;
   <span itemprop="publisher"
@@ -199,7 +199,7 @@
 
   <span itemprop="about">
     <i>{{/* italicize title */}}
-      {{- echoParam . "container-title" -}}
+      {{- index . "container-title" -}}
     </i></span>.{{/* close to avoid space */}}
   {{- end -}}
   {{- if or (isset . "edition") (isset . "page") -}}&#32;(
@@ -213,7 +213,7 @@
   ){{- end -}}.
   {{ if isset . "publisher-place" -}}
   <meta itemprop="contentLocation"
-        value="{{- echoParam . "publisher-place" -}}">
+        value="{{- index . "publisher-place" -}}">
   {{- end -}}
   {{- with .publisher -}}
     &#32;<span itemprop="publisher"
@@ -251,7 +251,7 @@
 
   <i>{{/* italicize journal title */}}
     <span itemprop="about">
-    {{- echoParam . "container-title" -}}</span>
+      {{- index . "container-title" -}}</span>
     {{- if isset . "volume" -}}
     ,&#32;{{- .volume -}}
     {{- end -}}
@@ -293,7 +293,7 @@
     {{- .title | markdownify -}}
   </span>
   {{- end -}}
-{{- if isset . "genre" -}}<span itemprop="genre">&nbsp;[{{- echoParam . "genre" -}}]</span>
+{{- if isset . "genre" -}}<span itemprop="genre">&nbsp;[{{- index . "genre" -}}]</span>
     {{- end -}}.&nbsp;
 
   {{- if isset . "container-title" -}}
@@ -303,7 +303,7 @@
   {{- end -}}
 
 <span itemprop="isPartOf">
-    {{- echoParam . "container-title" -}}</span>
+    {{- index . "container-title" -}}</span>
     {{- if isset . "volume" -}}
     ,&#32;{{- .volume -}}
     {{- end -}}
@@ -331,18 +331,18 @@
     <i>{{- .title | markdownify -}}</i>
   </span>
   {{- end -}}
-{{- if isset . "genre" -}}<span itemprop="inSupportOf">&nbsp;({{- echoParam . "genre" -}})</span>
+{{- if isset . "genre" -}}<span itemprop="inSupportOf">&nbsp;({{- index . "genre" -}})</span>
     {{- end -}}.&#32;
 {{- if isset . "publisher-place" -}}
   <meta itemprop="locationCreated"
-        value="{{- echoParam . "publisher-place" -}}">
+        value="{{- index . "publisher-place" -}}">
   {{- end -}}
   {{- with .publisher -}}
   <span itemprop="publisher"
         itemtype="http://schema.org/EducationalOrganization"
         itemscope>
     <span itemprop="name">{{- . -}}{{- end -}}
-    </span>{{ if isset . "publisher-place" -}},&#32; <span itemprop="location">{{- echoParam . "publisher-place" -}}</span></span>.
+    </span>{{ if isset . "publisher-place" -}},&#32; <span itemprop="location">{{- index . "publisher-place" -}}</span></span>.
   {{- end }}
   {{- template "ArchivalID" . -}}
   {{- template "DOIPart" . -}}
@@ -363,11 +363,11 @@
     <i>{{- .title | markdownify -}}</i>
   </span>
   {{- end -}}
-  {{- if isset . "number" -}}<span itemprop="reportNumber">&nbsp;({{- echoParam . "number" -}})</span>
+  {{- if isset . "number" -}}<span itemprop="reportNumber">&nbsp;({{- index . "number" -}})</span>
     {{- end -}}.&nbsp;
   {{- if isset . "publisher-place" -}}
   <meta itemprop="contentLocation"
-        value="{{- echoParam . "publisher-place" -}}">
+        value="{{- index . "publisher-place" -}}">
   {{- end -}}
   {{- with .publisher -}}
   <span itemprop="Organization"
@@ -375,7 +375,7 @@
         itemscope>
     <span itemprop="name">
       {{- . -}}{{- end -}}
-    </span> {{ if isset . "publisher-place" -}}:&#32; <span itemprop="location">{{- echoParam . "publisher-place" -}}</span></span>.
+    </span> {{ if isset . "publisher-place" -}}:&#32; <span itemprop="location">{{- index . "publisher-place" -}}</span></span>.
   {{- end }}
   {{- template "ArchivalID" . -}}
   {{- template "DOIPart" . -}}
@@ -403,7 +403,7 @@
   ){{- end -}}.
   {{ if isset . "publisher-place" -}}
   <meta itemprop="contentLocation"
-        content="{{- echoParam . "publisher-place" -}}">
+        content="{{- index . "publisher-place" -}}">
   {{- end -}}
   {{- with .publisher -}}&#32;
   <span itemprop="publisher" itemtype="http://schema.org/Organization" itemscope="">

@@ -1,6 +1,7 @@
 baseURL: "https://tommago.com/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 title: "TomMago"
-paginate: 5
+pagination:
+  pagerSize: 10
 theme:
 - "PaperMod"
 - "hugo-cite"
@@ -27,6 +28,9 @@ languages:
           tag: tags
         menu:
             main:
+                - name: Talks
+                  url: talks/
+                  weight: 8
                 - name: Search
                   url: search/
                   weight: 10
@@ -35,7 +39,7 @@ languages:
                   weight: 10
                 - name: Notes
                   url: https://notes.tommago.com
-                  weight: 10
+                  weight: 9
                 #- name: Categories
                 #  url: categories/
                 #  weight: 10
@@ -81,7 +85,7 @@ params:
     #          url: tags
 
     homeInfoParams:
-        Title: "Welcome!"
+        Title: "Hey!"
         Content: >
             I'm Tom Magorsch, I'm a physicist mainly interested in <i>Particle Phenomenology</i>, and the application of <i>Machine Learning</i> and <i>Quantum Computing</i> to HEP problems.
             <ul style="padding-left:25px; padding-top:10px">

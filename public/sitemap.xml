@@ -2,64 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://tommago.com/posts/vmcgrad/</loc>
+    <loc>http://localhost:1313/posts/vmcgrad/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/tags/vmc/</loc>
+    <loc>http://localhost:1313/tags/vmc/</loc>
     <lastmod>2025-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/vpert/</loc>
+    <loc>http://localhost:1313/posts/vpert/</loc>
     <lastmod>2024-04-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/tags/gsoc/</loc>
+    <loc>http://localhost:1313/tags/gsoc/</loc>
     <lastmod>2024-04-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/gsoc23/</loc>
+    <loc>http://localhost:1313/posts/gsoc23/</loc>
     <lastmod>2023-10-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/qgan/</loc>
+    <loc>http://localhost:1313/posts/qgan/</loc>
     <lastmod>2023-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/nersc/</loc>
+    <loc>http://localhost:1313/posts/nersc/</loc>
     <lastmod>2022-12-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/tags/qml/</loc>
+    <loc>http://localhost:1313/tags/qml/</loc>
     <lastmod>2022-12-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/gsoc/</loc>
+    <loc>http://localhost:1313/posts/gsoc/</loc>
     <lastmod>2022-09-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/drc/</loc>
+    <loc>http://localhost:1313/posts/drc/</loc>
     <lastmod>2022-09-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/qng/</loc>
+    <loc>http://localhost:1313/posts/qng/</loc>
     <lastmod>2022-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/qae/</loc>
+    <loc>http://localhost:1313/posts/qae/</loc>
     <lastmod>2022-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/posts/hello/</loc>
+    <loc>http://localhost:1313/posts/hello/</loc>
     <lastmod>2022-06-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tommago.com/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>https://tommago.com/decanting/</loc>
+    <loc>http://localhost:1313/decanting/</loc>
   </url><url>
-    <loc>https://tommago.com/news/</loc>
+    <loc>http://localhost:1313/news/</loc>
   </url><url>
-    <loc>https://tommago.com/QuarkoniumSuppressionPoster/</loc>
+    <loc>http://localhost:1313/QuarkoniumSuppressionPoster/</loc>
   </url><url>
-    <loc>https://tommago.com/search/</loc>
+    <loc>http://localhost:1313/search/</loc>
   </url><url>
-    <loc>https://tommago.com/talks/</loc>
+    <loc>http://localhost:1313/talks/</loc>
   </url>
 </urlset>
