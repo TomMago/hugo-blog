@@ -1,3 +1,4 @@
+- **[01/2026]** New preprint on differentiating quantum MC simulations: [2601.14399](https://arxiv.org/abs/2601.14399)
 - **[12/2025]** Im at the INT in seattle for our [Open Quantum System program](https://www.int.washington.edu/index.php/programs-and-workshops/25-3b) 
 - **[11/2025]** This week Im visiting CERN for the [17th QWG](https://indico.cern.ch/event/1539475)
 - **[09/2025]** Im at the school on [EFTs and Lattice](https://indico.ph.tum.de/event/7886) in Benasque 
