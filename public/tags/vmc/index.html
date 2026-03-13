@@ -45,6 +45,8 @@ onload="renderMathInElement(document.body,
 
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
+  
+    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MSJDZKGWH"></script>
       <script>
         var doNotTrack = false;
@@ -58,7 +60,11 @@ onload="renderMathInElement(document.body,
           gtag('js', new Date());
           gtag('config', 'G-9MSJDZKGWH');
         }
-      </script><meta property="og:title" content="VMC" />
+      </script>
+    
+  
+
+<meta property="og:title" content="VMC" />
 <meta property="og:description" content="Tom Magorsch - writing about particle physics, machine learning and other interests" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://tommago.com/tags/vmc/" />
@@ -151,8 +157,7 @@ onload="renderMathInElement(document.body,
     </h2>
   </header>
   <div class="entry-content">
-    <p>I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula. Since I found the full derivation non-trivial I will give it here in case anyone else out there is confused as well.
-...</p>
+    <p>I recently tried to derive the formula for the gradient estimator in Variational Monte Carlo and got confused trying to obtain the common covariance formula $\partial_\Theta\braket{E} = 2\text{Re}\text{Cov}[(\partial_\Theta\log\psi)^*, E_l]$ in the case of complex wavefunctions. At first, to me it seemed like the direct derivative of the estimator was missing (which vanishes for real wavefunctions). Indeed most derivations in the literature seem to assume real wavefunctions, however it turns out this direct part gives a similar term included in the score based part which eventually lets us simplify the estimator to the real part of the covariance formula....</p>
   </div>
   <footer class="entry-footer"><span title='2025-02-12 00:00:00 +0000 UTC'>February 12, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Tom Magorsch</footer>
   <a class="entry-link" aria-label="post link to Gradient estimator in Variational Monte Carlo" href="https://tommago.com/posts/vmcgrad/"></a>
