@@ -1,3 +1,4 @@
+- **[04/2026]** Im at our [MITP program on Open Quantum Systems](https://indico.mitp.uni-mainz.de/event/436/)
 - **[03/2026]** New preprint on Axions in the Schwinger model: [2603.12194](https://arxiv.org/abs/2603.12194)
 - **[01/2026]** New preprint on differentiating quantum MC simulations: [2601.14399](https://arxiv.org/abs/2601.14399)
 - **[12/2025]** Im at the INT in seattle for our [Open Quantum System program](https://www.int.washington.edu/index.php/programs-and-workshops/25-3b) 
