@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Abstract workshop impression placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f172a" />
+      <stop offset="1" stop-color="#164e63" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <g fill="none" stroke-linecap="round">
+    <path d="M110 445c130-210 250-215 360-20s260 200 430-120" stroke="#67e8f9" stroke-width="10" opacity=".8" />
+    <path d="M130 500c160-120 285-125 400-10s240 110 540-155" stroke="#a7f3d0" stroke-width="7" opacity=".65" />
+    <path d="M175 225h850" stroke="#e2e8f0" stroke-width="2" opacity=".18" />
+    <path d="M175 330h850" stroke="#e2e8f0" stroke-width="2" opacity=".18" />
+    <path d="M175 435h850" stroke="#e2e8f0" stroke-width="2" opacity=".18" />
+  </g>
+  <g fill="#e0f2fe" opacity=".85">
+    <circle cx="235" cy="265" r="16" />
+    <circle cx="420" cy="390" r="18" />
+    <circle cx="620" cy="255" r="14" />
+    <circle cx="835" cy="345" r="20" />
+    <circle cx="990" cy="215" r="15" />
+  </g>
+</svg>

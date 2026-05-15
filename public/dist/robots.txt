@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://oqsfp.example.org/sitemap-index.xml
