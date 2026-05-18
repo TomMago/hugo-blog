@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Abstract collaboration session placeholder">
+  <rect width="1200" height="675" fill="#0f172a" />
+  <g stroke="#e2e8f0" stroke-width="3" opacity=".28">
+    <path d="M250 210 430 360 610 230 790 415 960 250" />
+    <path d="M280 500 430 360 640 505 790 415" />
+  </g>
+  <g>
+    <circle cx="250" cy="210" r="58" fill="#67e8f9" opacity=".78" />
+    <circle cx="430" cy="360" r="70" fill="#34d399" opacity=".78" />
+    <circle cx="610" cy="230" r="50" fill="#a5b4fc" opacity=".78" />
+    <circle cx="790" cy="415" r="64" fill="#f0abfc" opacity=".68" />
+    <circle cx="960" cy="250" r="56" fill="#bae6fd" opacity=".76" />
+    <circle cx="640" cy="505" r="42" fill="#f8fafc" opacity=".75" />
+  </g>
+</svg>
