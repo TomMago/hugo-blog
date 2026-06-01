@@ -6,6 +6,7 @@ type: "page"
 
 A selection of talks I gave
 
+- **[19.12.25]** [MITP-OQS](https://indico.mitp.uni-mainz.de/event/436/): [Slides](../pdfs/MITP_OQS.pdf)
 - **[19.12.25]** [DEEPIN](https://ithems.riken.jp/en/events/neural-network-quantum-states-for-quarkonium-in-medium-real-time-open-quantum-system-dynamics) RIKEN: [Slides](../pdfs/RIKEN_19_12_2025.pdf)
 - **[03.12.25]** [OQS@INT](https://www.int.washington.edu/index.php/programs-and-workshops/25-3b/) Seattle: [Slides](../pdfs/INT_03_12_2025.pdf)
 - **[21.11.25]** [QWG17](https://indico.cern.ch/event/1539475/) CERN: [Slides](../pdfs/QWG_21_11_2025.pdf)
